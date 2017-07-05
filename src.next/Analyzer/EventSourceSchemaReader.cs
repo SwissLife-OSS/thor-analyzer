@@ -1,7 +1,6 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved. See License.txt in the project root for license information.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
@@ -14,109 +13,56 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema
     /// </summary>
     public class EventSourceSchemaReader
     {
-        private static readonly XNamespace Ns = "http://schemas.microsoft.com/win/2004/08/events";
-        private static readonly XName Root = Ns + "instrumentationManifest";
-        private static readonly XName Instrumentation = Ns + "instrumentation";
-        private static readonly XName Events = Ns + "events";
-        private static readonly XName Provider = Ns + "provider";
-        private static readonly XName Tasks = Ns + "tasks";
-        private static readonly XName Task = Ns + "task";
-        private static readonly XName Keywords = Ns + "keywords";
-        private static readonly XName Keyword = Ns + "keyword";
-        private static readonly XName Opcodes = Ns + "opcodes";
-        private static readonly XName Opcode = Ns + "opcode";
-        private static readonly XName Event = Ns + "event";
-        private static readonly XName Templates = Ns + "templates";
-        private static readonly XName Template = Ns + "template";
-
-        private static readonly Regex DotNetTokensRegex = new Regex(@"%(\d+)", RegexOptions.Compiled);
-        private static readonly Regex StringIdRegex = new Regex(@"\$\(string\.(.+?)\)", RegexOptions.Compiled);
+        private static readonly XNamespace _ns = "http://schemas.microsoft.com/win/2004/08/events";
+        private static readonly XName _root = _ns + "instrumentationManifest";
+        private static readonly XName _instrumentation = _ns + "instrumentation";
+        private static readonly XName _events = _ns + "events";
+        private static readonly XName _provider = _ns + "provider";
+        private static readonly XName _tasks = _ns + "tasks";
+        private static readonly XName _task = _ns + "task";
+        private static readonly XName _keywords = _ns + "keywords";
+        private static readonly XName _keyword = _ns + "keyword";
+        private static readonly XName _opcodes = _ns + "opcodes";
+        private static readonly XName _opcode = _ns + "opcode";
+        private static readonly XName _event = _ns + "event";
+        private static readonly XName _templates = _ns + "templates";
+        private static readonly XName _template = _ns + "template";
 
         /// <summary>
         /// Gets the schema for the specified event source.
         /// </summary>
         /// <param name="eventSource">The event source.</param>
         /// <returns>The event schema.</returns>
-        public IDictionary<int, EventSchema> GetSchema(EventSource eventSource)
+        public static IImmutableDictionary<int, EventSchema> GetSchema(EventSource eventSource)
         {
-            if(eventSource == null)
+            if (eventSource == null)
             {
                 throw new ArgumentNullException(nameof(eventSource));
             }
 
-            return this.GetSchema(EventSource.GenerateManifest(eventSource.GetType(), null));
+            return GetSchema(EventSource.GenerateManifest(eventSource.GetType(), null));
         }
 
-        internal IDictionary<int, EventSchema> GetSchema(string manifest)
+        internal static IImmutableDictionary<int, EventSchema> GetSchema(string manifestXml)
         {
-            var doc = XDocument.Parse(manifest);
+            XDocument doc = XDocument.Parse(manifestXml);
 
-            var provider = doc.Root.Element(Instrumentation).Element(Events).Element(Provider);
-            var templates = provider.Element(Templates);
-            var tasks = provider.Element(Tasks);
-            var opcodes = provider.Element(Opcodes);
-            var keywords = provider.Element(Keywords);
-            ////var stringTable = GetStringTable(doc.Root);
+            XElement provider = doc.Root.Element(_instrumentation).Element(_events).Element(_provider);
 
-            var providerGuid = (Guid)provider.Attribute("guid");
-            var providerName = (string)provider.Attribute("name");
-            var events = new Dictionary<int, EventSchema>();
+            Guid providerGuid = (Guid)provider.Attribute("guid");
+            string providerName = (string)provider.Attribute("name");
+            Dictionary<int, EventSchema> events = new Dictionary<int, EventSchema>();
 
-            foreach (var @event in provider.Element(Events).Elements(Event))
+            foreach (XElement @event in provider.Element(_events).Elements(_event))
             {
-                var eventId = (int)@event.Attribute("value");
-                var templateRef = @event.Attribute("template");
-                var taskName = (string)@event.Attribute("task");
-
-                int taskId = 0;
-                if (!string.IsNullOrWhiteSpace(taskName))
-                {
-                    taskId = (int)tasks
-                        .Elements(Task)
-                        .First(t => (string)t.Attribute("name") == taskName)
-                        .Attribute("value");
-                }
-
-                var level = this.ParseLevel((string)@event.Attribute("level"));
-                var opcode = this.ParseOpcode((string)@event.Attribute("opcode"), opcodes);
-                ////var message = GetLocalizedString((string)@event.Attribute("message"), stringTable);
-
-                var keywordNames = (string)@event.Attribute("keywords");
-
-                long keywordsMask = 0;
-                if (!string.IsNullOrWhiteSpace(keywordNames))
-                {
-                    foreach (var keywordName in keywordNames.Split())
-                    {
-                        var keywordsMaskAtt = keywords
-                            .Elements(Keyword)
-                            .Where(k => (string)k.Attribute("name") == keywordName)
-                            .Select(k => k.Attribute("mask"))
-                            .FirstOrDefault();
-
-                        if (keywordsMaskAtt != null)
-                        {
-                            keywordsMask |= Convert.ToInt64(keywordsMaskAtt.Value, 16);
-                        }
-                    }
-                }
-
+                int eventId = (int)@event.Attribute("value");
+                EventLevel level = ParseLevel((string)@event.Attribute("level"));
                 int version = @event.Attribute("version") != null ? (int)@event.Attribute("version") : 0;
 
-                IEnumerable<string> paramList;
-                if (templateRef == null)
-                {
-                    // Event has no parameters/payload
-                    paramList = Enumerable.Empty<string>();
-                }
-                else
-                {
-                    paramList = templates
-                                        .Elements(Template)
-                                        .First(t => (string)t.Attribute("tid") == templateRef.Value)
-                                            .Elements(Ns + "data")
-                                            .Select(d => (string)d.Attribute("name")).ToList();
-                }
+                (string name, EventTask task) task = ParseTask(provider.Element(_tasks), @event);
+                (string name, EventOpcode code) opcode = ParseOpcode((string)@event.Attribute("opcode"), provider.Element(_opcodes));
+                (string keywordsDescription, EventKeywords keywords) keywords = ParseKeywords(provider.Element(_keywords), @event);
+                IEnumerable<string> payload = ParsePayload(provider.Element(_templates), @event);
 
                 events.Add(eventId,
                         new EventSchema(
@@ -124,21 +70,78 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema
                             providerGuid,
                             providerName,
                             level,
-                            (EventTask)taskId,
-                            taskName,
-                            opcode.Item2,
-                            opcode.Item1,
-                            ////message,
-                            (EventKeywords)keywordsMask,
-                            keywordNames,
+                            task.task,
+                            task.name,
+                            opcode.code,
+                            opcode.name,
+                            keywords.keywords,
+                            keywords.keywordsDescription,
                             version,
-                            paramList));
+                            payload));
             }
 
-            return events;
+            return events.ToImmutableDictionary();
         }
 
-        private EventLevel ParseLevel(string level)
+        private static (string keywordNames, EventKeywords eventKeywords) ParseKeywords(XElement keywords, XElement @event)
+        {
+            long keywordsMask = 0;
+            string keywordNames = (string)@event.Attribute("keywords");
+
+            if (!string.IsNullOrWhiteSpace(keywordNames))
+            {
+                foreach (string keywordName in keywordNames.Split())
+                {
+                    XAttribute keywordsMaskAtt = keywords
+                        .Elements(_keyword)
+                        .Where(k => (string)k.Attribute("name") == keywordName)
+                        .Select(k => k.Attribute("mask"))
+                        .FirstOrDefault();
+
+                    if (keywordsMaskAtt != null)
+                    {
+                        keywordsMask |= Convert.ToInt64(keywordsMaskAtt.Value, 16);
+                    }
+                }
+            }
+
+            return (keywordNames, (EventKeywords)keywordsMask);
+        }
+
+        private static (string name, EventTask task) ParseTask(XElement tasks, XElement @event)
+        {
+            string taskName = (string)@event.Attribute("task");
+
+            int taskId = 0;
+            if (!string.IsNullOrWhiteSpace(taskName))
+            {
+                taskId = (int)tasks
+                    .Elements(_task)
+                    .First(t => (string)t.Attribute("name") == taskName)
+                    .Attribute("value");
+            }
+
+            return(taskName, (EventTask)taskId);
+        }
+
+        private static IEnumerable<string> ParsePayload(XElement templates, XElement @event)
+        {
+                XAttribute templateRef = @event.Attribute("template");                
+                if (templateRef == null)
+                {
+                    // Event has no parameters/payload
+                    return Enumerable.Empty<string>();
+                }
+                else
+                {
+                    return templates.Elements(_template)
+                        .First(t => (string)t.Attribute("tid") == templateRef.Value)
+                        .Elements(_ns + "data")
+                        .Select(d => (string)d.Attribute("name")).ToList();
+                }
+        }
+
+        private static EventLevel ParseLevel(string level)
         {
             switch (level)
             {
@@ -158,112 +161,46 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema
             }
         }
 
-        ////private static string GetLocalizedString(string format, XElement stringTable)
-        ////{
-        ////    if (string.IsNullOrWhiteSpace(format) || stringTable == null)
-        ////    {
-        ////        return format;
-        ////    }
-
-        ////    return stringIdRegex.Replace(format, match =>
-        ////    {
-        ////        if (match.Groups.Count == 2)
-        ////        {
-        ////            var stringValue = FindString(stringTable, match.Groups[1].Value);
-        ////            if (stringValue != null)
-        ////            {
-        ////                stringValue = ReplaceTokens(stringValue);
-        ////                return stringValue;
-        ////            }
-        ////        }
-
-        ////        return match.Value;
-        ////    });
-        ////}
-
-        ////private static string ReplaceTokens(string format)
-        ////{
-        ////    return dotNetTokensRegex.Replace(format, ReplaceDotNetToken);
-        ////}
-
-        ////private static string ReplaceDotNetToken(Match match)
-        ////{
-        ////    if (match.Groups.Count == 2)
-        ////    {
-        ////        var position = int.Parse(match.Groups[1].Value);
-        ////        return "{" + (position - 1) + "}";
-        ////    }
-
-        ////    return match.Value;
-        ////}
-
-        ////private static string FindString(XElement stringTable, string id)
-        ////{
-        ////    var stringElement = stringTable.Elements(ns + "string")
-        ////        .FirstOrDefault(s => (string)s.Attribute("id") == id);
-        ////    if (stringElement != null)
-        ////    {
-        ////        return (string)stringElement.Attribute("value");
-        ////    }
-
-        ////    return null;
-        ////}
-
-        ////private static XElement GetStringTable(XElement instrumentation)
-        ////{
-        ////    var element = instrumentation.Element(ns + "localization");
-        ////    if (element != null)
-        ////    {
-        ////        element = element.Element(ns + "resources"); // TODO: filter by language?
-        ////        if (element != null)
-        ////        {
-        ////            return element.Element(ns + "stringTable");
-        ////        }
-        ////    }
-
-        ////    return null;
-        ////}
-
-        private Tuple<string, EventOpcode> ParseOpcode(string opcode, XElement opcodes)
+        private static (string name, EventOpcode code) ParseOpcode(string opcode, XElement opcodes)
         {
             switch (opcode)
             {
                 case null:
                 case "win:Info":
-                    return Tuple.Create("Info", EventOpcode.Info);
+                    return ("Info", EventOpcode.Info);
                 case "win:Start":
-                    return Tuple.Create("Start", EventOpcode.Start);
+                    return ("Start", EventOpcode.Start);
                 case "win:Stop":
-                    return Tuple.Create("Stop", EventOpcode.Stop);
+                    return ("Stop", EventOpcode.Stop);
                 case "win:DC_Start":
-                    return Tuple.Create("DC_Start", EventOpcode.DataCollectionStart);
+                    return ("DC_Start", EventOpcode.DataCollectionStart);
                 case "win:DC_Stop":
-                    return Tuple.Create("DC_Stop", EventOpcode.DataCollectionStop);
+                    return ("DC_Stop", EventOpcode.DataCollectionStop);
                 case "win:Extension":
-                    return Tuple.Create("Extension", EventOpcode.Extension);
+                    return ("Extension", EventOpcode.Extension);
                 case "win:Reply":
-                    return Tuple.Create("Reply", EventOpcode.Reply);
+                    return ("Reply", EventOpcode.Reply);
                 case "win:Resume":
-                    return Tuple.Create("Resume", EventOpcode.Resume);
+                    return ("Resume", EventOpcode.Resume);
                 case "win:Suspend":
-                    return Tuple.Create("Suspend", EventOpcode.Suspend);
+                    return ("Suspend", EventOpcode.Suspend);
                 case "win:Send":
-                    return Tuple.Create("Send", EventOpcode.Send);
+                    return ("Send", EventOpcode.Send);
                 case "win:Receive":
-                    return Tuple.Create("Receive", EventOpcode.Receive);
+                    return ("Receive", EventOpcode.Receive);
             }
 
             if (!string.IsNullOrWhiteSpace(opcode))
             {
-                var opcodeElement = opcodes.Elements(Opcode).FirstOrDefault(o => (string)o.Attribute("name") == opcode);
+                var opcodeElement = opcodes.Elements(_opcode).FirstOrDefault(o => (string)o.Attribute("name") == opcode);
                 if (opcodeElement != null)
                 {
                     int opcodeId = (int)opcodeElement.Attribute("value");
-                    return Tuple.Create(opcode, (EventOpcode)opcodeId);
+                    return (opcode, (EventOpcode)opcodeId);
                 }
             }
 
-            return Tuple.Create("Info", EventOpcode.Info);
+            return ("Info", EventOpcode.Info);
         }
     }
 }

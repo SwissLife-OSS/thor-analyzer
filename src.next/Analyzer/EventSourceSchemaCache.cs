@@ -13,8 +13,8 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema
     /// </summary>
     public class EventSourceSchemaCache
     {
-        private readonly ConcurrentDictionary<Guid, IReadOnlyDictionary<int, EventSchema>> schemas = new ConcurrentDictionary<Guid, IReadOnlyDictionary<int, EventSchema>>();
-        private readonly EventSourceSchemaReader schemaReader = new EventSourceSchemaReader();
+        private readonly ConcurrentDictionary<Guid, IReadOnlyDictionary<int, EventSchema>> _schemas = new ConcurrentDictionary<Guid, IReadOnlyDictionary<int, EventSchema>>();
+        private readonly EventSourceSchemaReader _schemaReader = new EventSourceSchemaReader();
 
         static EventSourceSchemaCache()
         {
@@ -42,10 +42,10 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema
 
             IReadOnlyDictionary<int, EventSchema> events;
 
-            if (!this.schemas.TryGetValue(eventSource.Guid, out events))
+            if (!_schemas.TryGetValue(eventSource.Guid, out events))
             {
                 events = new ReadOnlyDictionary<int, EventSchema>(this.schemaReader.GetSchema(eventSource));
-                this.schemas[eventSource.Guid] = events;
+                _schemas[eventSource.Guid] = events;
             }
 
             return events[eventId];

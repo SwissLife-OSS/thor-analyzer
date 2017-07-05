@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.Diagnostics.Tracing;
 
@@ -10,19 +11,6 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema
     /// </summary>
     public sealed class EventSchema
     {
-        private readonly int id;
-        private readonly Guid providerId;
-        private readonly string providerName;
-        private readonly string[] payload;
-        private readonly EventTask task;
-        private readonly string taskName;
-        private readonly EventLevel level;
-        private readonly int version;
-        private readonly EventKeywords keywords;
-        private readonly string keywordsDescription;
-        private readonly EventOpcode opcode;
-        private readonly string opcodeName;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema.EventSchema"/> class with the specified values.
         /// </summary>
@@ -38,20 +26,23 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema
         /// <param name="keywordsDescription">The event keywords description.</param>
         /// <param name="version">The event version.</param>
         /// <param name="payload">The event payload.</param>
-        public EventSchema(int id, Guid providerId, string providerName, EventLevel level, EventTask task, string taskName, EventOpcode opcode, string opcodeName, EventKeywords keywords, string keywordsDescription, int version, IEnumerable<string> payload)
+        public EventSchema(int id, Guid providerId, string providerName, EventLevel level, 
+            EventTask task, string taskName, EventOpcode opcode, string opcodeName, 
+            EventKeywords keywords, string keywordsDescription, int version, 
+            IEnumerable<string> payload)
         {
-            this.id = id;
-            this.providerId = providerId;
-            this.providerName = providerName;
-            this.level = level;
-            this.task = task;
-            this.taskName = taskName;
-            this.opcode = opcode;
-            this.opcodeName = opcodeName;
-            this.keywords = keywords;
-            this.keywordsDescription = keywordsDescription;
-            this.version = version;
-            this.payload = payload.ToArray();
+            Id = id;
+            ProviderId = providerId;
+            ProviderName = providerName;
+            Level = level;
+            Task = task;
+            TaskName = taskName;
+            Opcode = opcode;
+            OpcodeName = opcodeName;
+            Keywords = keywords;
+            KeywordsDescription = keywordsDescription;
+            Version = version;
+            Payload = payload.ToImmutableArray();
         }
 
         /// <summary>
@@ -112,46 +103,31 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema
         /// Gets the human-readable string name for the <see cref="EventSchema.Opcode"/> property. 
         /// </summary>
         /// <value>The operation code name.</value>
-        public string OpcodeName
-        {
-            get { return this.opcodeName; }
-        }
+        public string OpcodeName { get; }
 
         /// <summary>
         /// Gets the event level.
         /// </summary>
         /// <value>The event level.</value>
-        public EventLevel Level
-        {
-            get { return this.level; }
-        }
+        public EventLevel Level { get; }
 
         /// <summary>
         /// Gets the event version.
         /// </summary>
         /// <value>The event version.</value>
-        public int Version
-        {
-            get { return this.version; }
-        }
+        public int Version { get; }
 
         /// <summary>
         /// Gets the event keywords.
         /// </summary>
         /// <value>The event keywords.</value>
-        public EventKeywords Keywords
-        {
-            get { return this.keywords; }
-        }
+        public EventKeywords Keywords { get; }
 
         /// <summary>
         /// Gets the human-readable string name for the <see cref="EventSchema.Keywords"/> property. 
         /// </summary>
         /// <value>The keyword description.</value>
-        public string KeywordsDescription
-        {
-            get { return this.keywordsDescription; }
-        }
+        public string KeywordsDescription { get; }
 
         /// <summary>
         /// Gets the name for the event.
@@ -160,9 +136,6 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema
         /// This is simply the concatenation of the task and operation code names.
         /// </remarks>
         /// <value>The event name.</value>
-        public string EventName
-        {
-            get { return this.TaskName + this.OpcodeName; }
-        }
+        public string EventName { get; }
     }
 }
