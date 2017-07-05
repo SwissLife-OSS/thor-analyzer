@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using Microsoft.Diagnostics.Tracing;
 
@@ -13,8 +14,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema
     /// </summary>
     public class EventSourceSchemaCache
     {
-        private readonly ConcurrentDictionary<Guid, IReadOnlyDictionary<int, EventSchema>> _schemas = new ConcurrentDictionary<Guid, IReadOnlyDictionary<int, EventSchema>>();
-        private readonly EventSourceSchemaReader _schemaReader = new EventSourceSchemaReader();
+        private readonly ConcurrentDictionary<Guid, IImmutableDictionary<int, EventSchema>> _schemas = new ConcurrentDictionary<Guid, IImmutableDictionary<int, EventSchema>>();
 
         static EventSourceSchemaCache()
         {
@@ -40,11 +40,11 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema
                 throw new ArgumentNullException(nameof(eventSource));
             }
 
-            IReadOnlyDictionary<int, EventSchema> events;
+            IImmutableDictionary<int, EventSchema> events;
 
             if (!_schemas.TryGetValue(eventSource.Guid, out events))
             {
-                events = new ReadOnlyDictionary<int, EventSchema>(this.schemaReader.GetSchema(eventSource));
+                events = EventSourceSchemaReader.GetSchema(eventSource);
                 _schemas[eventSource.Guid] = events;
             }
 
