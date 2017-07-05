@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>ChilliCream.Tracing</PackageId>
+    <AssemblyName>ChilliCream.Tracing.Analyzers</AssemblyName>
+    <RootNamespace>ChilliCream.Tracing</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Diagnostics.Tracing.EventSource.Redist" Version="1.1.28" />
+  </ItemGroup>
+</Project>
