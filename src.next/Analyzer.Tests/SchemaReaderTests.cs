@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using ChilliCream.Tracing.Schema;
 using FluentAssertions;
 using Microsoft.Diagnostics.Tracing;
@@ -14,7 +13,7 @@ namespace ChilliCream.Tracing.Tests
         public void GetSchema()
         {
             // arrange
-            OneEventEventSource eventSource = new Tests.OneEventEventSource();
+            OneEventEventSource eventSource = new OneEventEventSource();
 
             // act
             EventSourceSchema schema = eventSource.GetSchema();
@@ -33,7 +32,7 @@ namespace ChilliCream.Tracing.Tests
         public void GetEventSchema()
         {
             // arrange
-            OneEventEventSource eventSource = new Tests.OneEventEventSource();
+            OneEventEventSource eventSource = new OneEventEventSource();
 
             // act
             EventSchema eventSchema = eventSource.GetEventSchema(1);
@@ -50,20 +49,20 @@ namespace ChilliCream.Tracing.Tests
         public void GetEventSchema_UnknownEventId()
         {
             // arrange
-            OneEventEventSource eventSource = new Tests.OneEventEventSource();
+            OneEventEventSource eventSource = new OneEventEventSource();
 
             // act
             Action getEventSchema = () => eventSource.GetEventSchema(5);
 
             // assert
-            getEventSchema.ShouldNotThrow<KeyNotFoundException>();
+            getEventSchema.ShouldThrow<KeyNotFoundException>();
         }
 
         [Fact]
         public void TryGetEventSchema()
         {
             // arrange
-            OneEventEventSource eventSource = new Tests.OneEventEventSource();
+            OneEventEventSource eventSource = new OneEventEventSource();
 
             // act
             EventSchema eventSchema;
@@ -72,7 +71,7 @@ namespace ChilliCream.Tracing.Tests
             // assert
             success.Should().BeTrue();
             eventSchema.Should().NotBeNull();
-            eventSchema.TaskName.Should().Be("Foo");
+            eventSchema.Name.Should().Be("Foo");
             eventSchema.EventSource.Name.Should().Be("OneEvent");
             eventSchema.Payload.Should().HaveCount(1);
             eventSchema.Payload.Should().Contain(new[] { "bar" });
@@ -82,11 +81,11 @@ namespace ChilliCream.Tracing.Tests
         public void TryGetEventSchema_UnknownEventId()
         {
             // arrange
-            OneEventEventSource eventSource = new Tests.OneEventEventSource();
+            OneEventEventSource eventSource = new OneEventEventSource();
 
             // act
             EventSchema eventSchema;
-            bool success = eventSource.TryGetEventSchema(1, out eventSchema);
+            bool success = eventSource.TryGetEventSchema(5, out eventSchema);
 
             // assert
             success.Should().BeFalse();
@@ -104,10 +103,10 @@ namespace ChilliCream.Tracing.Tests
 
             // assert
             eventSchema.Should().NotBeNull();
-            eventSchema.EventName.Should().BeNull();
+            eventSchema.Name.Should().Be("WithChannel");
             eventSchema.Id.Should().Be(2);
             eventSchema.TaskName.Should().Be("WithChannel");
-            eventSchema.EventSource.Name.Should().Be("OneEvent");
+            eventSchema.EventSource.Name.Should().Be("MultipleEvents");
             eventSchema.Payload.Should().HaveCount(1);
             eventSchema.Payload.Should().Contain(new[] { "bar" });
         }

@@ -16,6 +16,7 @@ namespace ChilliCream.Tracing.Schema
         /// Initializes a new instance of the <see cref="Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema.EventSchema"/> class with the specified values.
         /// </summary>
         /// <param name="id">The event id.</param>
+        /// <param name="id">The event name.</param>
         /// <param name="providerId">The provider GUID.</param>
         /// <param name="providerName">The provider name.</param>
         /// <param name="level">The event level.</param>
@@ -27,13 +28,13 @@ namespace ChilliCream.Tracing.Schema
         /// <param name="keywordsDescription">The event keywords description.</param>
         /// <param name="version">The event version.</param>
         /// <param name="payload">The event payload.</param>
-        public EventSchema(int id, string eventName, EventLevel level,
+        public EventSchema(int id, string name, EventLevel level,
             EventTask task, string taskName, EventOpcode opcode, string opcodeName,
             EventKeywords keywords, string keywordsDescription, int version,
             IEnumerable<string> payload)
         {
             Id = id;
-            EventName = eventName;
+            Name = name;
             Level = level;
             Task = task;
             TaskName = taskName;
@@ -121,7 +122,7 @@ namespace ChilliCream.Tracing.Schema
         /// This is simply the concatenation of the task and operation code names.
         /// </remarks>
         /// <value>The event name.</value>
-        public string EventName { get; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets the event source schema.
