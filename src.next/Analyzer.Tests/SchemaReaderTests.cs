@@ -57,8 +57,8 @@ namespace ChilliCream.Tracing.Tests
 
             schema.Events.Should().HaveCount(1);
 
-            EventSchema fooSchema = schema.Events[1];
-            fooSchema.TaskName.Should().Be("Valid");
+            EventSchema validSchema = schema.Events[2];
+            validSchema.TaskName.Should().Be("Valid");
         }
 
         [Fact]
@@ -132,14 +132,60 @@ namespace ChilliCream.Tracing.Tests
             MultipleEventsEventSource eventSource = new MultipleEventsEventSource();
 
             // act
-            EventSchema eventSchema = eventSource.GetEventSchema(2);
+            EventSchema eventSchema = eventSource.GetEventSchema(3);
 
             // assert
             eventSchema.Should().NotBeNull();
-            eventSchema.Id.Should().Be(2);
+            eventSchema.Id.Should().Be(3);
             eventSchema.Name.Should().Be("WithKeywords");
             eventSchema.Keywords.Should().Be(EventKeywords.AuditFailure);
             eventSchema.KeywordsDescription.Should().BeNull();
+            eventSchema.Level.Should().Be(EventLevel.Informational);
+            eventSchema.Opcode.Should().Be(EventOpcode.Info);
+            eventSchema.Version.Should().Be(0);
+            eventSchema.Payload.Should().HaveCount(1);
+            eventSchema.Payload.Should().Contain(new[] { "bar" });
+        }
+
+        [Fact]
+        public void GetEventWithLevel()
+        {
+            // arrange
+            MultipleEventsEventSource eventSource = new MultipleEventsEventSource();
+
+            // act
+            EventSchema eventSchema = eventSource.GetEventSchema(4);
+
+            // assert
+            eventSchema.Should().NotBeNull();
+            eventSchema.Id.Should().Be(4);
+            eventSchema.Name.Should().Be("WithLevel");
+            eventSchema.Keywords.Should().Be(EventKeywords.None);
+            eventSchema.KeywordsDescription.Should().BeNull();
+            eventSchema.Level.Should().Be(EventLevel.Verbose);
+            eventSchema.Opcode.Should().Be(EventOpcode.Info);
+            eventSchema.Version.Should().Be(0);
+            eventSchema.Payload.Should().HaveCount(1);
+            eventSchema.Payload.Should().Contain(new[] { "bar" });
+        }
+
+        [Fact]
+        public void GetEventWithOpcode()
+        {
+            // arrange
+            MultipleEventsEventSource eventSource = new MultipleEventsEventSource();
+
+            // act
+            EventSchema eventSchema = eventSource.GetEventSchema(6);
+
+            // assert
+            eventSchema.Should().NotBeNull();
+            eventSchema.Id.Should().Be(6);
+            eventSchema.Name.Should().Be("WithOpcode");
+            eventSchema.Keywords.Should().Be(EventKeywords.None);
+            eventSchema.KeywordsDescription.Should().BeNull();
+            eventSchema.Level.Should().Be(EventLevel.Informational);
+            eventSchema.Opcode.Should().Be(EventOpcode.Receive);
             eventSchema.Version.Should().Be(0);
             eventSchema.Payload.Should().HaveCount(1);
             eventSchema.Payload.Should().Contain(new[] { "bar" });
@@ -166,12 +212,6 @@ namespace ChilliCream.Tracing.Tests
         public void WithLevel(string bar)
         {
             WriteEvent(4, bar);
-        }
-
-        [Event(5, Message = "ABC {0}")]
-        public void WithMessage(string bar)
-        {
-            WriteEvent(5, bar);
         }
 
         [Event(6, Opcode = EventOpcode.Receive)]

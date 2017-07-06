@@ -107,13 +107,14 @@ namespace ChilliCream.Tracing.Schema
         private static void DeserializeEventSchemas(XElement provider,
             List<EventSchema> eventSchemas, Dictionary<int, int> eventIdCounts)
         {
-            foreach (XElement @event in provider.Element(_events).Elements(_event))
+            foreach (XElement eventElement in provider.Element(_events).Elements(_event))
             {
-                int eventId = (int)@event.Attribute("value");
+                int eventId = (int)eventElement.Attribute("value");
 
                 if (eventId > 0)
                 {
                     TrackDuplicateEventIds(eventIdCounts, eventId);
+                    eventSchemas.Add(CreateEventSchema(eventId, eventElement, provider));
                 }
             }
         }
