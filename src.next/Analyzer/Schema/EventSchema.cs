@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.Diagnostics.Tracing;
 
-namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema
+namespace ChilliCream.Tracing.Schema
 {
     /// <summary>
     /// Represents an <see cref="EventSource"/> schema.
     /// </summary>
     public sealed class EventSchema
     {
+        private EventSourceSchema _eventSource;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema.EventSchema"/> class with the specified values.
         /// </summary>
@@ -26,14 +27,13 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema
         /// <param name="keywordsDescription">The event keywords description.</param>
         /// <param name="version">The event version.</param>
         /// <param name="payload">The event payload.</param>
-        public EventSchema(int id, Guid providerId, string providerName, EventLevel level, 
-            EventTask task, string taskName, EventOpcode opcode, string opcodeName, 
-            EventKeywords keywords, string keywordsDescription, int version, 
+        public EventSchema(int id, string eventName, EventLevel level,
+            EventTask task, string taskName, EventOpcode opcode, string opcodeName,
+            EventKeywords keywords, string keywordsDescription, int version,
             IEnumerable<string> payload)
         {
             Id = id;
-            ProviderId = providerId;
-            ProviderName = providerName;
+            EventName = eventName;
             Level = level;
             Task = task;
             TaskName = taskName;
@@ -52,21 +52,6 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema
         public int Id { get; }
 
         /// <summary>
-        /// Gets the provider id.
-        /// </summary>
-        /// <remarks>
-        /// Provider GUID can be <see cref="Guid.Empty"/> for pre-Vista ETW providers.  
-        /// </remarks>
-        /// <value>The provider id.</value>
-        public Guid ProviderId { get; }
-
-        /// <summary>
-        /// Gets the provider name.
-        /// </summary>
-        /// <value>The provider name.</value>
-        public string ProviderName { get; }
-
-        /// <summary>
         /// Gets the event task.
         /// </summary>
         /// <remarks>
@@ -81,7 +66,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema
         /// Gets the task name.
         /// </summary>
         /// <value>The task name.</value>
-        public string TaskName  { get; }
+        public string TaskName { get; }
 
         /// <summary>
         /// Gets the payload names that maps to the event signature parameter names.
@@ -137,5 +122,25 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema
         /// </remarks>
         /// <value>The event name.</value>
         public string EventName { get; }
+
+        /// <summary>
+        /// Gets the event source schema.
+        /// </summary>
+        /// <value>The event source schema.</value>
+        public EventSourceSchema EventSource
+        {
+            get
+            {
+                return _eventSource;
+            }
+            internal set
+            {
+                if (_eventSource != null)
+                {
+                    throw new InvalidOperationException("The event source schema can be set only once.");
+                }
+                _eventSource = value;
+            }
+        }
     }
 }
