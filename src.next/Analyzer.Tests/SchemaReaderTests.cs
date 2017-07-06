@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ChilliCream.Tracing.Schema;
 using FluentAssertions;
 using Microsoft.Diagnostics.Tracing;
@@ -19,13 +20,45 @@ namespace ChilliCream.Tracing.Tests
             EventSourceSchema schema = eventSource.GetSchema();
 
             // assert
-            schema.Events.Should().HaveCount(2);
+            schema.Events.Should().HaveCount(1);
+
+            foreach (EventSchema eventSchema in schema.Events.Values)
+            {
+                eventSchema.EventSource.Should().Be(schema);
+            }
 
             EventSchema fooSchema = schema.Events[1];
             fooSchema.TaskName.Should().Be("Foo");
             fooSchema.EventSource.Name.Should().Be("OneEvent");
             fooSchema.Payload.Should().HaveCount(1);
             fooSchema.Payload.Should().Contain(new[] { "bar" });
+        }
+
+        [Fact]
+        public void GetSchema_DuplicateEventIds()
+        {
+            // arrange
+            DuplicateEventIdEventSource eventSource = new DuplicateEventIdEventSource();
+
+            // act
+            EventSourceSchema schema = eventSource.GetSchema();
+
+            // assert
+            schema.Errors.Should().HaveCount(1);
+
+            EventSourceSchemaError error = schema.Errors.First();
+            error.Code.Should().Be(EventSourceSchemaErrorCodes.DuplicateEventIds);
+            error.Events.Should().HaveCount(2);
+
+            foreach (EventSchema eventSchema in error.Events)
+            {
+                eventSchema.EventSource.Should().Be(schema);
+            }
+
+            schema.Events.Should().HaveCount(1);
+
+            EventSchema fooSchema = schema.Events[1];
+            fooSchema.TaskName.Should().Be("Valid");
         }
 
         [Fact]
@@ -93,7 +126,7 @@ namespace ChilliCream.Tracing.Tests
         }
 
         [Fact]
-        public void GetEventWithChannel()
+        public void GetEventWithKeywords()
         {
             // arrange
             MultipleEventsEventSource eventSource = new MultipleEventsEventSource();
@@ -103,23 +136,13 @@ namespace ChilliCream.Tracing.Tests
 
             // assert
             eventSchema.Should().NotBeNull();
-            eventSchema.Name.Should().Be("WithChannel");
             eventSchema.Id.Should().Be(2);
-            eventSchema.TaskName.Should().Be("WithChannel");
-            eventSchema.EventSource.Name.Should().Be("MultipleEvents");
+            eventSchema.Name.Should().Be("WithKeywords");
+            eventSchema.Keywords.Should().Be(EventKeywords.AuditFailure);
+            eventSchema.KeywordsDescription.Should().BeNull();
+            eventSchema.Version.Should().Be(0);
             eventSchema.Payload.Should().HaveCount(1);
             eventSchema.Payload.Should().Contain(new[] { "bar" });
-        }
-    }
-
-    [EventSource(Name = "OneEvent")]
-    public class OneEventEventSource
-        : EventSource
-    {
-        [Event(1)]
-        public void Foo(string bar)
-        {
-            WriteEvent(1, bar);
         }
     }
 
@@ -133,12 +156,6 @@ namespace ChilliCream.Tracing.Tests
             WriteEvent(1, bar);
         }
 
-        [Event(2, Channel = EventChannel.Admin)]
-        public void WithChannel(string bar)
-        {
-            WriteEvent(2, bar);
-        }
-
         [Event(3, Keywords = EventKeywords.AuditFailure)]
         public void WithKeywords(string bar)
         {
@@ -150,7 +167,7 @@ namespace ChilliCream.Tracing.Tests
         {
             WriteEvent(4, bar);
         }
-        
+
         [Event(5, Message = "ABC {0}")]
         public void WithMessage(string bar)
         {

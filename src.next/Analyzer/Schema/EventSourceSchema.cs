@@ -1,26 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Text;
 
 namespace ChilliCream.Tracing.Schema
 {
     public class EventSourceSchema
     {
-        internal EventSourceSchema(Guid id, string name, IEnumerable<EventSchema> events)
+        internal EventSourceSchema(Guid guid, string name,
+            IReadOnlyDictionary<int, EventSchema> events,
+            IReadOnlyCollection<EventSourceSchemaError> errors)
         {
-            Id = id;
-            Name = name;
-            Events = events.ToImmutableDictionary(t => t.Id);
-
-            foreach (EventSchema eventSchema in Events.Values)
+            if (string.IsNullOrWhiteSpace(name))
             {
-                eventSchema.EventSource = this;
+                throw new ArgumentNullException(nameof(name));
             }
+            if (events == null)
+            {
+                throw new ArgumentNullException(nameof(events));
+            }
+            if (errors == null)
+            {
+                throw new ArgumentNullException(nameof(errors));
+            }
+
+            Guid = guid;
+            Name = name;
+            Events = events;
+            Errors = errors;
         }
 
-        public Guid Id { get; }
+        public Guid Guid { get; }
         public string Name { get; }
         public IReadOnlyDictionary<int, EventSchema> Events { get; }
+        public IReadOnlyCollection<EventSourceSchemaError> Errors { get; }
     }
 }

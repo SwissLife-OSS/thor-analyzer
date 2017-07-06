@@ -11,6 +11,24 @@ namespace ChilliCream.Tracing.Schema
     {
         private static readonly ConcurrentDictionary<Guid, EventSourceSchema>
             _schemas = new ConcurrentDictionary<Guid, EventSourceSchema>();
+        
+        public static EventSourceSchema GetSchema(this EventSource eventSource)
+        {
+            if (eventSource == null)
+            {
+                throw new ArgumentNullException(nameof(eventSource));
+            }
+
+            EventSourceSchema schema;
+
+            if (!_schemas.TryGetValue(eventSource.Guid, out schema))
+            {
+                schema = EventSourceSchemaReader.GetSchema(eventSource);
+                _schemas[eventSource.Guid] = schema;
+            }
+
+            return schema;
+        }
 
         /// <summary>
         /// Gets the <see cref="EventSchema"/> for the specified eventId and eventSource.
@@ -25,14 +43,7 @@ namespace ChilliCream.Tracing.Schema
                 throw new ArgumentNullException(nameof(eventSource));
             }
 
-            EventSourceSchema schema;
-
-            if (!_schemas.TryGetValue(eventSource.Guid, out schema))
-            {
-                schema = eventSource.GetSchema();
-                _schemas[eventSource.Guid] = schema;
-            }
-
+            EventSourceSchema schema = GetSchema(eventSource);
             return schema.Events[eventId];
         }
 
@@ -50,14 +61,7 @@ namespace ChilliCream.Tracing.Schema
                 throw new ArgumentNullException(nameof(eventSource));
             }
 
-            EventSourceSchema schema;
-
-            if (!_schemas.TryGetValue(eventSource.Guid, out schema))
-            {
-                schema = eventSource.GetSchema();
-                _schemas[eventSource.Guid] = schema;
-            }
-
+            EventSourceSchema schema = GetSchema(eventSource);
             return schema.Events.TryGetValue(eventId, out eventSchema);
         }
 
