@@ -9,7 +9,7 @@ namespace ChilliCream.Logging.Analyzer.Rules
     /// <summary>
     /// A rule which probes for duplicate event identifiers.
     /// </summary>
-    public sealed class DuplicateEventIdsNotAllowed
+    public class DuplicateEventIdsNotAllowed
         : IEventSourceRule
     {
         private readonly Dictionary<int, int> _duplicateIds = new Dictionary<int, int>();

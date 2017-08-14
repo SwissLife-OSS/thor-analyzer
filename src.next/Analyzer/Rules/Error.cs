@@ -6,7 +6,7 @@ namespace ChilliCream.Logging.Analyzer.Rules
     /// <summary>
     /// A result that represents a error status for a rule.
     /// </summary>
-    public sealed class Error
+    public class Error
         : IResult
     {
         /// <summary>

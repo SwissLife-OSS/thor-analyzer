@@ -5,7 +5,7 @@ namespace ChilliCream.Logging.Analyzer.Rules
     /// <summary>
     /// A result that represents a success status for a rule.
     /// </summary>
-    public sealed class Success
+    public class Success
         : IResult
     {
         /// <summary>

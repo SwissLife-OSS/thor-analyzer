@@ -3,9 +3,11 @@
 namespace ChilliCream.Logging.Analyzer.Tests
 {
     [EventSource(Name = "MultipleEvents")]
-    public class MultipleEventsEventSource
+    public sealed class MultipleEventsEventSource
        : EventSource
     {
+        public static MultipleEventsEventSource Log = new MultipleEventsEventSource();
+
         [Event(1)]
         public void Foo(string bar)
         {

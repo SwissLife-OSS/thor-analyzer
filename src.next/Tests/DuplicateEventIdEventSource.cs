@@ -3,9 +3,12 @@
 namespace ChilliCream.Logging.Analyzer.Tests
 {
     [EventSource(Name = "DuplicateEventId")]
-    public class DuplicateEventIdEventSource
-       : EventSource
+    public sealed class DuplicateEventIdEventSource
+        : EventSource
+        , IDuplicateEventIdEventSource
     {
+        public static IDuplicateEventIdEventSource Log = new DuplicateEventIdEventSource();
+
         [Event(1)]
         public void Foo(string bar)
         {
@@ -23,5 +26,14 @@ namespace ChilliCream.Logging.Analyzer.Tests
         {
             WriteEvent(2);
         }
+    }
+
+    public interface IDuplicateEventIdEventSource
+    {
+        void Foo(string bar);
+
+        void Bar(string foo);
+
+        void Valid();
     }
 }

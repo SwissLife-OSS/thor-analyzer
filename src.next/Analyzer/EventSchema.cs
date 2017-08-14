@@ -6,7 +6,7 @@ namespace ChilliCream.Logging.Analyzer
     /// <summary>
     /// Represents an <see cref="EventSource"/> event schema.
     /// </summary>
-    public sealed class EventSchema
+    public class EventSchema
     {
         public EventSchema(EventSourceSchema eventSourceSchema, int id, string name,
             EventLevel level, EventTask task, string taskName, EventOpcode opcode,

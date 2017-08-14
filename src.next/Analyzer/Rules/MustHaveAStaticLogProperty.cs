@@ -7,7 +7,7 @@ namespace ChilliCream.Logging.Analyzer.Rules
     /// <summary>
     /// A rule which probes for missing <c>Log</c> properties.
     /// </summary>
-    public sealed class MustHaveAStaticLogProperty
+    public class MustHaveAStaticLogProperty
         : IEventSourceRule
     {
         /// <summary>
@@ -42,19 +42,9 @@ namespace ChilliCream.Logging.Analyzer.Rules
             Type eventSourceType = eventSource.GetType();
             FieldInfo field = eventSourceType.GetField("Log");
 
-            if (field == null)
+            if (field == null || !field.IsStatic || !field.FieldType.IsAssignableFrom(eventSourceType))
             {
-                return new Error(this, "Public, static field that returns an instance of the specific EventSource implementation is missing.");
-            }
-
-            if (field.FieldType != eventSourceType)
-            {
-                return new Error(this, "The Log field must return an instance of its own type.");
-            }
-
-            if (!field.IsStatic)
-            {
-                return new Error(this, "The Log field must be static.");
+                return new Error(this, "Did not found a public 'Log' field which is static and holds an instance of its own type.");
             }
 
             return new Success(this);

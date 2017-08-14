@@ -3,7 +3,7 @@ using System.Collections.Immutable;
 
 namespace ChilliCream.Logging.Analyzer
 {
-    public sealed class EventSourceSchema
+    public class EventSourceSchema
     {
         internal EventSourceSchema(Guid providerId, string providerName)
         {

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace ChilliCream.Logging.Analyzer
 {
-    public sealed class EventSourceAnalyzer
+    public class EventSourceAnalyzer
     {
         private readonly List<IRuleSet> _ruleSets = new List<IRuleSet>();
         private readonly SchemaCache _cache = new SchemaCache();
