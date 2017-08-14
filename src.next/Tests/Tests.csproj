@@ -4,11 +4,14 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <AssemblyName>ChilliCream.Logging.Analyzer.Tests</AssemblyName>
+
+    <RootNamespace>ChilliCream.Logging.Analyzer.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="fluentassertions" Version="4.19.3" />
-    <PackageReference Include="microsoft.diagnostics.tracing.eventsource.redist" Version="1.1.28" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0-preview-20170517-02" />
     <PackageReference Include="xunit" Version="2.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />

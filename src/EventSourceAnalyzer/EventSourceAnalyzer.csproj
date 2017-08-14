@@ -61,7 +61,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Schema\EventSourceSchema.csproj">
+    <ProjectReference Include="..\EventSourceSchema\EventSourceSchema.csproj">
       <Project>{30658BFB-6CE3-466D-8CBD-40F632AD3FD3}</Project>
       <Name>EventSourceSchema</Name>
     </ProjectReference>

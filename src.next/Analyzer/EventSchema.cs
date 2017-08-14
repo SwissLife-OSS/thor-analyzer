@@ -1,49 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using Microsoft.Diagnostics.Tracing;
+﻿using System.Collections.Immutable;
+using System.Diagnostics.Tracing;
 
-namespace ChilliCream.Tracing.Schema
+namespace ChilliCream.Logging.Analyzer
 {
     /// <summary>
-    /// Represents an <see cref="EventSource"/> schema.
+    /// Represents an <see cref="EventSource"/> event schema.
     /// </summary>
     public sealed class EventSchema
     {
-        private EventSourceSchema _eventSource;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Schema.EventSchema"/> class with the specified values.
-        /// </summary>
-        /// <param name="id">The event id.</param>
-        /// <param name="id">The event name.</param>
-        /// <param name="providerId">The provider GUID.</param>
-        /// <param name="providerName">The provider name.</param>
-        /// <param name="level">The event level.</param>
-        /// <param name="task">The event task.</param>
-        /// <param name="taskName">The event task name.</param>
-        /// <param name="opcode">The event operation code.</param>
-        /// <param name="opcodeName">The event operation code name.</param>
-        /// <param name="keywords">The event keywords.</param>
-        /// <param name="keywordsDescription">The event keywords description.</param>
-        /// <param name="version">The event version.</param>
-        /// <param name="payload">The event payload.</param>
-        public EventSchema(int id, string name, EventLevel level,
-            EventTask task, string taskName, EventOpcode opcode, string opcodeName,
-            EventKeywords keywords, string keywordsDescription, int version,
-            IEnumerable<string> payload)
+        public EventSchema(EventSourceSchema eventSourceSchema, int id, string name,
+            EventLevel level, EventTask task, string taskName, EventOpcode opcode,
+            EventKeywords keywords, int version, ImmutableArray<string> payload)
         {
+            EventSource = eventSourceSchema;
             Id = id;
             Name = name;
             Level = level;
             Task = task;
             TaskName = taskName;
             Opcode = opcode;
-            OpcodeName = opcodeName;
             Keywords = keywords;
-            KeywordsDescription = keywordsDescription;
             Version = version;
-            Payload = payload.ToImmutableArray();
+            Payload = payload;
         }
 
         /// <summary>
@@ -86,12 +64,6 @@ namespace ChilliCream.Tracing.Schema
         public EventOpcode Opcode { get; }
 
         /// <summary>
-        /// Gets the human-readable string name for the <see cref="EventSchema.Opcode"/> property. 
-        /// </summary>
-        /// <value>The operation code name.</value>
-        public string OpcodeName { get; }
-
-        /// <summary>
         /// Gets the event level.
         /// </summary>
         /// <value>The event level.</value>
@@ -110,12 +82,6 @@ namespace ChilliCream.Tracing.Schema
         public EventKeywords Keywords { get; }
 
         /// <summary>
-        /// Gets the human-readable string name for the <see cref="EventSchema.Keywords"/> property. 
-        /// </summary>
-        /// <value>The keyword description.</value>
-        public string KeywordsDescription { get; }
-
-        /// <summary>
         /// Gets the name for the event.
         /// </summary>
         /// <remarks>
@@ -128,20 +94,6 @@ namespace ChilliCream.Tracing.Schema
         /// Gets the event source schema.
         /// </summary>
         /// <value>The event source schema.</value>
-        public EventSourceSchema EventSource
-        {
-            get
-            {
-                return _eventSource;
-            }
-            internal set
-            {
-                if (_eventSource != null)
-                {
-                    throw new InvalidOperationException("The event source schema can be set only once.");
-                }
-                _eventSource = value;
-            }
-        }
+        public EventSourceSchema EventSource { get; }
     }
 }
