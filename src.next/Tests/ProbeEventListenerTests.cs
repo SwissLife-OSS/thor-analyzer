@@ -1,5 +1,6 @@
 ﻿using ChilliCream.Logging.Analyzer.Tests.EventSources;
 using FluentAssertions;
+using System;
 using System.Diagnostics.Tracing;
 using System.Threading.Tasks;
 using Xunit;
@@ -21,11 +22,17 @@ namespace ChilliCream.Logging.Analyzer.Tests
                 MultipleEventsEventSource.Log.WithTags("2");
 
                 // assert
-                await Task.Delay(200).ConfigureAwait(false);
-
                 EventWrittenEventArgs[] events = (EventWrittenEventArgs[])listener.OrderdEvents;
+                Random random = new Random();
+                int expectedCount = 2;
+                int run = 0;
 
-                events.Should().HaveCount(2);
+                while (events.Length != expectedCount && run++ < 50)
+                {
+                    await Task.Delay(random.Next(50, 100)).ConfigureAwait(false);
+                }
+
+                events.Should().HaveCount(expectedCount);
                 events[0].EventName.Should().Be("WithKeywords");
                 events[1].EventName.Should().Be("WithTags");
             }
