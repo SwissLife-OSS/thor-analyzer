@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.Tracing;
 
-namespace ChilliCream.Logging.Analyzer.Tests
+namespace ChilliCream.Logging.Analyzer.Tests.EventSources
 {
     [EventSource(Name = "MultipleEvents")]
     public sealed class MultipleEventsEventSource

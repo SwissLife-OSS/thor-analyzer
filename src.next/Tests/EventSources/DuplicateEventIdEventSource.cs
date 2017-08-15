@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.Tracing;
 
-namespace ChilliCream.Logging.Analyzer.Tests
+namespace ChilliCream.Logging.Analyzer.Tests.EventSources
 {
     [EventSource(Name = "DuplicateEventId")]
     public sealed class DuplicateEventIdEventSource

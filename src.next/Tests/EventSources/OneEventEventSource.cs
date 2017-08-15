@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics.Tracing;
 
-namespace ChilliCream.Logging.Analyzer.Tests
+namespace ChilliCream.Logging.Analyzer.Tests.EventSources
 {
     [EventSource(Name = "OneEvent")]
-    public class OneEventEventSource
+    public sealed class OneEventEventSource
         : EventSource
     {
         public static OneEventEventSource Log = new OneEventEventSource();

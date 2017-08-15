@@ -8,7 +8,7 @@ namespace ChilliCream.Logging.Analyzer.Tests
     {
         #region TryAdd
 
-        [Fact(DisplayName = "TryAdd: Should add a schema to the cache.")]
+        [Fact(DisplayName = "TryAdd: Should add a schema to the cache")]
         public void TryAdd()
         {
             // arrange
@@ -23,7 +23,7 @@ namespace ChilliCream.Logging.Analyzer.Tests
             added.Should().BeTrue();
         }
 
-        [Fact(DisplayName = "TryAdd: Should not add a schema to the cache if already cached.")]
+        [Fact(DisplayName = "TryAdd: Should not add a schema to the cache if already cached")]
         public void TryAdd_ExistsAlready()
         {
             // arrange
@@ -39,7 +39,7 @@ namespace ChilliCream.Logging.Analyzer.Tests
             added.Should().BeFalse();
         }
 
-        [Fact(DisplayName = "TryAdd: Should throw an argument null exception for eventSource.")]
+        [Fact(DisplayName = "TryAdd: Should throw an argument null exception for eventSource")]
         public void TryAdd_SchemaNull()
         {
             // arrange
@@ -59,7 +59,7 @@ namespace ChilliCream.Logging.Analyzer.Tests
 
         #region TryGet
 
-        [Fact(DisplayName = "TryGet: Should get a schema from the cache.")]
+        [Fact(DisplayName = "TryGet: Should get a schema from the cache")]
         public void TryGet()
         {
             // arrange
@@ -76,7 +76,7 @@ namespace ChilliCream.Logging.Analyzer.Tests
             output.Should().NotBeNull();
         }
 
-        [Fact(DisplayName = "TryGet: Should return null if not exists.")]
+        [Fact(DisplayName = "TryGet: Should return null if not exists")]
         public void TryGet_ExistsAlready()
         {
             // arrange
@@ -90,7 +90,7 @@ namespace ChilliCream.Logging.Analyzer.Tests
             exists.Should().BeFalse();
         }
 
-        [Fact(DisplayName = "TryGet: Should throw an argument null exception for eventSource.")]
+        [Fact(DisplayName = "TryGet: Should throw an argument null exception for eventSource")]
         public void TryGet_SchemaNull()
         {
             // arrange
@@ -110,7 +110,7 @@ namespace ChilliCream.Logging.Analyzer.Tests
 
         #region Clear
 
-        [Fact(DisplayName = "Clear: Should clear the cache.")]
+        [Fact(DisplayName = "Clear: Should clear the cache")]
         public void Clear()
         {
             // arrange

@@ -5,7 +5,7 @@ namespace ChilliCream.Logging.Analyzer
 {
     public class EventSourceSchema
     {
-        internal EventSourceSchema(Guid providerId, string providerName)
+        public EventSourceSchema(Guid providerId, string providerName)
         {
             if (providerId == Guid.Empty)
             {

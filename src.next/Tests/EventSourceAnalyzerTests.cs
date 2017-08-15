@@ -1,4 +1,5 @@
 ﻿using ChilliCream.Logging.Analyzer.Rules;
+using ChilliCream.Logging.Analyzer.Tests.EventSources;
 using FluentAssertions;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,19 +9,19 @@ namespace ChilliCream.Logging.Analyzer.Tests
 {
     public class EventSourceAnalyzerTests
     {
-        [Fact(DisplayName = "Inspect: Should return an error for duplicate event identifiers.")]
+        [Fact(DisplayName = "Inspect: Should return an error for duplicate event identifiers")]
         public void Inspect_DuplicateEventId()
         {
             // arrange
-            DuplicateEventIdEventSource eventSource = new DuplicateEventIdEventSource();
+            MultipleEventsEventSource eventSource = new MultipleEventsEventSource();
             EventSourceAnalyzer analyzer = new EventSourceAnalyzer();
 
             // act
             IEnumerable<IResult> results = analyzer.Inspect(eventSource);
 
             // assert
-            results.Should().HaveCount(2);
-            results.First().Should().BeOfType<Error>();
+            results.Should().HaveCount(analyzer.RuleSets.SelectMany(r => r.Rules).Count());
+            results.All(r => r.GetType().IsAssignableFrom(typeof(Success))).Should().BeTrue();
         }
     }
 }

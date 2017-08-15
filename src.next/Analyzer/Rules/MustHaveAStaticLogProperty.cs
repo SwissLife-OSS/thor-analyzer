@@ -42,7 +42,7 @@ namespace ChilliCream.Logging.Analyzer.Rules
             Type eventSourceType = eventSource.GetType();
             FieldInfo field = eventSourceType.GetField("Log");
 
-            if (field == null || !field.IsStatic || !field.FieldType.IsAssignableFrom(eventSourceType))
+            if (field == null || !field.IsStatic || !field.FieldType.IsAssignableFrom(eventSourceType) || field.GetValue(null) == null)
             {
                 return new Error(this, "Did not found a public 'Log' field which is static and holds an instance of its own type.");
             }

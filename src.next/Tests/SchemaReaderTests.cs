@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using ChilliCream.Logging.Analyzer.Tests.EventSources;
+using FluentAssertions;
 using System;
 using System.Diagnostics.Tracing;
 using Xunit;
@@ -7,13 +8,14 @@ namespace ChilliCream.Logging.Analyzer.Tests
 {
     public class SchemaReaderTests
     {
-        [Fact(DisplayName = "Constructor: Should throw an argument null exception")]
-        public void Constructor()
+        [Fact(DisplayName = "Constructor: Should throw an argument null exception for eventSource")]
+        public void Constructor_EventSourceNull()
         {
             // arrange
+            EventSource eventSource = null;
 
             // act
-            Action validate = () => new SchemaReader(null);
+            Action validate = () => new SchemaReader(eventSource);
 
             // assert
             validate.ShouldThrow<ArgumentNullException>()

@@ -8,23 +8,28 @@ namespace ChilliCream.Logging.Analyzer
 {
     public class EventSourceAnalyzer
     {
-        private readonly List<IRuleSet> _ruleSets = new List<IRuleSet>();
         private readonly SchemaCache _cache = new SchemaCache();
+        private ImmutableArray<IRuleSet> _ruleSets = ImmutableArray<IRuleSet>.Empty;
 
         public EventSourceAnalyzer()
-        {
-            _ruleSets.Add(new BasicRuleSet());
-            _ruleSets.Add(new AdvancedRuleSet());
-        }
+            : this(new IRuleSet[] { new BasicRuleSet(), new AdvancedRuleSet() })
+        { }
 
         public EventSourceAnalyzer(IEnumerable<IRuleSet> ruleSets)
         {
-            _ruleSets.AddRange(ruleSets);
+            AddRange(ruleSets);
         }
 
-        public void Append(IRuleSet ruleSet)
+        public IEnumerable<IRuleSet> RuleSets { get { return _ruleSets; } }
+
+        public void Add(IRuleSet ruleSet)
         {
-            _ruleSets.Add(ruleSet);
+            _ruleSets = _ruleSets.Add(ruleSet);
+        }
+
+        public void AddRange(IEnumerable<IRuleSet> ruleSets)
+        {
+            _ruleSets = _ruleSets.AddRange(ruleSets);
         }
 
         public IEnumerable<IResult> Inspect(EventSource eventSource)
