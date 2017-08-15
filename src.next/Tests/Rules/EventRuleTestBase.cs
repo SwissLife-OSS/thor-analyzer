@@ -1,5 +1,4 @@
 ﻿using ChilliCream.Logging.Analyzer.Rules;
-using FluentAssertions;
 using Moq;
 using System;
 using System.Collections.Immutable;
@@ -23,10 +22,7 @@ namespace ChilliCream.Logging.Analyzer.Tests.Rules
             Action validate = () => CreateRule(ruleSet);
 
             // assert
-            validate.ShouldThrow<ArgumentNullException>()
-                .Where(e => e.ParamName == "ruleSet")
-                .Should()
-                .NotBeNull();
+            validate.ShouldThrowArgumentNull("ruleSet");
         }
 
         [Fact(DisplayName = "Apply: Should throw an argument null exception for schema")]
@@ -42,10 +38,7 @@ namespace ChilliCream.Logging.Analyzer.Tests.Rules
             Action validate = () => rule.Apply(schema, eventSource);
 
             // assert
-            validate.ShouldThrow<ArgumentNullException>()
-                .Where(e => e.ParamName == "schema")
-                .Should()
-                .NotBeNull();
+            validate.ShouldThrowArgumentNull("schema");
         }
 
         [Fact(DisplayName = "Apply: Should throw an argument null exception for eventSource")]
@@ -64,10 +57,7 @@ namespace ChilliCream.Logging.Analyzer.Tests.Rules
             Action validate = () => rule.Apply(eventSchema, eventSource);
 
             // assert
-            validate.ShouldThrow<ArgumentNullException>()
-                .Where(e => e.ParamName == "eventSource")
-                .Should()
-                .NotBeNull();
+            validate.ShouldThrowArgumentNull("eventSource");
         }
     }
 }
