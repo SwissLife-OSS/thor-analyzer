@@ -6,19 +6,19 @@ using Xunit;
 
 namespace ChilliCream.Logging.Analyzer.Tests.Rules
 {
-    public class MustHaveAStaticLogPropertyTests
-        : EventSourceRuleTestBase<MustHaveAStaticLogProperty>
+    public class MustHaveSinglePrivateConstructorTests
+        : EventSourceRuleTestBase<MustHaveSinglePrivateConstructor>
     {
-        protected override MustHaveAStaticLogProperty CreateRule(IRuleSet ruleSet)
+        protected override MustHaveSinglePrivateConstructor CreateRule(IRuleSet ruleSet)
         {
-            return new MustHaveAStaticLogProperty(ruleSet);
+            return new MustHaveSinglePrivateConstructor(ruleSet);
         }
 
-        [Fact(DisplayName = "Apply: Should return an error because log field does not exist")]
-        public void Apply_NoLogField()
+        [Fact(DisplayName = "Apply: Should return an error because constructor does not exist")]
+        public void Apply_NoConstructor()
         {
             // arrange
-            LogFieldDoesNotExistEventSource eventSource = new LogFieldDoesNotExistEventSource();
+            ConstructorDoesNotExistEventSource eventSource = new ConstructorDoesNotExistEventSource();
             SchemaReader reader = new SchemaReader(eventSource);
             EventSourceSchema schema = reader.Read();
             IRuleSet ruleSet = new Mock<IRuleSet>().Object;
@@ -32,11 +32,11 @@ namespace ChilliCream.Logging.Analyzer.Tests.Rules
             result.Should().BeOfType<Error>();
         }
 
-        [Fact(DisplayName = "Apply: Should return an error because the log field is not public")]
-        public void Apply_LogFieldNotPublic()
+        [Fact(DisplayName = "Apply: Should return an error because the constructor is not private")]
+        public void Apply_ConstructorNotPrivate()
         {
             // arrange
-            LogFieldNotPublicEventSource eventSource = new LogFieldNotPublicEventSource();
+            ConstructorNotPrivateEventSource eventSource = new ConstructorNotPrivateEventSource();
             SchemaReader reader = new SchemaReader(eventSource);
             EventSourceSchema schema = reader.Read();
             IRuleSet ruleSet = new Mock<IRuleSet>().Object;
@@ -50,11 +50,11 @@ namespace ChilliCream.Logging.Analyzer.Tests.Rules
             result.Should().BeOfType<Error>();
         }
 
-        [Fact(DisplayName = "Apply: Should return an error because the log field is not static")]
-        public void Apply_LogFieldNotStatic()
+        [Fact(DisplayName = "Apply: Should return an error because the constructor is static")]
+        public void Apply_ConstructorStatic()
         {
             // arrange
-            LogFieldNotStaticEventSource eventSource = new LogFieldNotStaticEventSource();
+            ConstructorStaticEventSource eventSource = new ConstructorStaticEventSource();
             SchemaReader reader = new SchemaReader(eventSource);
             EventSourceSchema schema = reader.Read();
             IRuleSet ruleSet = new Mock<IRuleSet>().Object;
@@ -68,11 +68,29 @@ namespace ChilliCream.Logging.Analyzer.Tests.Rules
             result.Should().BeOfType<Error>();
         }
 
-        [Fact(DisplayName = "Apply: Should return an error because the log field returns no value")]
-        public void Apply_LogFieldNoValue()
+        [Fact(DisplayName = "Apply: Should return an error because there are multiple constructors")]
+        public void Apply_MultipleConstructors()
         {
             // arrange
-            LogFieldDoesNotHaveValueEventSource eventSource = new LogFieldDoesNotHaveValueEventSource();
+            MultipleConstructorsEventSource eventSource = MultipleConstructorsEventSource.Log;
+            SchemaReader reader = new SchemaReader(eventSource);
+            EventSourceSchema schema = reader.Read();
+            IRuleSet ruleSet = new Mock<IRuleSet>().Object;
+            IEventSourceRule rule = CreateRule(ruleSet);
+
+            // act
+            IResult result = rule.Apply(schema, eventSource);
+
+            // assert
+            result.Should().NotBeNull();
+            result.Should().BeOfType<Error>();
+        }
+
+        [Fact(DisplayName = "Apply: Should return an error because the constructor at least one parameter")]
+        public void Apply_ConstructorOutOfRange()
+        {
+            // arrange
+            ConstructorOutOfRangeEventSource eventSource = ConstructorOutOfRangeEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
             EventSourceSchema schema = reader.Read();
             IRuleSet ruleSet = new Mock<IRuleSet>().Object;
@@ -90,7 +108,7 @@ namespace ChilliCream.Logging.Analyzer.Tests.Rules
         public void Apply_Success()
         {
             // arrange
-            LogFieldEventSource eventSource = new LogFieldEventSource();
+            ConstructorEventSource eventSource = ConstructorEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
             EventSourceSchema schema = reader.Read();
             IRuleSet ruleSet = new Mock<IRuleSet>().Object;

@@ -13,9 +13,10 @@ namespace ChilliCream.Logging.Analyzer.Rules
         /// </summary>
         public AdvancedRuleSet()
         {
-            Rules = new[]
+            Rules = new IRule[]
             {
-                new MustHaveAStaticLogProperty(this)
+                new MustHaveSinglePrivateConstructor(this),
+                new MustHaveStaticLogProperty(this)
             };
         }
 

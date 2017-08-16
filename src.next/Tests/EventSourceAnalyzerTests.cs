@@ -13,7 +13,7 @@ namespace ChilliCream.Logging.Analyzer.Tests
         public void Inspect_DuplicateEventId()
         {
             // arrange
-            MultipleEventsEventSource eventSource = new MultipleEventsEventSource();
+            MultipleEventsEventSource eventSource = MultipleEventsEventSource.Log;
             EventSourceAnalyzer analyzer = new EventSourceAnalyzer();
 
             // act

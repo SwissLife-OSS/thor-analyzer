@@ -92,7 +92,7 @@ namespace ChilliCream.Logging.Analyzer.Tests
         public void ReadEvent_WithKeywords()
         {
             // arrange
-            MultipleEventsEventSource eventSource = new MultipleEventsEventSource();
+            MultipleEventsEventSource eventSource = MultipleEventsEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
 
             // act
@@ -107,7 +107,7 @@ namespace ChilliCream.Logging.Analyzer.Tests
         public void ReadEvent_WithLevel()
         {
             // arrange
-            MultipleEventsEventSource eventSource = new MultipleEventsEventSource();
+            MultipleEventsEventSource eventSource = MultipleEventsEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
 
             // act
@@ -122,7 +122,7 @@ namespace ChilliCream.Logging.Analyzer.Tests
         public void ReadEvent_WithOpcode()
         {
             // arrange
-            MultipleEventsEventSource eventSource = new MultipleEventsEventSource();
+            MultipleEventsEventSource eventSource = MultipleEventsEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
 
             // act

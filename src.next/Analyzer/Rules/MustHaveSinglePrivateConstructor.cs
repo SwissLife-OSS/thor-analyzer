@@ -1,20 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.Tracing;
+using System.Linq;
 using System.Reflection;
 
 namespace ChilliCream.Logging.Analyzer.Rules
 {
     /// <summary>
-    /// A rule which probes for missing <c>Log</c> properties.
+    /// A rule which probes for a single private constructor.
     /// </summary>
-    public class MustHaveAStaticLogProperty
+    public class MustHaveSinglePrivateConstructor
         : IEventSourceRule
     {
         /// <summary>
-        /// Initiates a new instance of the <see cref="MustHaveAStaticLogProperty"/> class.
+        /// Initiates a new instance of the <see cref="MustHaveSinglePrivateConstructor"/> class.
         /// </summary>
         /// <param name="ruleSet">A ruleset which is the parent of this rule.</param>
-        public MustHaveAStaticLogProperty(IRuleSet ruleSet)
+        public MustHaveSinglePrivateConstructor(IRuleSet ruleSet)
         {
             if (ruleSet == null)
             {
@@ -40,11 +42,14 @@ namespace ChilliCream.Logging.Analyzer.Rules
             }
 
             Type eventSourceType = eventSource.GetType();
-            FieldInfo field = eventSourceType.GetField("Log");
+            IEnumerable<ConstructorInfo> constructors = eventSourceType.GetConstructors()
+                .Concat(eventSourceType.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic))
+                .Concat(eventSourceType.GetConstructors(BindingFlags.Instance | BindingFlags.Static));
 
-            if (field == null || !field.IsStatic || !field.FieldType.IsAssignableFrom(eventSourceType) || field.GetValue(null) == null)
+            if (constructors.Count() != 1 || !constructors.First().IsPrivate || constructors.First().IsStatic ||
+                constructors.First().GetParameters().Length > 0)
             {
-                return new Error(this, "Did not found a public 'Log' field which is static and holds an instance of its own type.");
+                return new Error(this, "Did not found a single private constructor without any parameter.");
             }
 
             return new Success(this);

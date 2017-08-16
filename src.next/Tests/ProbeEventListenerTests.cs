@@ -23,8 +23,8 @@ namespace ChilliCream.Logging.Analyzer.Tests
             _output = output;
         }
 
-        [Fact(DisplayName = "EnqueueAsync: Should enqueue events in the right order")]
-        public async Task EnqueueAsync()
+        [Fact(DisplayName = "Enqueue: Should enqueue events in the right order")]
+        public void Enqueue()
         {
             using (ProbeEventListener listener = new ProbeEventListener())
             {

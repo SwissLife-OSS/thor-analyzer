@@ -6,6 +6,8 @@ namespace ChilliCream.Logging.Analyzer.Tests.EventSources
     public sealed class MultipleEventsEventSource
        : EventSource
     {
+        private MultipleEventsEventSource() { }
+
         public static MultipleEventsEventSource Log = new MultipleEventsEventSource();
 
         [Event(1)]
