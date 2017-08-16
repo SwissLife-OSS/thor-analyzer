@@ -2,39 +2,52 @@
 using FluentAssertions;
 using System;
 using System.Diagnostics.Tracing;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace ChilliCream.Logging.Analyzer.Tests
 {
     public class ProbeEventListenerTests
     {
+        private readonly ITestOutputHelper _output;
+
+        public ProbeEventListenerTests(ITestOutputHelper output)
+        {
+            if (output == null)
+            {
+                throw new ArgumentNullException(nameof(output));
+            }
+
+            _output = output;
+        }
+
         [Fact(DisplayName = "EnqueueAsync: Should enqueue events in the right order")]
         public async Task EnqueueAsync()
         {
             using (ProbeEventListener listener = new ProbeEventListener())
             {
                 // arrange
-                listener.EnableEvents(MultipleEventsEventSource.Log, EventLevel.Verbose);
+                listener.EnableEvents(ProbeEventListenerEventSource.Log, EventLevel.Verbose);
+                listener.EventSourceCreated += (sender, eventArgs) =>
+                    _output.WriteLine($"Created event source: {eventArgs.EventSource.Name}");
 
                 // act
-                MultipleEventsEventSource.Log.WithKeywords("1");
-                MultipleEventsEventSource.Log.WithTags("2");
+                ProbeEventListenerEventSource.Log.Foo("1");
+                ProbeEventListenerEventSource.Log.Bar("2");
+                ProbeEventListenerEventSource.Log.Foo("3");
 
                 // assert
                 EventWrittenEventArgs[] events = (EventWrittenEventArgs[])listener.OrderdEvents;
-                Random random = new Random();
-                int expectedCount = 2;
-                int run = 0;
 
-                while (events.Length != expectedCount && run++ < 50)
-                {
-                    await Task.Delay(random.Next(50, 100)).ConfigureAwait(false);
-                }
-
-                events.Should().HaveCount(expectedCount);
-                events[0].EventName.Should().Be("WithKeywords");
-                events[1].EventName.Should().Be("WithTags");
+                events.Should().HaveCount(3);
+                events[0].EventName.Should().Be("Foo");
+                events[0].Payload.Single().Should().Be("1");
+                events[1].EventName.Should().Be("Bar");
+                events[1].Payload.Single().Should().Be("2");
+                events[2].EventName.Should().Be("Foo");
+                events[2].Payload.Single().Should().Be("3");
             }
         }
     }

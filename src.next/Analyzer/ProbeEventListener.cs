@@ -9,7 +9,7 @@ namespace ChilliCream.Logging.Analyzer
     {
         private readonly ConcurrentQueue<EventWrittenEventArgs> _queue = new ConcurrentQueue<EventWrittenEventArgs>();
 
-        public IEnumerable<EventWrittenEventArgs> OrderdEvents { get { return _queue.ToArray(); } }
+        public IEnumerable<EventWrittenEventArgs> OrderdEvents => _queue.ToArray();
 
         protected override void OnEventWritten(EventWrittenEventArgs eventData)
         {
