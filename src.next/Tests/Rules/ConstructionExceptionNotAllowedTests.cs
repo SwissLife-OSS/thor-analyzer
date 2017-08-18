@@ -6,19 +6,19 @@ using Xunit;
 
 namespace ChilliCream.Logging.Analyzer.Tests.Rules
 {
-    public class DuplicateEventIdsNotAllowedTests
-        : EventSourceRuleTestBase<DuplicateEventIdsNotAllowed>
+    public class ConstructionExceptionNotAllowedTests
+        : EventSourceRuleTestBase<ConstructionExceptionNotAllowed>
     {
-        protected override DuplicateEventIdsNotAllowed CreateRule(IRuleSet ruleSet)
+        protected override ConstructionExceptionNotAllowed CreateRule(IRuleSet ruleSet)
         {
-            return new DuplicateEventIdsNotAllowed(ruleSet);
+            return new ConstructionExceptionNotAllowed(ruleSet);
         }
 
         [Fact(DisplayName = "Apply: Should return an error result")]
         public void Apply_Error()
         {
             // arrange
-            DuplicateEventIdEventSource eventSource = new DuplicateEventIdEventSource();
+            ConstructionExceptionEventSource eventSource = ConstructionExceptionEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
             EventSourceSchema schema = reader.Read();
             IRuleSet ruleSet = new Mock<IRuleSet>().Object;
@@ -30,13 +30,14 @@ namespace ChilliCream.Logging.Analyzer.Tests.Rules
             // assert
             result.Should().NotBeNull();
             result.Should().BeOfType<Error>();
+            ((Error)result).Details.Should().HaveCount(1);
         }
 
         [Fact(DisplayName = "Apply: Should return a success result")]
         public void Apply_Success()
         {
             // arrange
-            OneEventEventSource eventSource = OneEventEventSource.Log;
+            NoConstructionExceptionEventSource eventSource = NoConstructionExceptionEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
             EventSourceSchema schema = reader.Read();
             IRuleSet ruleSet = new Mock<IRuleSet>().Object;

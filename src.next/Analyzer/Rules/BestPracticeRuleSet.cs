@@ -3,20 +3,21 @@
 namespace ChilliCream.Logging.Analyzer.Rules
 {
     /// <summary>
-    /// A rule set which contains vital rules. Those rules are defined by ChilliCream.
+    /// A rule set which contains best practice rules.
     /// </summary>
-    public class AdvancedRuleSet
+    public class BestPracticeRuleSet
         : IRuleSet
     {
         /// <summary>
-        /// Initiates a new instance of the <see cref="AdvancedRuleSet"/> class.
+        /// Initiates a new instance of the <see cref="BestPracticeRuleSet"/> class.
         /// </summary>
-        public AdvancedRuleSet()
+        public BestPracticeRuleSet()
         {
             Rules = new IRule[]
             {
                 new MustHaveSinglePrivateConstructor(this),
-                new MustHaveStaticLogProperty(this)
+                new MustHaveStaticLogProperty(this),
+                new MustBeSealed(this)
             };
         }
 

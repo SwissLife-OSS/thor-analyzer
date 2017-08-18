@@ -1,4 +1,5 @@
 ﻿using ChilliCream.Logging.Analyzer.Rules;
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.Tracing;
@@ -12,7 +13,7 @@ namespace ChilliCream.Logging.Analyzer
         private ImmutableArray<IRuleSet> _ruleSets = ImmutableArray<IRuleSet>.Empty;
 
         public EventSourceAnalyzer()
-            : this(new IRuleSet[] { new BasicRuleSet(), new AdvancedRuleSet() })
+            : this(new IRuleSet[] { new RequiredRuleSet(), new BestPracticeRuleSet() })
         { }
 
         public EventSourceAnalyzer(IEnumerable<IRuleSet> ruleSets)
@@ -34,6 +35,11 @@ namespace ChilliCream.Logging.Analyzer
 
         public IEnumerable<IResult> Inspect(EventSource eventSource)
         {
+            if (eventSource == null)
+            {
+                throw new ArgumentNullException(nameof(eventSource));
+            }
+
             EventSourceSchema schema;
 
             if (!_cache.TryGet(eventSource.Guid, out schema))

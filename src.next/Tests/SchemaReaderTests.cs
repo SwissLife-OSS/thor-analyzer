@@ -28,7 +28,7 @@ namespace ChilliCream.Logging.Analyzer.Tests
         public void Read()
         {
             // arrange
-            OneEventEventSource eventSource = new OneEventEventSource();
+            OneEventEventSource eventSource = OneEventEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
 
             // act
@@ -47,7 +47,7 @@ namespace ChilliCream.Logging.Analyzer.Tests
         public void ReadEvent()
         {
             // arrange
-            OneEventEventSource eventSource = new OneEventEventSource();
+            OneEventEventSource eventSource = OneEventEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
 
             // act
@@ -61,7 +61,7 @@ namespace ChilliCream.Logging.Analyzer.Tests
         public void ReadEvent_OutOfRange()
         {
             // arrange
-            OneEventEventSource eventSource = new OneEventEventSource();
+            OneEventEventSource eventSource = OneEventEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
 
             // act
@@ -78,7 +78,7 @@ namespace ChilliCream.Logging.Analyzer.Tests
         public void ReadEvent_UnknownEventId()
         {
             // arrange
-            OneEventEventSource eventSource = new OneEventEventSource();
+            OneEventEventSource eventSource = OneEventEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
 
             // act

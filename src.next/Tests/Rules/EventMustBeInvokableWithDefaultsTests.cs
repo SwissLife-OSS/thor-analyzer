@@ -2,48 +2,50 @@
 using ChilliCream.Logging.Analyzer.Tests.EventSources;
 using FluentAssertions;
 using Moq;
+using System.Linq;
 using Xunit;
 
 namespace ChilliCream.Logging.Analyzer.Tests.Rules
 {
-    public class DuplicateEventIdsNotAllowedTests
-        : EventSourceRuleTestBase<DuplicateEventIdsNotAllowed>
+    public class EventMustBeInvokableWithDefaultsTests
+        : EventRuleTestBase<EventMustBeInvokableWithDefaults>
     {
-        protected override DuplicateEventIdsNotAllowed CreateRule(IRuleSet ruleSet)
+        protected override EventMustBeInvokableWithDefaults CreateRule(IRuleSet ruleSet)
         {
-            return new DuplicateEventIdsNotAllowed(ruleSet);
+            return new EventMustBeInvokableWithDefaults(ruleSet);
         }
 
         [Fact(DisplayName = "Apply: Should return an error result")]
         public void Apply_Error()
         {
             // arrange
-            DuplicateEventIdEventSource eventSource = new DuplicateEventIdEventSource();
+            EventNotWorkingWithDefaultsEventSource eventSource = EventNotWorkingWithDefaultsEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
             EventSourceSchema schema = reader.Read();
             IRuleSet ruleSet = new Mock<IRuleSet>().Object;
-            IEventSourceRule rule = CreateRule(ruleSet);
+            IEventRule rule = CreateRule(ruleSet);
 
             // act
-            IResult result = rule.Apply(schema, eventSource);
+            IResult result = rule.Apply(schema.Events.First(), eventSource);
 
             // assert
             result.Should().NotBeNull();
             result.Should().BeOfType<Error>();
+            ((Error)result).Details.Should().HaveCount(1);
         }
 
         [Fact(DisplayName = "Apply: Should return a success result")]
         public void Apply_Success()
         {
             // arrange
-            OneEventEventSource eventSource = OneEventEventSource.Log;
+            EventWorkingWithDefaultsEventSource eventSource = EventWorkingWithDefaultsEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
             EventSourceSchema schema = reader.Read();
             IRuleSet ruleSet = new Mock<IRuleSet>().Object;
-            IEventSourceRule rule = CreateRule(ruleSet);
+            IEventRule rule = CreateRule(ruleSet);
 
             // act
-            IResult result = rule.Apply(schema, eventSource);
+            IResult result = rule.Apply(schema.Events.First(), eventSource);
 
             // assert
             result.Should().NotBeNull();

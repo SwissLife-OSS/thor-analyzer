@@ -2,13 +2,13 @@
 
 namespace ChilliCream.Logging.Analyzer.Tests.EventSources
 {
-    [EventSource(Name = "OneEvent")]
-    public sealed class OneEventEventSource
+    [EventSource(Name = "EventWorking")]
+    public sealed class EventWorkingEventSource
         : EventSource
     {
-        private OneEventEventSource() { }
+        private EventWorkingEventSource() { }
 
-        public static OneEventEventSource Log = new OneEventEventSource();
+        public static EventWorkingEventSource Log = new EventWorkingEventSource();
 
         [Event(1)]
         public void Foo(string bar)
