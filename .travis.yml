@@ -1,0 +1,10 @@
+language: csharp
+mono: none
+dotnet: 2.0.0
+dist: trusty
+script:
+  - dotnet restore
+  - dotnet build src/EventSourceAnalyzer.sln --configuration Release
+  - dotnet test src/Tests/Tests.csproj
+git:
+  depth: 3
