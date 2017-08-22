@@ -17,6 +17,8 @@ environment:
     secure: Oh/eULUJNuQcby4Rp0+gvp9gA5SbxkCeuK8L7qZGUvguXpO6YYpFmEHjXI2PCe/b
   SONARQUBE:
     secure: Oh/eULUJNuQcby4Rp0+gvp9gA5SbxkCeuK8L7qZGUvguXpO6YYpFmEHjXI2PCe/b
+install:
+- ps: .\build\install.ps1
 nuget:
   disable_publish_on_pr: true
 build_script:
