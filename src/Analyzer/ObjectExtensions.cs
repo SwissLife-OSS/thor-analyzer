@@ -1,4 +1,4 @@
-﻿namespace CChilliCream.Tracing.Analyzer
+﻿namespace ChilliCream.Tracing.Analyzer
 {
     internal static class ObjectExtensions
     {

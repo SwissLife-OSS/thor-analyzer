@@ -1,4 +1,4 @@
-﻿using CChilliCream.Tracing.AnalyzerTests.EventSources;
+﻿using ChilliCream.Tracing.Analyzer.Tests.EventSources;
 using FluentAssertions;
 using System;
 using System.Diagnostics.Tracing;

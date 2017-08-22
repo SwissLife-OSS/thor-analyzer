@@ -1,4 +1,4 @@
-﻿using CChilliCream.Tracing.AnalyzerRules;
+﻿using ChilliCream.Tracing.Analyzer.Rules;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;

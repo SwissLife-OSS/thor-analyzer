@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics.Tracing;
+﻿using System.Diagnostics.Tracing;
 
 namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
 {

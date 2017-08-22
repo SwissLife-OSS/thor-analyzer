@@ -1,4 +1,4 @@
-﻿namespace CChilliCream.Tracing.AnalyzerRules
+﻿namespace ChilliCream.Tracing.Analyzer.Rules
 {
     /// <summary>
     /// 
