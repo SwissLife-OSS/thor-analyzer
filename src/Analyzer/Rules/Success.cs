@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ChilliCream.Logging.Analyzer.Rules
+namespace ChilliCream.Tracing.Analyzer.Rules
 {
     /// <summary>
     /// A result that represents a success status for a rule.

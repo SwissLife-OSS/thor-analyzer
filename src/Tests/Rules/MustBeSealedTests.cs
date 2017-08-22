@@ -1,10 +1,10 @@
-﻿using ChilliCream.Logging.Analyzer.Rules;
-using ChilliCream.Logging.Analyzer.Tests.EventSources;
+﻿using CChilliCream.Tracing.AnalyzerRules;
+using ChilliCream.Tracing.Analyzer.Tests.EventSources;
 using FluentAssertions;
 using Moq;
 using Xunit;
 
-namespace ChilliCream.Logging.Analyzer.Tests.Rules
+namespace ChilliCream.Tracing.Analyzer.Tests.Rules
 {
     public class MustBeSealedTests
         : EventSourceRuleTestBase<MustBeSealed>

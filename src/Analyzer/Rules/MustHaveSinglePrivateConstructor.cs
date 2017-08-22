@@ -4,7 +4,7 @@ using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Reflection;
 
-namespace ChilliCream.Logging.Analyzer.Rules
+namespace ChilliCream.Tracing.Analyzer.Rules
 {
     /// <summary>
     /// A rule which probes for a single private constructor.

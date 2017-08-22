@@ -2,7 +2,7 @@
 using System;
 using Xunit;
 
-namespace ChilliCream.Logging.Analyzer.Tests
+namespace ChilliCream.Tracing.Analyzer.Tests
 {
     public class SchemaCacheTests
     {

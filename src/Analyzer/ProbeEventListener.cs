@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 
-namespace ChilliCream.Logging.Analyzer
+namespace ChilliCream.Tracing.Analyzer
 {
     public class ProbeEventListener
         : EventListener

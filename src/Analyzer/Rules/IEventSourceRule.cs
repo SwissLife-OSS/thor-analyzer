@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.Tracing;
 
-namespace ChilliCream.Logging.Analyzer.Rules
+namespace ChilliCream.Tracing.Analyzer.Rules
 {
     /// <summary>
     /// 

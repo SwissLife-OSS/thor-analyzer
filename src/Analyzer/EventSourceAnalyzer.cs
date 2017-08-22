@@ -1,11 +1,11 @@
-﻿using ChilliCream.Logging.Analyzer.Rules;
+﻿using CChilliCream.Tracing.AnalyzerRules;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.Tracing;
 using System.Linq;
 
-namespace ChilliCream.Logging.Analyzer
+namespace ChilliCream.Tracing.Analyzer
 {
     public class EventSourceAnalyzer
     {

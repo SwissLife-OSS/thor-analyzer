@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <IsPackable>false</IsPackable>
-    <AssemblyName>ChilliCream.Logging.Analyzer.Tests</AssemblyName>
-    <RootNamespace>ChilliCream.Logging.Analyzer.Tests</RootNamespace>
+    <AssemblyName>ChilliCream.Tracing.Analyzer.Tests</AssemblyName>
+    <RootNamespace>ChilliCream.Tracing.Analyzer.Tests</RootNamespace>
     <DebugType>Full</DebugType>
   </PropertyGroup>
 

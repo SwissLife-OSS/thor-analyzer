@@ -1,7 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Diagnostics.Tracing;
 
-namespace ChilliCream.Logging.Analyzer
+namespace ChilliCream.Tracing.Analyzer
 {
     /// <summary>
     /// Represents an <see cref="EventSource"/> event schema.

@@ -1,4 +1,4 @@
-﻿namespace ChilliCream.Logging.Analyzer.Rules
+﻿namespace CChilliCream.Tracing.AnalyzerRules
 {
     public interface IResult
     {

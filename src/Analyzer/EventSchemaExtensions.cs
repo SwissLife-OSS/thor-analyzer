@@ -2,7 +2,7 @@
 using System.Diagnostics.Tracing;
 using System.Reflection;
 
-namespace ChilliCream.Logging.Analyzer
+namespace ChilliCream.Tracing.Analyzer
 {
     internal static class EventSchemaExtensions
     {

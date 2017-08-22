@@ -1,3 +1,3 @@
 ﻿using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("ChilliCream.Logging.Analyzer.Tests")]
+[assembly: InternalsVisibleTo("ChilliCream.Tracing.Analyzer.Tests")]

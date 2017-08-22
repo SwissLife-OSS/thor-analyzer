@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>ChilliCream.Tracing.Analyzer</PackageId>
-    <AssemblyName>ChilliCream.Logging.Analyzer</AssemblyName>
-    <RootNamespace>ChilliCream.Logging.Analyzer</RootNamespace>
+    <AssemblyName>ChilliCream.Tracing.Analyzer</AssemblyName>
+    <RootNamespace>ChilliCream.Tracing.Analyzer</RootNamespace>
     <DebugType>Full</DebugType>
     <Authors>ChilliCream authors and contributors</Authors>
     <Company>ChilliCream</Company>

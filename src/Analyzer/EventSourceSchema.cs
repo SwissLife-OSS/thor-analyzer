@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Immutable;
 
-namespace ChilliCream.Logging.Analyzer
+namespace ChilliCream.Tracing.Analyzer
 {
     public class EventSourceSchema
     {

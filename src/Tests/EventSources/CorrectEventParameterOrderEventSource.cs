@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.Tracing;
 
-namespace ChilliCream.Logging.Analyzer.Tests.EventSources
+namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
 {
     [EventSource(Name = "CorrectEventParameterOrder")]
     public sealed class CorrectEventParameterOrderEventSource

@@ -2,7 +2,7 @@
 using System.Diagnostics.Tracing;
 using System.Reflection;
 
-namespace ChilliCream.Logging.Analyzer.Rules
+namespace ChilliCream.Tracing.Analyzer.Rules
 {
     /// <summary>
     /// A rule which probes for missing <c>Log</c> properties.

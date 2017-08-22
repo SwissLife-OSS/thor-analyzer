@@ -1,10 +1,10 @@
-﻿using ChilliCream.Logging.Analyzer.Rules;
+﻿using CChilliCream.Tracing.AnalyzerRules;
 using Moq;
 using System;
 using System.Diagnostics.Tracing;
 using Xunit;
 
-namespace ChilliCream.Logging.Analyzer.Tests.Rules
+namespace ChilliCream.Tracing.Analyzer.Tests.Rules
 {
     public abstract class EventSourceRuleTestBase<TRule>
         where TRule : IEventSourceRule

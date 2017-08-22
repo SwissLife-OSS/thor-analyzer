@@ -1,5 +1,5 @@
-﻿using ChilliCream.Logging.Analyzer.Rules;
-using ChilliCream.Logging.Analyzer.Tests.EventSources;
+﻿using CChilliCream.Tracing.AnalyzerRules;
+using ChilliCream.Tracing.Analyzer.Tests.EventSources;
 using FluentAssertions;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Diagnostics.Tracing;
 using System.Linq;
 using Xunit;
 
-namespace ChilliCream.Logging.Analyzer.Tests
+namespace ChilliCream.Tracing.Analyzer.Tests
 {
     public class EventSourceAnalyzerTests
     {

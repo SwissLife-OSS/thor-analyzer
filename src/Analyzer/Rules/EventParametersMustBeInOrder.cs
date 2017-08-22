@@ -3,7 +3,7 @@ using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Reflection;
 
-namespace ChilliCream.Logging.Analyzer.Rules
+namespace ChilliCream.Tracing.Analyzer.Rules
 {
     /// <summary>
     /// A rule which checks if the <see cref="EventSource"/> matches the schema.

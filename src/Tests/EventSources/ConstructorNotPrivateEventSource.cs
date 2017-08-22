@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.Tracing;
 
-namespace ChilliCream.Logging.Analyzer.Tests.EventSources
+namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
 {
     [EventSource(Name = "ConstructorNotPrivate")]
     public sealed class ConstructorNotPrivateEventSource

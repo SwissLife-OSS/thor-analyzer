@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ChilliCream.Logging.Analyzer.Rules
+namespace ChilliCream.Tracing.Analyzer.Rules
 {
     public interface IRuleSet
     {

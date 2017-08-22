@@ -1,4 +1,4 @@
-﻿using ChilliCream.Logging.Analyzer.Tests.EventSources;
+﻿using CChilliCream.Tracing.AnalyzerTests.EventSources;
 using FluentAssertions;
 using System;
 using System.Diagnostics.Tracing;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace ChilliCream.Logging.Analyzer.Tests
+namespace ChilliCream.Tracing.Analyzer.Tests
 {
     public class ProbeEventListenerTests
     {

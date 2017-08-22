@@ -1,10 +1,10 @@
-﻿using ChilliCream.Logging.Analyzer.Tests.EventSources;
+﻿using CChilliCream.Tracing.AnalyzerTests.EventSources;
 using FluentAssertions;
 using System;
 using System.Diagnostics.Tracing;
 using Xunit;
 
-namespace ChilliCream.Logging.Analyzer.Tests
+namespace ChilliCream.Tracing.Analyzer.Tests
 {
     public class SchemaReaderTests
     {

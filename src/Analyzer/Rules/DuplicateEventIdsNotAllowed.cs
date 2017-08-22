@@ -4,7 +4,7 @@ using System.Collections.Immutable;
 using System.Diagnostics.Tracing;
 using System.Linq;
 
-namespace ChilliCream.Logging.Analyzer.Rules
+namespace ChilliCream.Tracing.Analyzer.Rules
 {
     /// <summary>
     /// A rule which probes for duplicate event identifiers.

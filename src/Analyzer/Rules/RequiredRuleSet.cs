@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ChilliCream.Logging.Analyzer.Rules
+namespace ChilliCream.Tracing.Analyzer.Rules
 {
     /// <summary>
     /// A rule set which contains rules for the vitality of the <see cref="EventSource"/>.
