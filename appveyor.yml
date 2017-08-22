@@ -5,6 +5,8 @@ skip_non_tags: true
 image: Visual Studio 2017
 clone_depth: 1
 clone_folder: c:\cc\analyzer
+init:
+- ps: .\build\init.ps1
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'

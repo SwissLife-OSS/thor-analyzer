@@ -1,0 +1,1 @@
+dotnet restore .\src\EventSourceAnalyzer.sln
