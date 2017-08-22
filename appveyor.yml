@@ -8,8 +8,8 @@ clone_folder: c:\cc\analyzer
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
-  version: $(GitVersion_SemVer)
-  package_version: $(GitVersion_SemVer)
+  version: $(APPVEYOR_REPO_TAG_NAME)
+  package_version: $(APPVEYOR_REPO_TAG_NAME)
 environment:
   COVERALLS_REPO_TOKEN:
     secure: sy1uboCBXj09+y+KDXe0Ws9ru+eqenydlidc1CwlqcJnbLn72cYG476yh0AjU8jp
@@ -17,8 +17,7 @@ environment:
     secure: Oh/eULUJNuQcby4Rp0+gvp9gA5SbxkCeuK8L7qZGUvguXpO6YYpFmEHjXI2PCe/b
   SONARQUBE:
     secure: Oh/eULUJNuQcby4Rp0+gvp9gA5SbxkCeuK8L7qZGUvguXpO6YYpFmEHjXI2PCe/b
-install:
-- ps: .\build\install.ps1
+  CONFIGURATION: Release
 nuget:
   disable_publish_on_pr: true
 build_script:
