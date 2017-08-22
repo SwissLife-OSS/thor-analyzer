@@ -5,6 +5,12 @@ skip_non_tags: true
 image: Visual Studio 2017
 clone_depth: 1
 clone_folder: c:\cc\analyzer
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: $(APPVEYOR_REPO_TAG_NAME)
+  assembly_file_version: $(APPVEYOR_REPO_TAG_NAME)
+  assembly_informational_version: $(APPVEYOR_REPO_TAG_NAME)
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
