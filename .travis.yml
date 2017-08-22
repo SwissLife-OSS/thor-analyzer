@@ -4,7 +4,7 @@ dotnet: 2.0.0
 dist: trusty
 script:
   - dotnet restore src/EventSourceAnalyzer.sln
-  - dotnet build src/EventSourceAnalyzer.sln --configuration Release
-  - dotnet test src/Tests/Tests.csproj
+  - dotnet build src/EventSourceAnalyzer.sln -c Release
+  - dotnet test src/Tests/Tests.csproj -c Release
 git:
-  depth: 3
+  depth: 1

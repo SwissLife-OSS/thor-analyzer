@@ -1,11 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>ChilliCream.Tracing</PackageId>
+    <PackageId>ChilliCream.Tracing.Analyzer</PackageId>
     <AssemblyName>ChilliCream.Logging.Analyzer</AssemblyName>
     <RootNamespace>ChilliCream.Logging.Analyzer</RootNamespace>
+    <DebugType>Full</DebugType>
+    <Authors>ChilliCream authors and contributors</Authors>
+    <Company>ChilliCream</Company>
+    <Product>ChilliCream EventSource Analyzer</Product>
+    <Description>Provides an ETW EventSource analyzer build on .Net Standard 2.0.</Description>
+    <Copyright>copyright © 2017 ChilliCream (Michael &amp; Rafael Staib)</Copyright>
+    <PackageLicenseUrl>https://github.com/ChilliCream/EventSourceAnalyzer/raw/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ChilliCream/EventSourceAnalyzer</RepositoryUrl>
+    <PackageTags>Analyzer, ETW, EventSource, Logging, Tracing</PackageTags>
+    <PackageReleaseNotes>For release notes go to: https://github.com/ChilliCream/EventSourceAnalyzer/releases</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageIconUrl />
+    <RepositoryType>GitHub</RepositoryType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="System.Collections.Immutable" Version="1.3.1" />
+    <PackageReference Include="System.Collections.Immutable" Version="1.4.0" />
   </ItemGroup>
 </Project>

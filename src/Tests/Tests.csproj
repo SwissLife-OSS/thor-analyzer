@@ -2,12 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-
     <IsPackable>false</IsPackable>
-
     <AssemblyName>ChilliCream.Logging.Analyzer.Tests</AssemblyName>
-
     <RootNamespace>ChilliCream.Logging.Analyzer.Tests</RootNamespace>
+    <DebugType>Full</DebugType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -20,8 +18,10 @@
 
   <ItemGroup>
     <PackageReference Include="fluentassertions" Version="4.19.3" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0-preview-20170517-02" />
+    <PackageReference Include="Microsoft.CodeCoverage" Version="1.0.3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
     <PackageReference Include="Moq" Version="4.7.99" />
+    <PackageReference Include="OpenCover" Version="4.6.519" />
     <PackageReference Include="xunit" Version="2.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
   </ItemGroup>
