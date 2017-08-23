@@ -9,7 +9,7 @@ using Xunit;
 
 namespace ChilliCream.Tracing.Analyzer.Tests
 {
-    public class EventSourceAnalyzerTests
+    public class SuccessTests
     {
         [Fact(DisplayName = "Inspect: Should throw an argument null exception for eventSource")]
         public void Inspect_EventSourceNull()
