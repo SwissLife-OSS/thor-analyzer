@@ -6,11 +6,11 @@ image: Visual Studio 2017
 clone_depth: 1
 clone_folder: c:\cc\analyzer
 environment:
-  CONFIGURATION: Release
   COVERALLS_REPO_TOKEN:
     secure: sy1uboCBXj09+y+KDXe0Ws9ru+eqenydlidc1CwlqcJnbLn72cYG476yh0AjU8jp
   SONARQUBE_TOKEN:
     secure: Oh/eULUJNuQcby4Rp0+gvp9gA5SbxkCeuK8L7qZGUvguXpO6YYpFmEHjXI2PCe/b
+  CONFIGURATION: Release
 install:
 - ps: .\build\install.ps1
 nuget:
