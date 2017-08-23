@@ -1,4 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\Version.props" />
+
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>ChilliCream.Tracing.Analyzer</PackageId>
@@ -18,11 +21,10 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageIconUrl />
     <RepositoryType>GitHub</RepositoryType>
-    <Version>0.0.0</Version>
-    <FileVersion>0.0.0.0</FileVersion>
-    <AssemblyVersion>0.0.0.0</AssemblyVersion>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="System.Collections.Immutable" Version="1.4.0" />
   </ItemGroup>
+
 </Project>
