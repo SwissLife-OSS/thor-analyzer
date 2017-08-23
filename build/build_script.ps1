@@ -9,7 +9,6 @@ foreach($info in $infos)
 }
 
 # Build & Analyse
-Invoke-Expression ('SonarQube.Scanner.MSBuild.exe begin /k:"EventSourceAnalyzer" /d:"sonar.host.url=https://sonarqube.com" /d:"sonar.login=' + $env:SONARQUBE_TOKEN + '" /v:"' + $env:APPVEYOR_REPO_TAG_NAME + '"')
-#dotnet build .\src\EventSourceAnalyzer.sln -c $env:CONFIGURATION
-Invoke-Expression ('msbuild .\src\EventSourceAnalyzer.sln /p:' + $env:CONFIGURATION)
+Invoke-Expression ('SonarQube.Scanner.MSBuild.exe begin /k:"' + $env:APPVEYOR_PROJECT_NAME + '" /d:"sonar.host.url=https://sonarqube.com" /d:"sonar.login=' + $env:SONARQUBE_TOKEN + '" /v:"' + $env:APPVEYOR_REPO_TAG_NAME + '"')
+dotnet build .\src\EventSourceAnalyzer.sln -c $env:CONFIGURATION
 Invoke-Expression ('SonarQube.Scanner.MSBuild.exe end /d:"sonar.login=' + $env:SONARQUBE_TOKEN + '"')
