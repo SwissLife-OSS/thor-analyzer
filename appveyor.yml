@@ -5,19 +5,6 @@ skip_non_tags: true
 image: Visual Studio 2017
 clone_depth: 1
 clone_folder: c:\cc\analyzer
-init:
-- ps: .\build\init.ps1
-assembly_info:
-  patch: true
-  file: '**\AssemblyInfo.*'
-  assembly_version: $(APPVEYOR_REPO_TAG_NAME)
-  assembly_file_version: $(APPVEYOR_REPO_TAG_NAME)
-  assembly_informational_version: $(APPVEYOR_REPO_TAG_NAME)
-dotnet_csproj:
-  patch: true
-  file: '**\*.csproj'
-  version: $(APPVEYOR_REPO_TAG_NAME)
-  package_version: $(APPVEYOR_REPO_TAG_NAME)
 environment:
   COVERALLS_REPO_TOKEN:
     secure: sy1uboCBXj09+y+KDXe0Ws9ru+eqenydlidc1CwlqcJnbLn72cYG476yh0AjU8jp
