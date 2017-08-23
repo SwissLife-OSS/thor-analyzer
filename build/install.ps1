@@ -1,0 +1,1 @@
+choco install msbuild-sonarqube-runner -y
