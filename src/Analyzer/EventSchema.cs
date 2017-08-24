@@ -8,6 +8,19 @@ namespace ChilliCream.Tracing.Analyzer
     /// </summary>
     public class EventSchema
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EventSchema"/> class.
+        /// </summary>
+        /// <param name="eventSourceSchema">An event provider schema.</param>
+        /// <param name="id">An event identifier.</param>
+        /// <param name="name">An event name.</param>
+        /// <param name="level">An event level.</param>
+        /// <param name="task">An event task.</param>
+        /// <param name="taskName">An event task name.</param>
+        /// <param name="opcode">An event opcode.</param>
+        /// <param name="keywords">A event keyword mask.</param>
+        /// <param name="version">An event version.</param>
+        /// <param name="payload">An event payload.</param>
         public EventSchema(EventSourceSchema eventSourceSchema, int id, string name,
             EventLevel level, EventTask task, string taskName, EventOpcode opcode,
             EventKeywords keywords, int version, IReadOnlyCollection<string> payload)

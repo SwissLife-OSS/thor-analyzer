@@ -56,7 +56,7 @@ namespace ChilliCream.Tracing.Analyzer.Rules
 
                     if (method == null ||
                         !eventSource.TryInvokeMethod(schema, method, values, out exceptionMessage) ||
-                        listener.OrderdEvents.Count() == 0)
+                        listener.OrderedEvents.Count() == 0)
                     {
                         string[] details = (string.IsNullOrWhiteSpace(exceptionMessage))
                             ? new string[0]

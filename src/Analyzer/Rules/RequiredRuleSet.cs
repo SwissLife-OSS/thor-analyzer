@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 
 namespace ChilliCream.Tracing.Analyzer.Rules
 {

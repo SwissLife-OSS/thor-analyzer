@@ -56,12 +56,12 @@ namespace ChilliCream.Tracing.Analyzer.Rules
                     string exceptionMessage = null;
                     bool eventExecuted = (method != null &&
                         eventSource.TryInvokeMethod(schema, method, values, out exceptionMessage) &&
-                        listener.OrderdEvents.Count() == 1);
+                        listener.OrderedEvents.Count() == 1);
 
                     if (eventExecuted)
                     {
                         string errorMessage = CheckPayloadOrder(schema, method, parameters,
-                            listener.OrderdEvents.First());
+                            listener.OrderedEvents.First());
 
                         if (errorMessage != null)
                         {
