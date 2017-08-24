@@ -38,7 +38,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests
                 ProbeEventListenerEventSource.Log.Foo("3");
 
                 // assert
-                EventWrittenEventArgs[] events = (EventWrittenEventArgs[])listener.OrderdEvents;
+                EventWrittenEventArgs[] events = (EventWrittenEventArgs[])listener.OrderedEvents;
 
                 events.Should().HaveCount(3);
                 events[0].EventName.Should().Be("Foo");

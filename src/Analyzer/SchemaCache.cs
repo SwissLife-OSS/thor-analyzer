@@ -4,7 +4,7 @@ using System.Collections.Concurrent;
 namespace ChilliCream.Tracing.Analyzer
 {
     /// <summary>
-    /// A bunch of convenient <see cref="EventSource/> extension methods.
+    /// A cache for event provider schemas.
     /// </summary>
     public class SchemaCache
     {

@@ -1,7 +1,6 @@
 ﻿using ChilliCream.Tracing.Analyzer.Rules;
 using Moq;
 using System;
-using System.Collections.Immutable;
 using System.Diagnostics.Tracing;
 using Xunit;
 
@@ -49,7 +48,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             EventSourceSchema schema = new EventSourceSchema(Guid.NewGuid(), "Provider-Name");
             EventSchema eventSchema = new EventSchema(schema, 1, "Name", EventLevel.Verbose,
                 EventTask.None, "Task-Name", EventOpcode.Info, EventKeywords.None, 0,
-                ImmutableArray<string>.Empty);
+                new string[0]);
             IRuleSet ruleSet = new Mock<IRuleSet>().Object;
             TRule rule = CreateRule(ruleSet);
 
