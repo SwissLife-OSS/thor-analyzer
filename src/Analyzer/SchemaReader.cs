@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Immutable;
+using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Xml.Linq;
@@ -33,9 +33,9 @@ namespace ChilliCream.Tracing.Analyzer
         private readonly EventSource _eventSource;
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="SchemaReader"/> class.
         /// </summary>
-        /// <param name="eventSource"></param>
+        /// <param name="eventSource">An event provider to read the manifest from.</param>
         public SchemaReader(EventSource eventSource)
         {
             if (eventSource == null)
@@ -47,9 +47,9 @@ namespace ChilliCream.Tracing.Analyzer
         }
 
         /// <summary>
-        /// 
+        /// Reads the event provider manifest and returns the complete event provider schema.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>An event provider schema.</returns>
         public EventSourceSchema Read()
         {
             string manifest = EventSource.GenerateManifest(_eventSource.GetType(), null);
@@ -58,10 +58,10 @@ namespace ChilliCream.Tracing.Analyzer
         }
 
         /// <summary>
-        /// 
+        /// Reads the event provider manifest and returns the a single event schema.
         /// </summary>
-        /// <param name="eventId"></param>
-        /// <returns></returns>
+        /// <param name="eventId">An event identifier.</param>
+        /// <returns>A event schema.</returns>
         public EventSchema ReadEvent(int eventId)
         {
             if (eventId < 1)
@@ -93,14 +93,14 @@ namespace ChilliCream.Tracing.Analyzer
             return eventSourceSchema;
         }
 
-        private static ImmutableArray<EventSchema> ParseEventSchemas(EventSourceSchema eventSourceSchema, XElement providerElement)
+        private static IReadOnlyCollection<EventSchema> ParseEventSchemas(EventSourceSchema eventSourceSchema, XElement providerElement)
         {
             return providerElement
                 .Element(_events)
                 .Elements(_event)
                 .Where(e => (int)e.Attribute("value") > 0)
                 .Select(e => CreateEventSchema(eventSourceSchema, e, providerElement))
-                .ToImmutableArray<EventSchema>();
+                .ToArray();
         }
 
         private static EventSchema CreateEventSchema(EventSourceSchema eventSourceSchema, XElement eventElement, XElement providerElement)
@@ -112,7 +112,7 @@ namespace ChilliCream.Tracing.Analyzer
             (string name, EventTask value) task = ParseTask(providerElement.Element(_tasks), eventElement);
             EventKeywords keywords = ParseKeywords(providerElement.Element(_keywords), eventElement);
             EventOpcode opcode = ParseOpcode((string)eventElement.Attribute("opcode"), providerElement.Element(_opcodes));
-            ImmutableArray<string> payload = ParsePayload(providerElement.Element(_templates), eventElement);
+            IReadOnlyCollection<string> payload = ParsePayload(providerElement.Element(_templates), eventElement);
 
             return new EventSchema(eventSourceSchema, eventId, eventName, level,
                 task.value, task.name, opcode, keywords, version, payload);
@@ -169,13 +169,13 @@ namespace ChilliCream.Tracing.Analyzer
             return (taskName, (EventTask)taskId);
         }
 
-        private static ImmutableArray<string> ParsePayload(XElement templatesElement, XElement eventElement)
+        private static IReadOnlyCollection<string> ParsePayload(XElement templatesElement, XElement eventElement)
         {
             XAttribute templateReferenceAttribute = eventElement.Attribute("template");
 
             if (templateReferenceAttribute == null)
             {
-                return ImmutableArray<string>.Empty;
+                return new string[0];
             }
 
             return templatesElement
@@ -183,7 +183,7 @@ namespace ChilliCream.Tracing.Analyzer
                 .First(t => (string)t.Attribute("tid") == templateReferenceAttribute.Value)
                 .Elements(_ns + "data")
                 .Select(d => (string)d.Attribute("name"))
-                .ToImmutableArray<string>();
+                .ToArray<string>();
         }
 
         private static EventLevel ParseLevel(string level)

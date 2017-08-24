@@ -1,7 +1,6 @@
 ﻿using ChilliCream.Tracing.Analyzer.Rules;
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Diagnostics.Tracing;
 using System.Linq;
 
@@ -10,7 +9,7 @@ namespace ChilliCream.Tracing.Analyzer
     public class EventSourceAnalyzer
     {
         private readonly SchemaCache _cache = new SchemaCache();
-        private ImmutableArray<IRuleSet> _ruleSets = ImmutableArray<IRuleSet>.Empty;
+        private List<IRuleSet> _ruleSets = new List<IRuleSet>();
 
         public EventSourceAnalyzer()
             : this(new IRuleSet[] { new RequiredRuleSet(), new BestPracticeRuleSet() })
@@ -21,19 +20,19 @@ namespace ChilliCream.Tracing.Analyzer
             AddRange(ruleSets);
         }
 
-        public IEnumerable<IRuleSet> RuleSets { get { return _ruleSets; } }
+        public IReadOnlyCollection<IRuleSet> RuleSets { get { return _ruleSets; } }
 
         public void Add(IRuleSet ruleSet)
         {
-            _ruleSets = _ruleSets.Add(ruleSet);
+            _ruleSets.Add(ruleSet);
         }
 
         public void AddRange(IEnumerable<IRuleSet> ruleSets)
         {
-            _ruleSets = _ruleSets.AddRange(ruleSets);
+            _ruleSets.AddRange(ruleSets);
         }
 
-        public IEnumerable<IResult> Inspect(EventSource eventSource)
+        public IReadOnlyCollection<IResult> Inspect(EventSource eventSource)
         {
             if (eventSource == null)
             {
@@ -50,7 +49,7 @@ namespace ChilliCream.Tracing.Analyzer
                 _cache.TryAdd(schema);
             }
 
-            ImmutableArray<IResult> results = ImmutableArray<IResult>.Empty;
+            List<IResult> results = new List<IResult>();
 
             foreach (IRuleSet ruleSet in _ruleSets)
             {
@@ -58,7 +57,7 @@ namespace ChilliCream.Tracing.Analyzer
                 {
                     IResult result = rule.Apply(schema, eventSource);
 
-                    results = results.Add(result);
+                    results.Add(result);
                 }
 
                 IEnumerable<IEventRule> eventRules = ruleSet.Rules.OfType<IEventRule>();
@@ -69,7 +68,7 @@ namespace ChilliCream.Tracing.Analyzer
                     {
                         IResult result = rule.Apply(eventSchema, eventSource);
 
-                        results = results.Add(result);
+                        results.Add(result);
                     }
                 }
             }

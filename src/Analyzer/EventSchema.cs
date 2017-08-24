@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 
 namespace ChilliCream.Tracing.Analyzer
@@ -10,7 +10,7 @@ namespace ChilliCream.Tracing.Analyzer
     {
         public EventSchema(EventSourceSchema eventSourceSchema, int id, string name,
             EventLevel level, EventTask task, string taskName, EventOpcode opcode,
-            EventKeywords keywords, int version, ImmutableArray<string> payload)
+            EventKeywords keywords, int version, IReadOnlyCollection<string> payload)
         {
             EventSource = eventSourceSchema;
             Id = id;
@@ -51,7 +51,7 @@ namespace ChilliCream.Tracing.Analyzer
         /// Gets the payload names that maps to the event signature parameter names.
         /// </summary>
         /// <value>The event payload.</value>
-        public ImmutableArray<string> Payload { get; }
+        public IReadOnlyCollection<string> Payload { get; }
 
         /// <summary>
         /// Gets the operation code.

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Diagnostics.Tracing;
 using System.Linq;
 
@@ -55,11 +54,11 @@ namespace ChilliCream.Tracing.Analyzer.Rules
 
             if (_duplicateIds.Count > 0)
             {
-                ImmutableArray<string> details = ImmutableArray<string>.Empty;
+                List<string> details = new List<string>();
 
                 foreach(KeyValuePair<int, int> duplicateId in _duplicateIds)
                 {
-                    details = details.Add($"The event identifier {duplicateId.Key} was found {duplicateId.Value} times.");
+                    details.Add($"The event identifier {duplicateId.Key} was found {duplicateId.Value} times.");
                 }
 
                 return new Error(this, $"{_duplicateIds.Count} duplicate identifier(s) found. See details for more information.",

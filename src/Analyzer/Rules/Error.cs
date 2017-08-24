@@ -35,7 +35,7 @@ namespace ChilliCream.Tracing.Analyzer.Rules
         /// <param name="rule">A correlated rule.</param>
         /// <param name="reason">A message that explains why this error happens.</param>
         /// <param name="details">A collection of error details.</param>
-        public Error(IRule rule, string reason, IEnumerable<string> details)
+        public Error(IRule rule, string reason, IReadOnlyCollection<string> details)
             : this(rule, reason)
         {
             if (details == null)
@@ -52,7 +52,7 @@ namespace ChilliCream.Tracing.Analyzer.Rules
         /// <summary>
         /// 
         /// </summary>
-        public IEnumerable<string> Details { get; }
+        public IReadOnlyCollection<string> Details { get; }
 
         /// <summary>
         /// 
