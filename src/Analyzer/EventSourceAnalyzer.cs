@@ -28,6 +28,11 @@ namespace ChilliCream.Tracing.Analyzer
         /// <remarks>Use this ctor to override the complete set of rule sets.</remarks>
         public EventSourceAnalyzer(IEnumerable<IRuleSet> ruleSets)
         {
+            if (ruleSets == null)
+            {
+                throw new ArgumentNullException(nameof(ruleSets));
+            }
+
             AddRange(ruleSets);
         }
 
@@ -42,6 +47,11 @@ namespace ChilliCream.Tracing.Analyzer
         /// <param name="ruleSet">A rule set.</param>
         public void Add(IRuleSet ruleSet)
         {
+            if (ruleSet == null)
+            {
+                throw new ArgumentNullException(nameof(ruleSet));
+            }
+
             _ruleSets.Add(ruleSet);
         }
 
@@ -51,6 +61,11 @@ namespace ChilliCream.Tracing.Analyzer
         /// <param name="ruleSets">A collection of rule sets.</param>
         public void AddRange(IEnumerable<IRuleSet> ruleSets)
         {
+            if (ruleSets == null)
+            {
+                throw new ArgumentNullException(nameof(ruleSets));
+            }
+
             _ruleSets.AddRange(ruleSets);
         }
 
@@ -59,7 +74,7 @@ namespace ChilliCream.Tracing.Analyzer
         /// </summary>
         /// <param name="eventSource">An event provider.</param>
         /// <returns>A report.</returns>
-        public IReadOnlyCollection<IResult> Inspect(EventSource eventSource)
+        public Report Inspect(EventSource eventSource)
         {
             if (eventSource == null)
             {
@@ -100,7 +115,7 @@ namespace ChilliCream.Tracing.Analyzer
                 }
             }
 
-            return results;
+            return new Report(eventSource.Name, _ruleSets, results);
         }
     }
 }

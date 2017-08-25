@@ -1,4 +1,5 @@
 ﻿using ChilliCream.Tracing.Analyzer.Rules;
+using FluentAssertions;
 using Moq;
 using System;
 using System.Diagnostics.Tracing;
@@ -18,10 +19,24 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             IRuleSet ruleSet = null;
 
             // act
-            Action validate = () => CreateRule(ruleSet);
+            Action throwException = () => CreateRule(ruleSet);
 
             // assert
-            validate.ShouldThrowArgumentNull("ruleSet");
+            throwException.ShouldThrowNull("ruleSet");
+        }
+
+        [Fact(DisplayName = "Constructor: Should not throw any exception")]
+        public void Constructor_Success()
+        {
+            // arrange
+            IRuleSet ruleSet = new Mock<IRuleSet>().Object;
+
+            // act
+            IRule rule = CreateRule(ruleSet);
+
+            // assert
+            rule.Should().NotBeNull();
+            rule.RuleSet.Should().Be(ruleSet);
         }
 
         [Fact(DisplayName = "Apply: Should throw an argument null exception for schema")]
@@ -34,10 +49,10 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             TRule rule = CreateRule(ruleSet);
 
             // act
-            Action validate = () => rule.Apply(schema, eventSource);
+            Action throwException = () => rule.Apply(schema, eventSource);
 
             // assert
-            validate.ShouldThrowArgumentNull("schema");
+            throwException.ShouldThrowNull("schema");
         }
 
         [Fact(DisplayName = "Apply: Should throw an argument null exception for eventSource")]
@@ -53,10 +68,10 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             TRule rule = CreateRule(ruleSet);
 
             // act
-            Action validate = () => rule.Apply(eventSchema, eventSource);
+            Action throwException = () => rule.Apply(eventSchema, eventSource);
 
             // assert
-            validate.ShouldThrowArgumentNull("eventSource");
+            throwException.ShouldThrowNull("eventSource");
         }
     }
 }

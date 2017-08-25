@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 
 namespace ChilliCream.Tracing.Analyzer
@@ -11,7 +12,7 @@ namespace ChilliCream.Tracing.Analyzer
         /// <summary>
         /// Initializes a new instance of the <see cref="EventSchema"/> class.
         /// </summary>
-        /// <param name="eventSourceSchema">An event provider schema.</param>
+        /// <param name="schema">An event provider schema.</param>
         /// <param name="id">An event identifier.</param>
         /// <param name="name">An event name.</param>
         /// <param name="level">An event level.</param>
@@ -21,11 +22,24 @@ namespace ChilliCream.Tracing.Analyzer
         /// <param name="keywords">A event keyword mask.</param>
         /// <param name="version">An event version.</param>
         /// <param name="payload">An event payload.</param>
-        public EventSchema(EventSourceSchema eventSourceSchema, int id, string name,
+        public EventSchema(EventSourceSchema schema, int id, string name,
             EventLevel level, EventTask task, string taskName, EventOpcode opcode,
             EventKeywords keywords, int version, IReadOnlyCollection<string> payload)
         {
-            EventSource = eventSourceSchema;
+            if (schema == null)
+            {
+                throw new ArgumentNullException(nameof(schema));
+            }
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (payload == null)
+            {
+                throw new ArgumentNullException(nameof(payload));
+            }
+
+            EventSource = schema;
             Id = id;
             Name = name;
             Level = level;
