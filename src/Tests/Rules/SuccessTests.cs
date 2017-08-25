@@ -1,4 +1,6 @@
 ﻿using ChilliCream.Tracing.Analyzer.Rules;
+using FluentAssertions;
+using Moq;
 using System;
 using Xunit;
 
@@ -13,10 +15,23 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             IRule rule = null;
 
             // act
-            Action validate = () => new Success(rule);
+            Action throwException = () => new Success(rule);
 
             // assert
-            validate.ShouldThrowArgumentNull("rule");
+            throwException.ShouldThrowNull("rule");
+        }
+
+        [Fact(DisplayName = "Constructor: Should not throw any exception")]
+        public void Constructor_Success()
+        {
+            // arrange
+            IRule rule = new Mock<IRule>().Object;
+
+            // act
+            Success success = new Success(rule);
+
+            // assert
+            success.Rule.Should().Be(rule);
         }
     }
 }

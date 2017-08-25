@@ -15,13 +15,10 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             EventSource eventSource = null;
 
             // act
-            Action validate = () => new SchemaReader(eventSource);
+            Action throwException = () => new SchemaReader(eventSource);
 
             // assert
-            validate.ShouldThrow<ArgumentNullException>()
-                .Where(e => e.ParamName == "eventSource")
-                .Should()
-                .NotBeNull();
+            throwException.ShouldThrowNull("eventSource");
         }
 
         [Fact(DisplayName = "Read: Should return a schema")]
@@ -65,10 +62,10 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             SchemaReader reader = new SchemaReader(eventSource);
 
             // act
-            Action validate = () => reader.ReadEvent(0);
+            Action throwException = () => reader.ReadEvent(0);
 
             // assert
-            validate.ShouldThrow<ArgumentOutOfRangeException>()
+            throwException.ShouldThrow<ArgumentOutOfRangeException>()
                 .Where(e => e.ParamName == "eventId" && e.Message.StartsWith(ExceptionMessages.EventIdMustBeGreaterZero))
                 .Should()
                 .NotBeNull();
@@ -100,7 +97,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests
 
             // assert
             eventSchema.ShouldBe(3, "WithKeywords", EventLevel.Informational, EventOpcode.Info,
-                MultipleEventsEventSource.Keywords.Diagnostic, new[] { "bar" }, 0);
+                MultipleEventsEventSource.Keywords.Diagnostic, new[] { "bar" });
         }
 
         [Fact(DisplayName = "ReadEvent: Should return an event with specified level")]
@@ -115,7 +112,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests
 
             // assert
             eventSchema.ShouldBe(4, "WithLevel", EventLevel.Verbose, EventOpcode.Info,
-                EventKeywords.None, new[] { "bar" }, 0);
+                EventKeywords.None, new[] { "bar" });
         }
 
         [Fact(DisplayName = "ReadEvent: Should return an event with specified opcode")]
@@ -129,8 +126,8 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             EventSchema eventSchema = reader.ReadEvent(6);
 
             // assert
-            eventSchema.ShouldBe(6, "WithOpcode", EventLevel.Informational, EventOpcode.Receive,
-                EventKeywords.None, new[] { "bar" }, 0);
+            eventSchema.ShouldBe(6, "WithOpcode", EventLevel.Informational, null, EventOpcode.Receive,
+                EventKeywords.None, 0, new[] { "bar" });
         }
     }
 }

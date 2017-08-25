@@ -7,6 +7,11 @@ namespace ChilliCream.Tracing.Analyzer
     {
         public static object Default(this Type type)
         {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
             if (type == typeof(string))
             {
                 return string.Empty;
@@ -22,6 +27,11 @@ namespace ChilliCream.Tracing.Analyzer
 
         public static object NotDefault(this Type type)
         {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
             if (type == typeof(string))
             {
                 return "An arbitrary string value";

@@ -184,7 +184,7 @@ namespace ChilliCream.Tracing.Analyzer
                 .First(t => (string)t.Attribute("tid") == templateReferenceAttribute.Value)
                 .Elements(_ns + "data")
                 .Select(d => (string)d.Attribute("name"))
-                .ToArray<string>();
+                .ToArray();
         }
 
         private static EventLevel ParseLevel(string level)

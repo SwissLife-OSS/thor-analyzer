@@ -46,13 +46,10 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             SchemaCache cache = new SchemaCache();
 
             // act
-            Action validate = () => cache.TryAdd(null);
+            Action throwException = () => cache.TryAdd(null);
 
             // assert
-            validate.ShouldThrow<ArgumentNullException>()
-                .Where(e => e.ParamName == "schema")
-                .Should()
-                .NotBeNull();
+            throwException.ShouldThrowNull("schema");
         }
 
         #endregion
@@ -97,10 +94,10 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             SchemaCache cache = new SchemaCache();
 
             // act
-            Action validate = () => cache.TryGet(Guid.Empty, out EventSourceSchema result);
+            Action throwException = () => cache.TryGet(Guid.Empty, out EventSourceSchema result);
 
             // assert
-            validate.ShouldThrow<ArgumentException>()
+            throwException.ShouldThrow<ArgumentException>()
                 .Where(e => e.ParamName == "providerId" && e.Message.StartsWith(ExceptionMessages.ProviderIdMayNotBeEmpty))
                 .Should()
                 .NotBeNull();

@@ -1,6 +1,8 @@
 ﻿using ChilliCream.Tracing.Analyzer.Rules;
+using FluentAssertions;
 using Moq;
 using System;
+using System.Linq;
 using Xunit;
 
 namespace ChilliCream.Tracing.Analyzer.Tests.Rules
@@ -15,10 +17,10 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             string reason = "Reason";
 
             // act
-            Action validate = () => new Error(rule, reason);
+            Action throwException = () => new Error(rule, reason);
 
             // assert
-            validate.ShouldThrowArgumentNull("rule");
+            throwException.ShouldThrowNull("rule");
         }
 
         [Fact(DisplayName = "Constructor: Should throw an argument null exception for reason")]
@@ -29,10 +31,10 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             string reason = null;
 
             // act
-            Action validate = () => new Error(rule, reason);
+            Action throwException = () => new Error(rule, reason);
 
             // assert
-            validate.ShouldThrowArgumentNull("reason");
+            throwException.ShouldThrowNull("reason");
         }
 
         [Fact(DisplayName = "Constructor: Should throw an argument null exception for details")]
@@ -44,10 +46,44 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             string[] details = null;
 
             // act
-            Action validate = () => new Error(rule, reason, details);
+            Action throwException = () => new Error(rule, reason, details);
 
             // assert
-            validate.ShouldThrowArgumentNull("details");
+            throwException.ShouldThrowNull("details");
+        }
+
+        [Fact(DisplayName = "Constructor: Should not throw any exception")]
+        public void Constructor_Success()
+        {
+            // arrange
+            IRule rule = new Mock<IRule>().Object;
+            string reason = "Reason";
+
+            // act
+            Error error = new Error(rule, reason);
+
+            // assert
+            error.Details.Should().BeNull();
+            error.Reason.Should().Be(reason);
+            error.Rule.Should().Be(rule);
+        }
+
+        [Fact(DisplayName = "Constructor: Should not throw any exception with details")]
+        public void Constructor_Success_Details()
+        {
+            // arrange
+            IRule rule = new Mock<IRule>().Object;
+            string reason = "Reason";
+            string[] details = new string[] { "Details" };
+
+            // act
+            Error error = new Error(rule, reason, details);
+
+            // assert
+            error.Details.ToArray().Should().HaveCount(1)
+                .And.ContainInOrder("Details");
+            error.Reason.Should().Be(reason);
+            error.Rule.Should().Be(rule);
         }
     }
 }

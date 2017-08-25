@@ -8,6 +8,15 @@ namespace ChilliCream.Tracing.Analyzer
     {
         public static bool HasRelatedActivityId(this EventSchema schema, ParameterInfo[] eventParameters)
         {
+            if (schema == null)
+            {
+                throw new ArgumentNullException(nameof(schema));
+            }
+            if (eventParameters == null)
+            {
+                throw new ArgumentNullException(nameof(eventParameters));
+            }
+
             if (eventParameters.Length > 0 &&
                 eventParameters[0].ParameterType == typeof(Guid) &&
                 string.Equals(eventParameters[0].Name, "relatedActivityId", StringComparison.Ordinal) &&
