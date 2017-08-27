@@ -2,7 +2,7 @@ if (Test-Path env:APPVEYOR)
 {
     if (Test-Path env:PRBUILD)
     {
-        .\build\runtests.ps1
+        .\build\runtests.bat
     }
     else
     {
