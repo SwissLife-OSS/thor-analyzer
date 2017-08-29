@@ -11,7 +11,7 @@
     <PackageTags>Analyzer, ETW, EventSource, Logging, Tracing</PackageTags>
     <PackageReleaseNotes>Release notes: https://github.com/ChilliCream/EventSourceAnalyzer/releases/$(PackageVersion)</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageIconUrl />
+    <PackageIconUrl>https://github.com/ChilliCream/EventSourceAnalyzer/raw/master/icon.png</PackageIconUrl>
     <RepositoryType>GitHub</RepositoryType>
   </PropertyGroup>
 

@@ -1,8 +1,8 @@
 # EventSourceAnalyzer
 
-**An *ETW* EventSource analyzer build on *.Net Standard 2.0*.**
+**An *ETW* EventSource analyzer build on *.Net Standard 2.0***
 
-*ETW* (Event Tracing for Windows) is a very powerful instrument for tracing. However it could be very time consuming and frustrating to create a custom Event Provider (EventSource). The reason for that is there are many rules which have to be satisfied. Even as a professional, mistakes can be made easily. Here comes *EventSourceAnalyzer* which helps by analyzing EventSources to find any schema errors possible.
+*ETW* (Event Tracing for Windows) is a very powerful instrument for tracing. However it could be very time consuming and frustrating to create a custom Event Provider (EventSource). The reason for that is there are many rules which have to be satisfied. Even as a professional, mistakes can be made easily. Here comes *EventSourceAnalyzer* which helps by analyzing EventSources to detect any schema errors.
 
 ## Tools
 
