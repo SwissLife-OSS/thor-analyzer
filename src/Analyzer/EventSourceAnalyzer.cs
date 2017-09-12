@@ -7,7 +7,7 @@ using System.Linq;
 namespace ChilliCream.Tracing.Analyzer
 {
     /// <summary>
-    /// A event provider (<see cref="EventSource"/>) analyzer that generates a report.
+    /// An event provider (<see cref="EventSource"/>) analyzer that generates reports.
     /// </summary>
     public class EventSourceAnalyzer
     {
@@ -42,7 +42,7 @@ namespace ChilliCream.Tracing.Analyzer
         public IReadOnlyCollection<IRuleSet> RuleSets { get { return _ruleSets; } }
 
         /// <summary>
-        /// Adds on rule set.
+        /// Adds one rule set.
         /// </summary>
         /// <param name="ruleSet">A rule set.</param>
         public void Add(IRuleSet ruleSet)
@@ -70,7 +70,7 @@ namespace ChilliCream.Tracing.Analyzer
         }
 
         /// <summary>
-        /// Analyzes the event provider against the defined rule sets and generates a report subsequently.
+        /// Applies rule sets on the specified event provider and generates a report subsequently.
         /// </summary>
         /// <param name="eventSource">An event provider.</param>
         /// <returns>A report.</returns>
