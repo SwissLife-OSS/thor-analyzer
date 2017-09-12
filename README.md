@@ -11,7 +11,7 @@ Some tools we used to create the **EventSourceAnalyzer** library.
 |                       | Tools |
 | --------------------- | ----- |
 | Artefact Repository | [![NuGet](https://img.shields.io/nuget/v/ChilliCream.Tracing.Analyzer.svg)](https://www.nuget.org/packages/ChilliCream.Tracing.Analyzer) |
-| Build Tools         | [![AppVeyor branch](https://img.shields.io/appveyor/ci/rstaib/EventSourceAnalyzer/master.svg)](https://ci.appveyor.com/project/rstaib/eventsourceanalyzer-322tu) [![Travis branch](https://img.shields.io/travis/ChilliCream/EventSourceAnalyzer/master.svg)](https://travis-ci.org/ChilliCream/EventSourceAnalyzer) |
+| Build Tools         | [![AppVeyor branch](https://img.shields.io/appveyor/ci/rstaib/EventSourceAnalyzer/master.svg)](https://ci.appveyor.com/project/rstaib/eventsourceanalyzer-322tu) |
 | Quality Tools       | [![Coveralls](https://img.shields.io/coveralls/ChilliCream/EventSourceAnalyzer.svg)](https://coveralls.io/github/ChilliCream/EventSourceAnalyzer?branch=master) |
 | Source Control      | [![GitHub release](https://img.shields.io/github/release/ChilliCream/EventSourceAnalyzer.svg)](https://github.com/ChilliCream/EventSourceAnalyzer/releases) [![license](https://img.shields.io/github/license/ChilliCream/EventSourceAnalyzer.svg)](https://github.com/ChilliCream/EventSourceAnalyzer/blob/raf/dev/LICENSE) |
 
