@@ -110,13 +110,13 @@ namespace ChilliCream.Tracing.Analyzer
             string eventName = (string)eventElement.Attribute("symbol");
             EventLevel level = ParseLevel((string)eventElement.Attribute("level"));
             int version = ParseVersion(eventElement.Attribute("version"));
-            (string name, EventTask value) task = ParseTask(providerElement.Element(_tasks), eventElement);
+            Tuple<string, EventTask> task = ParseTask(providerElement.Element(_tasks), eventElement);
             EventKeywords keywords = ParseKeywords(providerElement.Element(_keywords), eventElement);
             EventOpcode opcode = ParseOpcode((string)eventElement.Attribute("opcode"), providerElement.Element(_opcodes));
             IReadOnlyCollection<string> payload = ParsePayload(providerElement.Element(_templates), eventElement);
 
             return new EventSchema(eventSourceSchema, eventId, eventName, level,
-                task.value, task.name, opcode, keywords, version, payload);
+                task.Item2, task.Item1, opcode, keywords, version, payload);
         }
 
         private static int ParseVersion(XAttribute versionAttribute)
@@ -154,7 +154,7 @@ namespace ChilliCream.Tracing.Analyzer
             return (EventKeywords)keywordsMask;
         }
 
-        private static (string name, EventTask task) ParseTask(XElement tasksElement, XElement eventElement)
+        private static Tuple<string, EventTask> ParseTask(XElement tasksElement, XElement eventElement)
         {
             string taskName = (string)eventElement.Attribute("task");
             int taskId = 0;
@@ -167,7 +167,7 @@ namespace ChilliCream.Tracing.Analyzer
                     .Attribute("value");
             }
 
-            return (taskName, (EventTask)taskId);
+            return new Tuple<string, EventTask>(taskName, (EventTask)taskId);
         }
 
         private static IReadOnlyCollection<string> ParsePayload(XElement templatesElement, XElement eventElement)

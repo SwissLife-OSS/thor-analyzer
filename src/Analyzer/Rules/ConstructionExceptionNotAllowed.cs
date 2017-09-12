@@ -5,7 +5,7 @@ using System.Diagnostics.Tracing;
 namespace ChilliCream.Tracing.Analyzer.Rules
 {
     /// <summary>
-    /// A rule which probes for duplicate event identifiers.
+    /// A rule which probes for construction exceptions.
     /// </summary>
     public class ConstructionExceptionNotAllowed
         : IEventSourceRule
