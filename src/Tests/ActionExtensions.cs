@@ -18,10 +18,8 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             }
 
             execute
-                .ShouldThrow<TArgumentException>()
-                .Where(e => e.ParamName == expectedParameterName)
-                .Should()
-                .NotBeNull();
+                .ShouldThrowExactly<TArgumentException>()
+                .Which.ParamName.Should().Be(expectedParameterName);
         }
 
         public static void ShouldThrowNull(this Action execute, string expectedParameterName) =>
