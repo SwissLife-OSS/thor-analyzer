@@ -1,0 +1,58 @@
+﻿<instrumentationManifest
+    xmlns="http://schemas.microsoft.com/win/2004/08/events">
+  <instrumentation
+      xmlns:xs="http://www.w3.org/2001/XMLSchema"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events">
+    <events
+        xmlns="http://schemas.microsoft.com/win/2004/08/events">
+      <provider name="Test" guid="{80adfbc7-6f82-584a-11fb-45d90a692bb8}" symbol="Test">
+        <tasks>
+          <task name="EventSourceMessage" message="$(string.task_EventSourceMessage)" value="65534"/>
+          <task name="Foo" message="$(string.task_Foo)" value="65533"/>
+          <task name="Bar" message="$(string.task_Bar)" value="65532"/>
+        </tasks>
+        <opcodes>
+          <opcode name="Test" value="5000" />
+        </opcodes>
+        <keywords>
+          <keyword name="Diagnostic" message="$(string.keyword_Diagnostic)" mask="0x1"/>
+          <keyword name="Session3" message="$(string.keyword_Session3)" mask="0x100000000000"/>
+          <keyword name="Session2" message="$(string.keyword_Session2)" mask="0x200000000000"/>
+          <keyword name="Session1" message="$(string.keyword_Session1)" mask="0x400000000000"/>
+          <keyword name="Session0" message="$(string.keyword_Session0)" mask="0x800000000000"/>
+        </keywords>
+        <events>
+          <event value="0" version="0" level="win:LogAlways" symbol="EventSourceMessage" task="EventSourceMessage" template="EventSourceMessageArgs"/>
+          <event value="1" level="win:Informational" symbol="Foo" task="Foo" opcode="Test" template="FooArgs"/>
+          <event value="2" version="0" level="win:Informational" symbol="Bar" task="Bar" opcode="Test2" template="BarArgs"/>
+        </events>
+        <templates>
+          <template tid="EventSourceMessageArgs">
+            <data name="message" inType="win:UnicodeString"/>
+          </template>
+          <template tid="FooArgs">
+            <data name="foo" inType="win:UnicodeString"/>
+          </template>
+          <template tid="BarArgs">
+            <data name="bar" inType="win:UnicodeString"/>
+          </template>
+        </templates>
+      </provider>
+    </events>
+  </instrumentation>
+  <localization>
+    <resources culture="en-US">
+      <stringTable>
+        <string id="keyword_Diagnostic" value="Diagnostic"/>
+        <string id="keyword_Session0" value="Session0"/>
+        <string id="keyword_Session1" value="Session1"/>
+        <string id="keyword_Session2" value="Session2"/>
+        <string id="keyword_Session3" value="Session3"/>
+        <string id="task_EventSourceMessage" value="EventSourceMessage"/>
+        <string id="task_Foo" value="Foo"/>
+        <string id="task_Bar" value="Bar"/>
+      </stringTable>
+    </resources>
+  </localization>
+</instrumentationManifest>

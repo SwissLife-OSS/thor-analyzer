@@ -78,7 +78,8 @@ namespace ChilliCream.Tracing.Analyzer
 
         #region Schema parsing
 
-        private static EventSourceSchema ParseSchema(string xmlManifest)
+        // Is internal for testing purposes
+        internal static EventSourceSchema ParseSchema(string xmlManifest)
         {
             XDocument doc = XDocument.Parse(xmlManifest);
             XElement provider = doc.Root
