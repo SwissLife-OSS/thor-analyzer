@@ -59,7 +59,7 @@ namespace ChilliCream.Tracing.Analyzer
 
             TypeConverter converter = TypeDescriptor.GetConverter(type);
 
-            if (converter != null && converter.CanConvertFrom(typeof(string)))
+            if (converter?.CanConvertFrom(typeof(string)) == true)
             {
                 return converter.ConvertFromInvariantString("1");
             }

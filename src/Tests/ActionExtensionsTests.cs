@@ -98,9 +98,9 @@ namespace ChilliCream.Tracing.Analyzer.Tests
                 .NotBeNull();
         }
 
-        #endregion
+#endregion
 
-        #region ShouldThrowArgumentNull
+#region ShouldThrowArgumentNull
 
         [Fact(DisplayName = "ShouldThrowArgumentNull: Should throw an argument null exception for source")]
         public void ShouldThrowArgumentNull_ExecuteNull()
@@ -191,6 +191,6 @@ namespace ChilliCream.Tracing.Analyzer.Tests
                 .NotBeNull();
         }
 
-        #endregion
+#endregion
     }
 }
