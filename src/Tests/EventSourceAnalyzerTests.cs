@@ -23,6 +23,8 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             throwException.ShouldThrowNull("ruleSets");
         }
 
+        #region Add
+
         [Fact(DisplayName = "Add: Should throw an argument null exception for ruleSet")]
         public void Add_RuleSetNull()
         {
@@ -50,6 +52,10 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             // assert
             analyzer.RuleSets.Should().HaveCount(1);
         }
+
+        #endregion
+
+        #region AddRange
 
         [Fact(DisplayName = "AddRange: Should throw an argument null exception for ruleSets")]
         public void AddRange_RuleSetsNull()
@@ -82,6 +88,10 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             // assert
             analyzer.RuleSets.Should().HaveCount(2);
         }
+
+        #endregion
+
+        #region Inspect
 
         [Fact(DisplayName = "Inspect: Should throw an argument null exception for eventSource")]
         public void Inspect_EventSourceNull()
@@ -117,5 +127,28 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             //report.Should().HaveCount(eventSourceRuleCount + eventRuleCount);
             //report.All(r => r.GetType().IsAssignableFrom(typeof(Success))).Should().BeTrue();
         }
+
+        [Fact(DisplayName = "Inspect: Should return only success status")]
+        public void Inspect_Success2()
+        {
+            // arrange
+            SchemaEventSource eventSource = SchemaEventSource.Log;
+            EventSourceAnalyzer analyzer = new EventSourceAnalyzer();
+
+            // act
+            Report report = analyzer.Inspect(eventSource);
+
+            // assert
+            report.HasErrors.Should().BeFalse();
+
+            //int eventCount = new SchemaReader(eventSource).Read().Events.Count();
+            //int eventSourceRuleCount = analyzer.RuleSets.SelectMany(r => r.Rules.OfType<IEventSourceRule>()).Count();
+            //int eventRuleCount = analyzer.RuleSets.SelectMany(r => r.Rules.OfType<IEventRule>()).Count() * eventCount;
+
+            //report.Should().HaveCount(eventSourceRuleCount + eventRuleCount);
+            //report.All(r => r.GetType().IsAssignableFrom(typeof(Success))).Should().BeTrue();
+        }
+
+        #endregion
     }
 }

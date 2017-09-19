@@ -159,6 +159,20 @@ namespace ChilliCream.Tracing.Analyzer.Tests
                 .And.Be("An arbitrary string value");
         }
 
+        [Fact(DisplayName = "NotDefault: Should return a non default object value")]
+        public void NotDefault_Object()
+        {
+            // arrange
+            Type type = typeof(object);
+
+            // act
+            object result = type.NotDefault();
+
+            // assert
+            result.Should().NotBeNull()
+                .And.BeOfType<object>();
+        }
+
         [Fact(DisplayName = "NotDefault: Should return a non default argument exception value")]
         public void NotDefault_ArgumentException()
         {
