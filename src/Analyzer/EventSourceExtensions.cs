@@ -3,7 +3,7 @@ using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Reflection;
 
-namespace ChilliCream.Tracing.Analyzer.Rules
+namespace ChilliCream.Tracing.Analyzer
 {
     internal static class EventSourceExtensions
     {

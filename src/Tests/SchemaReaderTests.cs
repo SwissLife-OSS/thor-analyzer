@@ -2,6 +2,8 @@
 using FluentAssertions;
 using System;
 using System.Diagnostics.Tracing;
+using System.IO;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace ChilliCream.Tracing.Analyzer.Tests
@@ -19,6 +21,20 @@ namespace ChilliCream.Tracing.Analyzer.Tests
 
             // assert
             throwException.ShouldThrowNull("eventSource");
+        }
+
+        [Fact(DisplayName = "ParseSchemaAsync: Should return a schema")]
+        public async Task ParseSchemaAsync()
+        {
+            // arrange
+            string filePath = ".\\SchemaReader.xml";
+            string manifest = await File.ReadAllTextAsync(filePath).ConfigureAwait(false);
+
+            // act
+            EventSourceSchema eventSchema = SchemaReader.ParseSchema(manifest);
+
+            // assert
+            eventSchema.Should().NotBeNull();
         }
 
         [Fact(DisplayName = "Read: Should return a schema")]
