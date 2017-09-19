@@ -6,7 +6,7 @@ The `EventSourceAnalyzer` is designed with customization in mind. Creating your 
 
 Use `Add` to add a single rule set or `AddRange` for adding multiple rule sets.
 
-```c-sharp
+```csharp
 EventSoureAnalyzer anlayzer = new EventSoureAnalyzer();
 analyzer.Add(new MyCustomRuleSet());
 ```
@@ -17,7 +17,7 @@ The default rule sets can be completely replaced by providing custom rule sets t
 
 *Warning: The `EventSourceAnalyzer` brings a bunch of helpful rule sets with it. If you replace them by your own rule sets you have to take care of schema validation by your self.*
 
-```c-sharp
+```csharp
 IRuleSet[] ruleSets = new []
 {
     new MyCustomRuleSet()
