@@ -28,7 +28,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests
         {
             // arrange
             string filePath = ".\\SchemaReader.xml";
-            string manifest = await File.ReadAllTextAsync(filePath).ConfigureAwait(false);
+            string manifest = await FileHelper.ReadAllTextAsync(filePath).ConfigureAwait(false);
 
             // act
             EventSourceSchema eventSchema = SchemaReader.ParseSchema(manifest);
