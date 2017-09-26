@@ -15,9 +15,10 @@ namespace ChilliCream.Tracing.Analyzer.Rules
         {
             Rules = new IRule[]
             {
+                new MustBeSealed(this),
                 new MustHaveSinglePrivateConstructor(this),
                 new MustHaveStaticLogProperty(this),
-                new MustBeSealed(this)
+                new MustHaveValidName(this)
             };
         }
 
