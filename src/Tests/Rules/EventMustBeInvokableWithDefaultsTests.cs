@@ -15,7 +15,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             return new EventMustBeInvokableWithDefaults(ruleSet);
         }
 
-        [Fact(DisplayName = "Apply: Should return an error result")]
+        [Fact(DisplayName = "Apply: Should return an error if events were not invokable with defaults")]
         public void Apply_Error()
         {
             // arrange
@@ -34,7 +34,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             ((Error)result).Details.Should().HaveCount(1);
         }
 
-        [Fact(DisplayName = "Apply: Should return a success result")]
+        [Fact(DisplayName = "Apply: Should return a success if events were invokable with defaults")]
         public void Apply_Success()
         {
             // arrange

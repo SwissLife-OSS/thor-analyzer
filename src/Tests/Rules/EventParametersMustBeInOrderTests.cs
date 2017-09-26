@@ -17,7 +17,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
 
 
         // todo: find a way to simulate wrong parameter order.
-        //[Fact(DisplayName = "Apply: Should return an error result")]
+        //[Fact(DisplayName = "Apply: Should return an error if event parameters were not in order")]
         //public void Apply_Error()
         //{
         //    // arrange
@@ -26,16 +26,16 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
         //    EventSourceSchema schema = reader.Read();
         //    IRuleSet ruleSet = new Mock<IRuleSet>().Object;
         //    IEventRule rule = CreateRule(ruleSet);
-        
+
         //    // act
         //    IResult result = rule.Apply(schema.Events.First(), eventSource);
-        
+
         //    // assert
         //    result.Should().NotBeNull();
         //    result.Should().BeOfType<Error>();
         //}
 
-        [Fact(DisplayName = "Apply: Should return a success result")]
+        [Fact(DisplayName = "Apply: Should return a success if event parameters were in order")]
         public void Apply_Success()
         {
             // arrange
@@ -53,7 +53,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             result.Should().BeOfType<Success>();
         }
 
-        [Fact(DisplayName = "Apply: Should return a success result")]
+        [Fact(DisplayName = "Apply: Should return a success if event parameters were in order (related activity id)")]
         public void Apply_SuccessRelatedActivityId()
         {
             // arrange

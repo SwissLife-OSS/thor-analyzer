@@ -104,7 +104,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             result.Should().BeOfType<Error>();
         }
 
-        [Fact(DisplayName = "Apply: Should return a success result")]
+        [Fact(DisplayName = "Apply: Should return a success if a log field as defined was found")]
         public void Apply_Success()
         {
             // arrange

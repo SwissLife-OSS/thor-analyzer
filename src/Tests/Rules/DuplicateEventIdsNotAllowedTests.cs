@@ -14,7 +14,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             return new DuplicateEventIdsNotAllowed(ruleSet);
         }
 
-        [Fact(DisplayName = "Apply: Should return an error result")]
+        [Fact(DisplayName = "Apply: Should return an error if duplicate events were found")]
         public void Apply_Error()
         {
             // arrange
@@ -32,7 +32,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             result.Should().BeOfType<Error>();
         }
 
-        [Fact(DisplayName = "Apply: Should return a success result")]
+        [Fact(DisplayName = "Apply: Should return a success if no duplicate events were found")]
         public void Apply_Success()
         {
             // arrange

@@ -14,7 +14,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             return new ConstructionExceptionNotAllowed(ruleSet);
         }
 
-        [Fact(DisplayName = "Apply: Should return an error result")]
+        [Fact(DisplayName = "Apply: Should return an error if a construction exception occurred")]
         public void Apply_Error()
         {
             // arrange
@@ -33,7 +33,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             ((Error)result).Details.Should().HaveCount(1);
         }
 
-        [Fact(DisplayName = "Apply: Should return a success result")]
+        [Fact(DisplayName = "Apply: Should return a success if no construction exception occurred")]
         public void Apply_Success()
         {
             // arrange
