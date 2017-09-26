@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ChilliCream.Tracing.Analyzer.Rules
 {
     /// <summary>
-    /// A result that represents a error status for a rule.
+    /// A result that represents an error status for a rule.
     /// </summary>
     public class Error
         : IResult
@@ -50,12 +50,12 @@ namespace ChilliCream.Tracing.Analyzer.Rules
         public IRule Rule { get; }
 
         /// <summary>
-        /// 
+        /// Gets detailed explanations for this error.
         /// </summary>
         public IReadOnlyCollection<string> Details { get; }
 
         /// <summary>
-        /// 
+        /// Gets an explanation for this error.
         /// </summary>
         public string Reason { get; }
     }

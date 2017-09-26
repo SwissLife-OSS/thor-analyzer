@@ -14,7 +14,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             return new MustBeSealed(ruleSet);
         }
 
-        [Fact(DisplayName = "Apply: Should return an error because log field does not exist")]
+        [Fact(DisplayName = "Apply: Should return an error if event source is not sealed")]
         public void Apply_NotSealed()
         {
             // arrange
@@ -32,7 +32,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             result.Should().BeOfType<Error>();
         }
 
-        [Fact(DisplayName = "Apply: Should return a success result")]
+        [Fact(DisplayName = "Apply: Should return a success if event source is sealed")]
         public void Apply_Sealed()
         {
             // arrange

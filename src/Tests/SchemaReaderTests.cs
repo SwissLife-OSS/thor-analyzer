@@ -28,7 +28,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests
         {
             // arrange
             string filePath = ".\\SchemaReader.xml";
-            string manifest = await File.ReadAllTextAsync(filePath).ConfigureAwait(false);
+            string manifest = await FileHelper.ReadAllTextAsync(filePath).ConfigureAwait(false);
 
             // act
             EventSourceSchema eventSchema = SchemaReader.ParseSchema(manifest);
@@ -82,7 +82,8 @@ namespace ChilliCream.Tracing.Analyzer.Tests
 
             // assert
             throwException.ShouldThrow<ArgumentOutOfRangeException>()
-                .Where(e => e.ParamName == "eventId" && e.Message.StartsWith(ExceptionMessages.EventIdMustBeGreaterZero))
+                .Where(e => e.ParamName == "eventId" && e.Message
+                    .StartsWith(ExceptionMessages.EventIdMustBeGreaterZero))
                 .Should()
                 .NotBeNull();
         }
@@ -142,8 +143,8 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             EventSchema eventSchema = reader.ReadEvent(6);
 
             // assert
-            eventSchema.ShouldBe(6, "WithOpcode", EventLevel.Informational, null, EventOpcode.Receive,
-                EventKeywords.None, 0, new[] { "bar" });
+            eventSchema.ShouldBe(6, "WithOpcode", EventLevel.Informational, null,
+                EventOpcode.Receive, EventKeywords.None, 0, new[] { "bar" });
         }
     }
 }

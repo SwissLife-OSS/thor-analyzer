@@ -62,8 +62,9 @@ namespace ChilliCream.Tracing.Analyzer.Rules
                             ? new string[0]
                             : new [] { exceptionMessage };
 
-                        return new Error(this, $"Event method '{method.Name}' does not call WriteEvent() or " +
-                            "the call is bypassed due to incorrect filtering before the WriteEvent call.", details);
+                        return new Error(this, $"Event method '{method.Name}' does not call " +
+                            "WriteEvent() or the call is bypassed due to incorrect filtering " +
+                            "before the WriteEvent call.", details);
                     }
                 }
                 finally

@@ -58,11 +58,12 @@ namespace ChilliCream.Tracing.Analyzer.Rules
 
                 foreach(KeyValuePair<int, int> duplicateId in _duplicateIds)
                 {
-                    details.Add($"The event identifier {duplicateId.Key} was found {duplicateId.Value} times.");
+                    details.Add($"The event identifier {duplicateId.Key} was found " +
+                        "{duplicateId.Value} times.");
                 }
 
-                return new Error(this, $"{_duplicateIds.Count} duplicate identifier(s) found. See details for more information.",
-                    details);
+                return new Error(this, $"{_duplicateIds.Count} duplicate identifier(s) found. " +
+                    "See details for more information.", details);
             }
 
             return new Success(this);

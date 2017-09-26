@@ -8,7 +8,8 @@ namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
     {
         private CorrectEventParameterOrderEventSource() { }
 
-        public static CorrectEventParameterOrderEventSource Log = new CorrectEventParameterOrderEventSource();
+        public static readonly CorrectEventParameterOrderEventSource Log =
+            new CorrectEventParameterOrderEventSource();
 
         [Event(1)]
         public void Foo(string foo, string bar)

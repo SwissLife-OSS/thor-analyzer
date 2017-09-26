@@ -17,29 +17,31 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
 
 
         // todo: find a way to simulate wrong parameter order.
-        //[Fact(DisplayName = "Apply: Should return an error result")]
+        //[Fact(DisplayName = "Apply: Should return an error if event parameters were not in order")]
         //public void Apply_Error()
         //{
         //    // arrange
-        //    WrongEventParameterOrderEventSource eventSource = WrongEventParameterOrderEventSource.Log;
+        //    WrongEventParameterOrderEventSource eventSource =
+        //        WrongEventParameterOrderEventSource.Log;
         //    SchemaReader reader = new SchemaReader(eventSource);
         //    EventSourceSchema schema = reader.Read();
         //    IRuleSet ruleSet = new Mock<IRuleSet>().Object;
         //    IEventRule rule = CreateRule(ruleSet);
-        
+
         //    // act
         //    IResult result = rule.Apply(schema.Events.First(), eventSource);
-        
+
         //    // assert
         //    result.Should().NotBeNull();
         //    result.Should().BeOfType<Error>();
         //}
 
-        [Fact(DisplayName = "Apply: Should return a success result")]
+        [Fact(DisplayName = "Apply: Should return a success if event parameters were in order")]
         public void Apply_Success()
         {
             // arrange
-            CorrectEventParameterOrderEventSource eventSource = CorrectEventParameterOrderEventSource.Log;
+            CorrectEventParameterOrderEventSource eventSource =
+                CorrectEventParameterOrderEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
             EventSourceSchema schema = reader.Read();
             IRuleSet ruleSet = new Mock<IRuleSet>().Object;
@@ -53,11 +55,13 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             result.Should().BeOfType<Success>();
         }
 
-        [Fact(DisplayName = "Apply: Should return a success result")]
+        [Fact(DisplayName = "Apply: Should return a success if event parameters were in order " +
+            "(related activity id)")]
         public void Apply_SuccessRelatedActivityId()
         {
             // arrange
-            CorrectEventParameterOrderWithRelatedActivityIdEventSource eventSource = CorrectEventParameterOrderWithRelatedActivityIdEventSource.Log;
+            CorrectEventParameterOrderWithRelatedActivityIdEventSource eventSource =
+                CorrectEventParameterOrderWithRelatedActivityIdEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
             EventSourceSchema schema = reader.Read();
             IRuleSet ruleSet = new Mock<IRuleSet>().Object;

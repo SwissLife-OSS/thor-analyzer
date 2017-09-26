@@ -1,7 +1,7 @@
 ﻿namespace ChilliCream.Tracing.Analyzer.Rules
 {
     /// <summary>
-    /// Descibes a result.
+    /// Describes a result.
     /// </summary>
     public interface IResult
     {

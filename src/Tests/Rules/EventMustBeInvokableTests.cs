@@ -15,7 +15,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             return new EventMustBeInvokable(ruleSet);
         }
 
-        [Fact(DisplayName = "Apply: Should return an error result")]
+        [Fact(DisplayName = "Apply: Should return an error if events were not invokable")]
         public void Apply_Error()
         {
             // arrange
@@ -34,7 +34,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             ((Error)result).Details.Should().HaveCount(0);
         }
 
-        [Fact(DisplayName = "Apply: Should return a success result")]
+        [Fact(DisplayName = "Apply: Should return a success if events were invokable")]
         public void Apply_Success()
         {
             // arrange

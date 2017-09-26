@@ -6,6 +6,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
     public sealed class LogFieldNotPublicEventSource
         : EventSource
     {
-        internal static LogFieldNotPublicEventSource Log = new LogFieldNotPublicEventSource();
+        internal static readonly LogFieldNotPublicEventSource Log =
+            new LogFieldNotPublicEventSource();
     }
 }

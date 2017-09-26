@@ -8,6 +8,6 @@ namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
     {
         private ConstructorEventSource() { }
 
-        public static ConstructorEventSource Log = new ConstructorEventSource();
+        public static readonly ConstructorEventSource Log = new ConstructorEventSource();
     }
 }

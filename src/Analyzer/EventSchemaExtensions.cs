@@ -6,20 +6,20 @@ namespace ChilliCream.Tracing.Analyzer
 {
     internal static class EventSchemaExtensions
     {
-        public static bool HasRelatedActivityId(this EventSchema schema, ParameterInfo[] eventParameters)
+        public static bool HasRelatedActivityId(this EventSchema schema,
+            ParameterInfo[] parameters)
         {
             if (schema == null)
             {
                 throw new ArgumentNullException(nameof(schema));
             }
-            if (eventParameters == null)
+            if (parameters == null)
             {
-                throw new ArgumentNullException(nameof(eventParameters));
+                throw new ArgumentNullException(nameof(parameters));
             }
 
-            if (eventParameters.Length > 0 &&
-                eventParameters[0].ParameterType == typeof(Guid) &&
-                string.Equals(eventParameters[0].Name, "relatedActivityId", StringComparison.Ordinal) &&
+            if (parameters.Length > 0 && parameters[0].ParameterType == typeof(Guid) &&
+                string.Equals(parameters[0].Name, "relatedActivityId", StringComparison.Ordinal) &&
                 (schema.Opcode == EventOpcode.Send || schema.Opcode == EventOpcode.Receive))
             {
                 return true;

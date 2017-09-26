@@ -9,7 +9,8 @@ namespace ChilliCream.Tracing.Analyzer.Tests
 {
     public class EventSchemaExtensionsTests
     {
-        [Fact(DisplayName = "HasRelatedActivityId: Should throw an argument null exception for schema")]
+        [Fact(DisplayName = "HasRelatedActivityId: Should throw an argument null exception for " +
+            "schema")]
         public void HasRelatedActivityId_SchemaNull()
         {
             // arrange
@@ -23,7 +24,8 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             throwException.ShouldThrowNull("schema");
         }
 
-        [Fact(DisplayName = "HasRelatedActivityId: Should throw an argument null exception for eventParameters")]
+        [Fact(DisplayName = "HasRelatedActivityId: Should throw an argument null exception for " +
+            "eventParameters")]
         public void HasRelatedActivityId_EventParametersNull()
         {
             // arrange
@@ -39,14 +41,16 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             throwException.ShouldThrowNull("eventParameters");
         }
 
-        [Fact(DisplayName = "HasRelatedActivityId: Should return false because eventParameters length is 0")]
+        [Fact(DisplayName = "HasRelatedActivityId: Should return false because eventParameters " +
+            "length is 0")]
         public void HasRelatedActivityId_EventParametersEmpty()
         {
             // arrange
             RelatedActivityIdEventSource eventSource = RelatedActivityIdEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
             EventSchema schema = reader.ReadEvent(6);
-            ParameterInfo[] eventParameters = eventSource.GetType().GetMethod("Sixth").GetParameters();
+            ParameterInfo[] eventParameters = eventSource.GetType().GetMethod("Sixth")
+                .GetParameters();
 
             // act
             bool result = schema.HasRelatedActivityId(eventParameters);
@@ -55,14 +59,16 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             result.Should().BeFalse();
         }
 
-        [Fact(DisplayName = "HasRelatedActivityId: Should return false because first parameter is not Guid")]
+        [Fact(DisplayName = "HasRelatedActivityId: Should return false because first parameter is " +
+            "not Guid")]
         public void HasRelatedActivityId_FirstParameterNotGuid()
         {
             // arrange
             RelatedActivityIdEventSource eventSource = RelatedActivityIdEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
             EventSchema schema = reader.ReadEvent(1);
-            ParameterInfo[] eventParameters = eventSource.GetType().GetMethod("First").GetParameters();
+            ParameterInfo[] eventParameters = eventSource.GetType().GetMethod("First")
+                .GetParameters();
 
             // act
             bool result = schema.HasRelatedActivityId(eventParameters);
@@ -71,14 +77,16 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             result.Should().BeFalse();
         }
 
-        [Fact(DisplayName = "HasRelatedActivityId: Should return false because first parameter is not named relatedActivityId")]
+        [Fact(DisplayName = "HasRelatedActivityId: Should return false because first parameter is " +
+            "not named relatedActivityId")]
         public void HasRelatedActivityId_FirstParameterNotRelatedId()
         {
             // arrange
             RelatedActivityIdEventSource eventSource = RelatedActivityIdEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
             EventSchema schema = reader.ReadEvent(2);
-            ParameterInfo[] eventParameters = eventSource.GetType().GetMethod("Second").GetParameters();
+            ParameterInfo[] eventParameters = eventSource.GetType().GetMethod("Second")
+                .GetParameters();
 
             // act
             bool result = schema.HasRelatedActivityId(eventParameters);
@@ -87,14 +95,16 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             result.Should().BeFalse();
         }
 
-        [Fact(DisplayName = "HasRelatedActivityId: Should return false because Opcode is not Send or Receive")]
+        [Fact(DisplayName = "HasRelatedActivityId: Should return false because Opcode is not Send " +
+            "or Receive")]
         public void HasRelatedActivityId_FirstParameterWrongOpcode()
         {
             // arrange
             RelatedActivityIdEventSource eventSource = RelatedActivityIdEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
             EventSchema schema = reader.ReadEvent(3);
-            ParameterInfo[] eventParameters = eventSource.GetType().GetMethod("Third").GetParameters();
+            ParameterInfo[] eventParameters = eventSource.GetType().GetMethod("Third")
+                .GetParameters();
 
             // act
             bool result = schema.HasRelatedActivityId(eventParameters);
@@ -110,7 +120,8 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             RelatedActivityIdEventSource eventSource = RelatedActivityIdEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
             EventSchema schema = reader.ReadEvent(4);
-            ParameterInfo[] eventParameters = eventSource.GetType().GetMethod("Forth").GetParameters();
+            ParameterInfo[] eventParameters = eventSource.GetType().GetMethod("Forth")
+                .GetParameters();
 
             // act
             bool result = schema.HasRelatedActivityId(eventParameters);
@@ -126,7 +137,8 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             RelatedActivityIdEventSource eventSource = RelatedActivityIdEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
             EventSchema schema = reader.ReadEvent(5);
-            ParameterInfo[] eventParameters = eventSource.GetType().GetMethod("Fifth").GetParameters();
+            ParameterInfo[] eventParameters = eventSource.GetType().GetMethod("Fifth")
+                .GetParameters();
 
             // act
             bool result = schema.HasRelatedActivityId(eventParameters);

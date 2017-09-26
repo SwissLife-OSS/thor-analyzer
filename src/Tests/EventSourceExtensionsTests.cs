@@ -7,7 +7,8 @@ namespace ChilliCream.Tracing.Analyzer.Tests
 {
     public class EventSourceExtensionsTests
     {
-        [Fact(DisplayName = "GetMethodFromSchema: Should throw an argument null exception for eventSource")]
+        [Fact(DisplayName = "GetMethodFromSchema: Should throw an argument null exception for " +
+            "eventSource")]
         public void GetMethodFromSchema_EventSourceNull()
         {
             // arrange
@@ -21,7 +22,8 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             throwException.ShouldThrowNull("eventSource");
         }
 
-        [Fact(DisplayName = "GetMethodFromSchema: Should throw an argument null exception for eventSource")]
+        [Fact(DisplayName = "GetMethodFromSchema: Should throw an argument null exception for " +
+            "eventSource")]
         public void GetMethodFromSchema_SchemaNull()
         {
             // arrange

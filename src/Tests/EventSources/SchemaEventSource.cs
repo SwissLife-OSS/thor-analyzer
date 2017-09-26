@@ -8,7 +8,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
     {
         private SchemaEventSource() { }
 
-        public static SchemaEventSource Log = new SchemaEventSource();
+        public static readonly SchemaEventSource Log = new SchemaEventSource();
 
         [Event(1, Level = EventLevel.LogAlways, Opcode = EventOpcode.DataCollectionStart)]
         public void LogAlways(string bar)

@@ -8,13 +8,16 @@ namespace ChilliCream.Tracing.Analyzer
     /// </summary>
     public class SchemaCache
     {
-        private readonly ConcurrentDictionary<Guid, EventSourceSchema> _schemas = new ConcurrentDictionary<Guid, EventSourceSchema>();
+        private readonly ConcurrentDictionary<Guid, EventSourceSchema> _schemas =
+            new ConcurrentDictionary<Guid, EventSourceSchema>();
 
         /// <summary>
         /// Tries to add a schema to the cache.
         /// </summary>
         /// <param name="schema">A schema that should be cached.</param>
-        /// <returns><c>true</c> if successfully added; otherwise <c>false</c> if already exists in the cache.</returns>
+        /// <returns>
+        /// <c>true</c> if successfully added; otherwise <c>false</c> if already exists in the cache.
+        /// </returns>
         public bool TryAdd(EventSourceSchema schema)
         {
             if (schema == null)
@@ -35,7 +38,8 @@ namespace ChilliCream.Tracing.Analyzer
         {
             if (providerId == Guid.Empty)
             {
-                throw new ArgumentException(ExceptionMessages.ProviderIdMayNotBeEmpty, nameof(providerId));
+                throw new ArgumentException(ExceptionMessages.ProviderIdMayNotBeEmpty,
+                    nameof(providerId));
             }
 
             return _schemas.TryGetValue(providerId, out schema);

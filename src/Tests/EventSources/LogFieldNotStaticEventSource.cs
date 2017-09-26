@@ -6,6 +6,6 @@ namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
     public sealed class LogFieldNotStaticEventSource
         : EventSource
     {
-        public LogFieldNotStaticEventSource Log;
+        public readonly LogFieldNotStaticEventSource Log = new LogFieldNotStaticEventSource();
     }
 }

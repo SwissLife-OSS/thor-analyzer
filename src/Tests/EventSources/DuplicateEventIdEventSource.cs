@@ -7,7 +7,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
         : EventSource
         , IDuplicateEventIdEventSource
     {
-        public static IDuplicateEventIdEventSource Log = new DuplicateEventIdEventSource();
+        public static readonly IDuplicateEventIdEventSource Log = new DuplicateEventIdEventSource();
 
         [Event(1)]
         public void Foo(string bar)

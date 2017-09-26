@@ -10,6 +10,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
 
         private MultipleConstructorsEventSource(string test) { }
 
-        public static MultipleConstructorsEventSource Log = new MultipleConstructorsEventSource();
+        public static readonly MultipleConstructorsEventSource Log =
+            new MultipleConstructorsEventSource();
     }
 }

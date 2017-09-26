@@ -5,7 +5,9 @@ namespace ChilliCream.Tracing.Analyzer.Rules
     /// <summary>
     /// Describes an event rule.
     /// </summary>
-    /// <remarks>A <see cref="IEventRule"/> will be executed for every event of a <see cref="EventSource"/>.</remarks>
+    /// <remarks>
+    /// A <see cref="IEventRule"/> will be executed for every event of a <see cref="EventSource"/>.
+    /// </remarks>
     public interface IEventRule
         : IRule
     {

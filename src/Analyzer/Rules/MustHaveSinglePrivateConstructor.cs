@@ -42,14 +42,17 @@ namespace ChilliCream.Tracing.Analyzer.Rules
             }
 
             Type eventSourceType = eventSource.GetType();
+            BindingFlags nonPuplicConstructors = BindingFlags.Instance | BindingFlags.NonPublic;
+            BindingFlags staticConstructors = BindingFlags.Instance | BindingFlags.Static;
             IEnumerable<ConstructorInfo> constructors = eventSourceType.GetConstructors()
-                .Concat(eventSourceType.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic))
-                .Concat(eventSourceType.GetConstructors(BindingFlags.Instance | BindingFlags.Static));
+                .Concat(eventSourceType.GetConstructors(nonPuplicConstructors))
+                .Concat(eventSourceType.GetConstructors(staticConstructors));
 
-            if (constructors.Count() != 1 || !constructors.First().IsPrivate || constructors.First().IsStatic ||
-                constructors.First().GetParameters().Length > 0)
+            if (constructors.Count() != 1 || !constructors.First().IsPrivate ||
+                constructors.First().IsStatic || constructors.First().GetParameters().Length > 0)
             {
-                return new Error(this, "Did not found a single private constructor without any parameter.");
+                return new Error(this, "Did not found a single private constructor without any " +
+                    "parameter.");
             }
 
             return new Success(this);

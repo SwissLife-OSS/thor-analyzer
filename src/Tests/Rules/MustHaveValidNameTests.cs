@@ -6,19 +6,19 @@ using Xunit;
 
 namespace ChilliCream.Tracing.Analyzer.Tests.Rules
 {
-    public class ConstructionExceptionNotAllowedTests
-        : EventSourceRuleTestBase<ConstructionExceptionNotAllowed>
+    public class MustHaveValidNameTests
+        : EventSourceRuleTestBase<MustHaveValidName>
     {
-        protected override ConstructionExceptionNotAllowed CreateRule(IRuleSet ruleSet)
+        protected override MustHaveValidName CreateRule(IRuleSet ruleSet)
         {
-            return new ConstructionExceptionNotAllowed(ruleSet);
+            return new MustHaveValidName(ruleSet);
         }
 
-        [Fact(DisplayName = "Apply: Should return an error if a construction exception occurred")]
-        public void Apply_Error()
+        [Fact(DisplayName = "Apply: Should return an error if name is invalid")]
+        public void Apply_NameInvalid()
         {
             // arrange
-            ConstructionExceptionEventSource eventSource = ConstructionExceptionEventSource.Log;
+            InvalidNameEventSource eventSource = InvalidNameEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
             EventSourceSchema schema = reader.Read();
             IRuleSet ruleSet = new Mock<IRuleSet>().Object;
@@ -30,14 +30,13 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             // assert
             result.Should().NotBeNull();
             result.Should().BeOfType<Error>();
-            ((Error)result).Details.Should().HaveCount(1);
         }
 
-        [Fact(DisplayName = "Apply: Should return a success if no construction exception occurred")]
-        public void Apply_Success()
+        [Fact(DisplayName = "Apply: Should return a success if name is valid")]
+        public void Apply_ValidName()
         {
             // arrange
-            NoConstructionExceptionEventSource eventSource = NoConstructionExceptionEventSource.Log;
+            ValidNameEventSource eventSource = ValidNameEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
             EventSourceSchema schema = reader.Read();
             IRuleSet ruleSet = new Mock<IRuleSet>().Object;

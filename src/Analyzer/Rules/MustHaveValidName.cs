@@ -1,20 +1,23 @@
 ﻿using System;
 using System.Diagnostics.Tracing;
-using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace ChilliCream.Tracing.Analyzer.Rules
 {
     /// <summary>
-    /// A rule which probes for missing <c>Log</c> properties.
+    /// A rule which verifies if the event source has a valid name.
     /// </summary>
-    public class MustHaveStaticLogProperty
+    public class MustHaveValidName
         : IEventSourceRule
     {
+        private static Regex _namePattern = new Regex(@"^[a-zA-Z]+(\-[a-zA-Z]+)*$",
+            RegexOptions.Compiled | RegexOptions.Singleline);
+
         /// <summary>
-        /// Initiates a new instance of the <see cref="MustHaveStaticLogProperty"/> class.
+        /// Initiates a new instance of the <see cref="MustHaveValidName"/> class.
         /// </summary>
         /// <param name="ruleSet">A ruleset which is the parent of this rule.</param>
-        public MustHaveStaticLogProperty(IRuleSet ruleSet)
+        public MustHaveValidName(IRuleSet ruleSet)
         {
             if (ruleSet == null)
             {
@@ -39,14 +42,9 @@ namespace ChilliCream.Tracing.Analyzer.Rules
                 throw new ArgumentNullException(nameof(eventSource));
             }
 
-            Type eventSourceType = eventSource.GetType();
-            FieldInfo field = eventSourceType.GetField("Log");
-
-            if (field == null || !field.IsStatic || !field.IsInitOnly ||
-                !field.FieldType.IsAssignableFrom(eventSourceType) || field.GetValue(null) == null)
+            if (!_namePattern.IsMatch(schema.ProviderName))
             {
-                return new Error(this, "Did not found a public readonly 'Log' field which is " +
-                    "static and holds an instance of its own type.");
+                return new Error(this, "The EventSource must have a valid name.");
             }
 
             return new Success(this);

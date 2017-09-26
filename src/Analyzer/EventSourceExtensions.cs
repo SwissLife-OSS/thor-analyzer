@@ -10,7 +10,8 @@ namespace ChilliCream.Tracing.Analyzer
         private const BindingFlags _bindings = BindingFlags.Instance | BindingFlags.DeclaredOnly |
             BindingFlags.InvokeMethod | BindingFlags.NonPublic | BindingFlags.Public;
 
-        public static MethodInfo GetMethodFromSchema(this EventSource eventSource, EventSchema schema)
+        public static MethodInfo GetMethodFromSchema(this EventSource eventSource,
+            EventSchema schema)
         {
             if (eventSource == null)
             {
@@ -21,8 +22,8 @@ namespace ChilliCream.Tracing.Analyzer
                 throw new ArgumentNullException(nameof(schema));
             }
 
-            return eventSource.GetType().GetMethods(_bindings).SingleOrDefault(m => m.IsEvent(schema.Id)) ??
-                eventSource.GetType().GetMethod(schema.TaskName, _bindings);
+            return eventSource.GetType().GetMethods(_bindings).SingleOrDefault(m =>
+                m.IsEvent(schema.Id)) ?? eventSource.GetType().GetMethod(schema.TaskName, _bindings);
         }
 
         private static bool IsEvent(this MethodInfo method, int eventId)

@@ -98,7 +98,8 @@ namespace ChilliCream.Tracing.Analyzer.Tests
 
             // assert
             throwException.ShouldThrow<ArgumentException>()
-                .Where(e => e.ParamName == "providerId" && e.Message.StartsWith(ExceptionMessages.ProviderIdMayNotBeEmpty))
+                .Where(e => e.ParamName == "providerId" && e.Message
+                    .StartsWith(ExceptionMessages.ProviderIdMayNotBeEmpty))
                 .Should()
                 .NotBeNull();
         }

@@ -9,7 +9,8 @@ namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
     {
         private WrongEventParameterOrderEventSource() { }
 
-        public static WrongEventParameterOrderEventSource Log = new WrongEventParameterOrderEventSource();
+        public static readonly WrongEventParameterOrderEventSource Log =
+            new WrongEventParameterOrderEventSource();
 
         [Event(1)]
         public void Foo(string foo, int bar)
