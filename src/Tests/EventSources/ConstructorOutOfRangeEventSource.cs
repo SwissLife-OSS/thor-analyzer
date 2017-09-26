@@ -8,6 +8,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
     {
         private ConstructorOutOfRangeEventSource(string test) { }
 
-        public static readonly ConstructorOutOfRangeEventSource Log = new ConstructorOutOfRangeEventSource("test");
+        public static readonly ConstructorOutOfRangeEventSource Log =
+            new ConstructorOutOfRangeEventSource("test");
     }
 }

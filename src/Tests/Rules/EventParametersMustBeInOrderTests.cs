@@ -21,7 +21,8 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
         //public void Apply_Error()
         //{
         //    // arrange
-        //    WrongEventParameterOrderEventSource eventSource = WrongEventParameterOrderEventSource.Log;
+        //    WrongEventParameterOrderEventSource eventSource =
+        //        WrongEventParameterOrderEventSource.Log;
         //    SchemaReader reader = new SchemaReader(eventSource);
         //    EventSourceSchema schema = reader.Read();
         //    IRuleSet ruleSet = new Mock<IRuleSet>().Object;
@@ -39,7 +40,8 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
         public void Apply_Success()
         {
             // arrange
-            CorrectEventParameterOrderEventSource eventSource = CorrectEventParameterOrderEventSource.Log;
+            CorrectEventParameterOrderEventSource eventSource =
+                CorrectEventParameterOrderEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
             EventSourceSchema schema = reader.Read();
             IRuleSet ruleSet = new Mock<IRuleSet>().Object;
@@ -53,11 +55,13 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             result.Should().BeOfType<Success>();
         }
 
-        [Fact(DisplayName = "Apply: Should return a success if event parameters were in order (related activity id)")]
+        [Fact(DisplayName = "Apply: Should return a success if event parameters were in order " +
+            "(related activity id)")]
         public void Apply_SuccessRelatedActivityId()
         {
             // arrange
-            CorrectEventParameterOrderWithRelatedActivityIdEventSource eventSource = CorrectEventParameterOrderWithRelatedActivityIdEventSource.Log;
+            CorrectEventParameterOrderWithRelatedActivityIdEventSource eventSource =
+                CorrectEventParameterOrderWithRelatedActivityIdEventSource.Log;
             SchemaReader reader = new SchemaReader(eventSource);
             EventSourceSchema schema = reader.Read();
             IRuleSet ruleSet = new Mock<IRuleSet>().Object;

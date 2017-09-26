@@ -90,7 +90,8 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
         public void Apply_LogFieldNoValue()
         {
             // arrange
-            LogFieldDoesNotHaveValueEventSource eventSource = new LogFieldDoesNotHaveValueEventSource();
+            LogFieldDoesNotHaveValueEventSource eventSource =
+                new LogFieldDoesNotHaveValueEventSource();
             SchemaReader reader = new SchemaReader(eventSource);
             EventSourceSchema schema = reader.Read();
             IRuleSet ruleSet = new Mock<IRuleSet>().Object;

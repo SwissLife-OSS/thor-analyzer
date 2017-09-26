@@ -23,7 +23,8 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             throwException.ShouldThrowNull("execute");
         }
 
-        [Fact(DisplayName = "ShouldThrow: Should throw an argument null exception for expectedParameterName")]
+        [Fact(DisplayName = "ShouldThrow: Should throw an argument null exception for " +
+            "expectedParameterName")]
         public void ShouldThrow_ExpectedParameterNameNull()
         {
             // arrange
@@ -98,11 +99,12 @@ namespace ChilliCream.Tracing.Analyzer.Tests
                 .NotBeNull();
         }
 
-#endregion
+        #endregion
 
-#region ShouldThrowArgumentNull
+        #region ShouldThrowArgumentNull
 
-        [Fact(DisplayName = "ShouldThrowArgumentNull: Should throw an argument null exception for source")]
+        [Fact(DisplayName = "ShouldThrowArgumentNull: Should throw an argument null exception for " +
+            "source")]
         public void ShouldThrowArgumentNull_ExecuteNull()
         {
             // arrange
@@ -116,7 +118,8 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             throwException.ShouldThrowNull("execute");
         }
 
-        [Fact(DisplayName = "ShouldThrowArgumentNull: Should throw an argument null exception for expectedParameterName")]
+        [Fact(DisplayName = "ShouldThrowArgumentNull: Should throw an argument null exception for " +
+            "expectedParameterName")]
         public void ShouldThrowArgumentNull_ExpectedParameterNameNull()
         {
             // arrange
@@ -191,6 +194,6 @@ namespace ChilliCream.Tracing.Analyzer.Tests
                 .NotBeNull();
         }
 
-#endregion
+        #endregion
     }
 }

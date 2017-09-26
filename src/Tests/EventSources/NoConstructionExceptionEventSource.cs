@@ -8,7 +8,8 @@ namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
     {
         private NoConstructionExceptionEventSource() { }
 
-        public static readonly NoConstructionExceptionEventSource Log = new NoConstructionExceptionEventSource();
+        public static readonly NoConstructionExceptionEventSource Log =
+            new NoConstructionExceptionEventSource();
 
         [Event(1)]
         public void Foo(string bar)

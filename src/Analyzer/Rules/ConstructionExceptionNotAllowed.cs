@@ -43,8 +43,10 @@ namespace ChilliCream.Tracing.Analyzer.Rules
 
             if (eventSource.ConstructionException != null)
             {
+                string[] details = new[] { eventSource.ConstructionException.Message };
+
                 return new Error(this, "An exception during creation of the event source occurred. " +
-                    "See details for exception message.", new [] { eventSource.ConstructionException.Message });
+                    "See details for exception message.", details);
             }
 
             return new Success(this);

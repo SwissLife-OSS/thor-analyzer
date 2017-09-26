@@ -61,9 +61,9 @@ namespace ChilliCream.Tracing.Analyzer
         /// Gets the event task.
         /// </summary>
         /// <remarks>
-        /// Events for a given provider can be given a group identifier called a Task that indicates the
-        /// broad area within the provider that the event pertains to (for example the Kernel provider has
-        /// Tasks for Process, Threads, etc). 
+        /// Events for a given provider can be given a group identifier called a Task that 
+        /// indicates the broad area within the provider that the event pertains to (for example 
+        /// the Kernel provider has Tasks for Process, Threads, etc). 
         /// </remarks>
         /// <value>The event task.</value>
         public EventTask Task { get; }
@@ -84,8 +84,9 @@ namespace ChilliCream.Tracing.Analyzer
         /// Gets the operation code.
         /// </summary>
         /// <remarks>
-        /// Each event has a Type identifier that indicates what kind of an event is being logged. Note that
-        /// providers are free to extend this set, so the id may not be just the value in <see cref="Opcode"/>.
+        /// Each event has a Type identifier that indicates what kind of an event is being logged. 
+        /// Note that providers are free to extend this set, so the id may not be just the value in 
+        /// <see cref="Opcode"/>.
         /// </remarks>
         /// <value>The operation code.</value>
         public EventOpcode Opcode { get; }

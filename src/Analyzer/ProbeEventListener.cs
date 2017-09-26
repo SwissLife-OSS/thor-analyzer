@@ -17,7 +17,8 @@ namespace ChilliCream.Tracing.Analyzer
     public class ProbeEventListener
         : EventListener
     {
-        private readonly ConcurrentQueue<EventWrittenEventArgs> _queue = new ConcurrentQueue<EventWrittenEventArgs>();
+        private readonly ConcurrentQueue<EventWrittenEventArgs> _queue =
+            new ConcurrentQueue<EventWrittenEventArgs>();
 
         /// <summary>
         /// A collection of ordered events which has been recorded during a session.
@@ -30,7 +31,7 @@ namespace ChilliCream.Tracing.Analyzer
             _queue.Enqueue(eventData);
         }
 
-#if NET461
+        #if NET461
 
         /// <summary>
         /// An event whhich is fired when an eventsource is successfully added to the listeners.
@@ -43,10 +44,10 @@ namespace ChilliCream.Tracing.Analyzer
             EventSourceCreated?.Invoke(this, new EventSourceCreatedEventArgs(eventSource));
         }
 
-#endif
+        #endif
     }
 
-#if NET461
+    #if NET461
 
     /// <summary>
     /// Provides data for the System.Diagnostics.Tracing.EventListener.EventSourceCreated event.
@@ -73,5 +74,5 @@ namespace ChilliCream.Tracing.Analyzer
         public EventSource EventSource { get; }
     }
 
-#endif
+    #endif
 }

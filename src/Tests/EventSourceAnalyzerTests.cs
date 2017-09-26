@@ -121,8 +121,10 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             report.HasErrors.Should().BeFalse();
 
             //int eventCount = new SchemaReader(eventSource).Read().Events.Count();
-            //int eventSourceRuleCount = analyzer.RuleSets.SelectMany(r => r.Rules.OfType<IEventSourceRule>()).Count();
-            //int eventRuleCount = analyzer.RuleSets.SelectMany(r => r.Rules.OfType<IEventRule>()).Count() * eventCount;
+            //int eventSourceRuleCount = analyzer.RuleSets.SelectMany(r => r.Rules
+            //    .OfType<IEventSourceRule>()).Count();
+            //int eventRuleCount = analyzer.RuleSets.SelectMany(r => r.Rules
+            //    .OfType<IEventRule>()).Count() * eventCount;
 
             //report.Should().HaveCount(eventSourceRuleCount + eventRuleCount);
             //report.All(r => r.GetType().IsAssignableFrom(typeof(Success))).Should().BeTrue();
@@ -142,8 +144,10 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             report.HasErrors.Should().BeFalse();
 
             //int eventCount = new SchemaReader(eventSource).Read().Events.Count();
-            //int eventSourceRuleCount = analyzer.RuleSets.SelectMany(r => r.Rules.OfType<IEventSourceRule>()).Count();
-            //int eventRuleCount = analyzer.RuleSets.SelectMany(r => r.Rules.OfType<IEventRule>()).Count() * eventCount;
+            //int eventSourceRuleCount = analyzer.RuleSets.SelectMany(r => r.Rules
+            //    .OfType<IEventSourceRule>()).Count();
+            //int eventRuleCount = analyzer.RuleSets.SelectMany(r => r.Rules
+            //    .OfType<IEventRule>()).Count() * eventCount;
 
             //report.Should().HaveCount(eventSourceRuleCount + eventRuleCount);
             //report.All(r => r.GetType().IsAssignableFrom(typeof(Success))).Should().BeTrue();
