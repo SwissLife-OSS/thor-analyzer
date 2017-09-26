@@ -30,3 +30,7 @@ Report report = analyzer.Inspect(eventSource);
 ```
 
 3. Check the report to see whats wrong
+
+## Compatibility
+
+This library supports in general .Net Stanedard 2.0. This means we support .Net 4.6.1 or higher and .Net Core 2.0 or higher.
