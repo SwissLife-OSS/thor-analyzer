@@ -9,7 +9,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
             : base ("ConstructionException", EventSourceSettings.Default, new [] { "odd", "even", "odd" })
         { }
 
-        public static ConstructionExceptionEventSource Log = new ConstructionExceptionEventSource();
+        public static readonly ConstructionExceptionEventSource Log = new ConstructionExceptionEventSource();
 
         [Event(1)]
         public void Foo(string bar)

@@ -8,7 +8,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
     {
         private EventNotWorkingEventSource() { }
 
-        public static EventNotWorkingEventSource Log = new EventNotWorkingEventSource();
+        public static readonly EventNotWorkingEventSource Log = new EventNotWorkingEventSource();
 
         [Event(1)]
         public void Foo(string bar)

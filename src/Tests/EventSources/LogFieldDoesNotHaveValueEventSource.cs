@@ -6,6 +6,6 @@ namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
     public sealed class LogFieldDoesNotHaveValueEventSource
         : EventSource
     {
-        public static LogFieldDoesNotHaveValueEventSource Log;
+        public static readonly LogFieldDoesNotHaveValueEventSource Log;
     }
 }

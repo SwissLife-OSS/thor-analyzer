@@ -8,7 +8,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
     {
         private MultipleEventsEventSource() { }
 
-        public static MultipleEventsEventSource Log = new MultipleEventsEventSource();
+        public static readonly MultipleEventsEventSource Log = new MultipleEventsEventSource();
 
         [Event(1)]
         public void Foo(string bar)

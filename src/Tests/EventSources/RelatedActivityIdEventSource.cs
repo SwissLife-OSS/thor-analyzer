@@ -9,7 +9,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
     {
         private RelatedActivityIdEventSource() { }
 
-        public static RelatedActivityIdEventSource Log = new RelatedActivityIdEventSource();
+        public static readonly RelatedActivityIdEventSource Log = new RelatedActivityIdEventSource();
 
         [Event(1)]
         public void First(string bar)

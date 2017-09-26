@@ -9,7 +9,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
     {
         private CorrectEventParameterOrderWithRelatedActivityIdEventSource() { }
 
-        public static CorrectEventParameterOrderWithRelatedActivityIdEventSource Log = new CorrectEventParameterOrderWithRelatedActivityIdEventSource();
+        public static readonly CorrectEventParameterOrderWithRelatedActivityIdEventSource Log = new CorrectEventParameterOrderWithRelatedActivityIdEventSource();
 
         [Event(1, Opcode = EventOpcode.Send)]
         public void Bar(Guid relatedActivityId, string foo, string bar)

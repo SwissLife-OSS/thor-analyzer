@@ -6,7 +6,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
     public sealed class InvalidNameEventSource
         : EventSource
     {
-        public readonly static InvalidNameEventSource Log = new InvalidNameEventSource();
+        public static readonly InvalidNameEventSource Log = new InvalidNameEventSource();
 
         private InvalidNameEventSource() { }
     }

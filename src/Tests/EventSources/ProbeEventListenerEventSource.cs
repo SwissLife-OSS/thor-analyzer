@@ -6,7 +6,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
     public sealed class ProbeEventListenerEventSource
        : EventSource
     {
-        public static ProbeEventListenerEventSource Log = new ProbeEventListenerEventSource();
+        public static readonly ProbeEventListenerEventSource Log = new ProbeEventListenerEventSource();
 
         [Event(1)]
         public void Foo(string foo)

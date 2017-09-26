@@ -14,7 +14,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             return new MustHaveStaticLogProperty(ruleSet);
         }
 
-        [Fact(DisplayName = "Apply: Should return an error because log field does not exist")]
+        [Fact(DisplayName = "Apply: Should return an error if log field does not exist")]
         public void Apply_NoLogField()
         {
             // arrange
@@ -32,7 +32,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             result.Should().BeOfType<Error>();
         }
 
-        [Fact(DisplayName = "Apply: Should return an error because the log field is not public")]
+        [Fact(DisplayName = "Apply: Should return an error if log field is not public")]
         public void Apply_LogFieldNotPublic()
         {
             // arrange
@@ -50,7 +50,25 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             result.Should().BeOfType<Error>();
         }
 
-        [Fact(DisplayName = "Apply: Should return an error because the log field is not static")]
+        [Fact(DisplayName = "Apply: Should return an error if log field is not readonly")]
+        public void Apply_LogFieldNotReadOnly()
+        {
+            // arrange
+            LogFieldNotReadOnlyEventSource eventSource = new LogFieldNotReadOnlyEventSource();
+            SchemaReader reader = new SchemaReader(eventSource);
+            EventSourceSchema schema = reader.Read();
+            IRuleSet ruleSet = new Mock<IRuleSet>().Object;
+            IEventSourceRule rule = CreateRule(ruleSet);
+
+            // act
+            IResult result = rule.Apply(schema, eventSource);
+
+            // assert
+            result.Should().NotBeNull();
+            result.Should().BeOfType<Error>();
+        }
+
+        [Fact(DisplayName = "Apply: Should return an error if log field is not static")]
         public void Apply_LogFieldNotStatic()
         {
             // arrange
@@ -68,7 +86,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             result.Should().BeOfType<Error>();
         }
 
-        [Fact(DisplayName = "Apply: Should return an error because the log field returns no value")]
+        [Fact(DisplayName = "Apply: Should return an error if log field returns no value")]
         public void Apply_LogFieldNoValue()
         {
             // arrange
