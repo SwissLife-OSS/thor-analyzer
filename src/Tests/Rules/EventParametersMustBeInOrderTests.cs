@@ -55,8 +55,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             result.Should().BeOfType<Success>();
         }
 
-        [Fact(DisplayName = "Apply: Should return a success if event parameters were in order " +
-            "(related activity id)")]
+        [Fact(DisplayName = "Apply: Should return a success if event parameters were in order (related activity id)")]
         public void Apply_SuccessRelatedActivityId()
         {
             // arrange

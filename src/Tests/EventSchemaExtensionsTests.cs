@@ -9,8 +9,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests
 {
     public class EventSchemaExtensionsTests
     {
-        [Fact(DisplayName = "HasRelatedActivityId: Should throw an argument null exception for " +
-            "schema")]
+        [Fact(DisplayName = "HasRelatedActivityId: Should throw an argument null exception for schema")]
         public void HasRelatedActivityId_SchemaNull()
         {
             // arrange
@@ -24,8 +23,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             throwException.ShouldThrowNull("schema");
         }
 
-        [Fact(DisplayName = "HasRelatedActivityId: Should throw an argument null exception for " +
-            "eventParameters")]
+        [Fact(DisplayName = "HasRelatedActivityId: Should throw an argument null exception for eventParameters")]
         public void HasRelatedActivityId_EventParametersNull()
         {
             // arrange
@@ -41,8 +39,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             throwException.ShouldThrowNull("parameters");
         }
 
-        [Fact(DisplayName = "HasRelatedActivityId: Should return false because eventParameters " +
-            "length is 0")]
+        [Fact(DisplayName = "HasRelatedActivityId: Should return false because eventParameters length is 0")]
         public void HasRelatedActivityId_EventParametersEmpty()
         {
             // arrange
@@ -59,8 +56,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             result.Should().BeFalse();
         }
 
-        [Fact(DisplayName = "HasRelatedActivityId: Should return false because first parameter is " +
-            "not Guid")]
+        [Fact(DisplayName = "HasRelatedActivityId: Should return false because first parameter is not Guid")]
         public void HasRelatedActivityId_FirstParameterNotGuid()
         {
             // arrange
@@ -77,8 +73,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             result.Should().BeFalse();
         }
 
-        [Fact(DisplayName = "HasRelatedActivityId: Should return false because first parameter is " +
-            "not named relatedActivityId")]
+        [Fact(DisplayName = "HasRelatedActivityId: Should return false because first parameter is not named relatedActivityId")]
         public void HasRelatedActivityId_FirstParameterNotRelatedId()
         {
             // arrange
@@ -95,8 +90,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             result.Should().BeFalse();
         }
 
-        [Fact(DisplayName = "HasRelatedActivityId: Should return false because Opcode is not Send " +
-            "or Receive")]
+        [Fact(DisplayName = "HasRelatedActivityId: Should return false because Opcode is not Send or Receive")]
         public void HasRelatedActivityId_FirstParameterWrongOpcode()
         {
             // arrange
