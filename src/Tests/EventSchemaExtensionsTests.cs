@@ -38,7 +38,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests
             Action throwException = () => schema.HasRelatedActivityId(eventParameters);
 
             // assert
-            throwException.ShouldThrowNull("eventParameters");
+            throwException.ShouldThrowNull("parameters");
         }
 
         [Fact(DisplayName = "HasRelatedActivityId: Should return false because eventParameters " +
