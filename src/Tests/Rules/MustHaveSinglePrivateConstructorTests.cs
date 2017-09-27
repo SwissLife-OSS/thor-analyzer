@@ -87,8 +87,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             result.Should().BeOfType<Error>();
         }
 
-        [Fact(DisplayName = "Apply: Should return an error if the constructor has one or more " +
-            "parameters")]
+        [Fact(DisplayName = "Apply: Should return an error if the constructor has one or more parameters")]
         public void Apply_ConstructorOutOfRange()
         {
             // arrange
@@ -106,8 +105,7 @@ namespace ChilliCream.Tracing.Analyzer.Tests.Rules
             result.Should().BeOfType<Error>();
         }
 
-        [Fact(DisplayName = "Apply: Should return a success if only one private constructor " +
-            "without parameters exist")]
+        [Fact(DisplayName = "Apply: Should return a success if only one private constructor without parameters exist")]
         public void Apply_Success()
         {
             // arrange
