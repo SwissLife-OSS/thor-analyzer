@@ -1,7 +1,12 @@
 ﻿using System;
-using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Reflection;
+
+#if LEGACY
+using Microsoft.Diagnostics.Tracing;
+#else
+using System.Diagnostics.Tracing;
+#endif
 
 namespace ChilliCream.Tracing.Analyzer
 {

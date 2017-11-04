@@ -1,5 +1,10 @@
 ﻿using System.Collections.Generic;
+
+#if LEGACY
+using Microsoft.Diagnostics.Tracing;
+#else
 using System.Diagnostics.Tracing;
+#endif
 
 namespace ChilliCream.Tracing.Analyzer.Rules
 {

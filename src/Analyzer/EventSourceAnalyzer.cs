@@ -1,8 +1,13 @@
 ﻿using ChilliCream.Tracing.Analyzer.Rules;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using System.Linq;
+
+#if LEGACY
+using Microsoft.Diagnostics.Tracing;
+#else
+using System.Diagnostics.Tracing;
+#endif
 
 namespace ChilliCream.Tracing.Analyzer
 {
