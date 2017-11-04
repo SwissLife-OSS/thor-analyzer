@@ -4,7 +4,7 @@
   <Import Project="..\Version.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net47;net461;net46;net451</TargetFrameworks>
+    <TargetFrameworks>net46;net451</TargetFrameworks>
     <PackageId>ChilliCream.Tracing.Analyzer.Legacy</PackageId>
     <AssemblyName>ChilliCream.Tracing.Analyzer.Legacy</AssemblyName>
     <RootNamespace>ChilliCream.Tracing.Analyzer</RootNamespace>
