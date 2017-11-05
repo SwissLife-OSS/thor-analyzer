@@ -25,7 +25,7 @@ Install-Package ChilliCream.Tracing.Analyzer.Legacy
 
 ### Basic Example
 
-After installing the package of our choice, we can start writing code. The simplest way is the following tercet.
+This example shows a simple tercet.
 
 ```csharp
 MyCustomEventSource eventSource = new MyCustomEventSource();
@@ -33,9 +33,11 @@ EventSourceAnalyzer analyzer = new EventSourceAnalyzer();
 Report report = analyzer.Inspect(eventSource);
 ```
 
+The report contains all the important information we need. If we want to know whether the event schema contains any errors, we dan do so by checking the `HasErrors` property.
+
 ### Automated Test Example
 
-If you are familiar with *xunit* see how event sources can be tested automatically. Works with other test frameworks as well of course.
+This example shows how to automate the analysis of event sources. For this example we used *xunit*, but any other test framework will work pretty much the same.
 
 ```csharp
 [Fact(DisplayName = "Should not contain any error")]
@@ -55,4 +57,4 @@ public void Analyze()
 
 ## Checkout the EventSourceGenerator
 
-In most scenarios we recommend to use the `ChilliCream.Tracing.Generator` to generate event sources automatically. Thus, the critical parts are generated in an efficient way by the generator. Click [here](https://github.com/ChilliCream/EventSourceGenerator) to get more information about the *EventSourceGenerator*.
+In most scenarios we recommend to use the `ChilliCream.Tracing.Generator` aka `esgen` to generate event sources automatically. Thus, the critical parts are generated in an efficient way by the generator. Click [here](https://github.com/ChilliCream/EventSourceGenerator) to get more information about the *EventSourceGenerator*.
