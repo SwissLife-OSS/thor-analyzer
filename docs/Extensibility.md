@@ -1,6 +1,6 @@
-# Customization
+# Extensibility
 
-The `EventSourceAnalyzer` is designed with customization in mind. Creating your own rule sets and rules is easy. Just add your custom rule sets or completely replace the default ones.
+The `EventSourceAnalyzer` is designed with extensibility in mind. Creating your own rule sets and rules is easy. Just add your custom rule sets or completely replace the default ones.
 
 ## Add custom rule sets
 
