@@ -13,7 +13,7 @@ In summary, can be stated that newer projects using the `System.Diagnostics.Trac
 Install-Package ChilliCream.Tracing.Analyzer
 ```
 
-Therefore, older projects using the `Microsoft.Diagnostics.Tracing` namspace should install the `ChilliCream.Tracing.Analyzer.Legacy` package. See the following Powershell script.
+Therefore, older projects using the `Microsoft.Diagnostics.Tracing` namespace should install the `ChilliCream.Tracing.Analyzer.Legacy` package. See the following Powershell script.
 
 ```powershell
 Install-Package ChilliCream.Tracing.Analyzer.Legacy
