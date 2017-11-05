@@ -1,4 +1,4 @@
-# ThorAnalyzer
+# Thor Analyzer
 [![release](https://img.shields.io/github/release/ChilliCream/thor-analyzer.svg)](https://github.com/ChilliCream/thor-analyzer/releases) [![package](https://img.shields.io/nuget/v/Thor.Analyzer.svg)](https://www.nuget.org/packages/Thor.Analyzer) [![license](https://img.shields.io/github/license/ChilliCream/thor-analyzer.svg)](https://github.com/ChilliCream/thor-analyzer/blob/master/LICENSE) [![build](https://img.shields.io/appveyor/ci/rstaib/thor-analyzer/master.svg)](https://ci.appveyor.com/project/rstaib/thor-analyzer) [![tests](https://img.shields.io/appveyor/tests/rstaib/thor-analyzer/master.svg)](https://ci.appveyor.com/project/rstaib/thor-analyzer) [![coverage](https://img.shields.io/coveralls/ChilliCream/thor-analyzer.svg)](https://coveralls.io/github/ChilliCream/thor-analyzer?branch=master)
 
 An analyzer for *ETW* (Event Tracing for Windows) event sources which helps reveal frequent mistakes and also guides in best practices rules.
