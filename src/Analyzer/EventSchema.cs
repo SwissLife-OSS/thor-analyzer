@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 
-namespace ChilliCream.Tracing.Analyzer
+#if LEGACY
+using Microsoft.Diagnostics.Tracing;
+#else
+using System.Diagnostics.Tracing;
+#endif
+
+namespace Thor.Analyzer
 {
     /// <summary>
     /// Represents an <see cref="EventSource"/> event schema.

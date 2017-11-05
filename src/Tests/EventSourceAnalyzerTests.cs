@@ -1,12 +1,12 @@
-﻿using ChilliCream.Tracing.Analyzer.Rules;
-using ChilliCream.Tracing.Analyzer.Tests.EventSources;
+﻿using Thor.Analyzer.Rules;
+using Thor.Analyzer.Tests.EventSources;
 using FluentAssertions;
 using Moq;
 using System;
 using System.Diagnostics.Tracing;
 using Xunit;
 
-namespace ChilliCream.Tracing.Analyzer.Tests
+namespace Thor.Analyzer.Tests
 {
     public class SuccessTests
     {

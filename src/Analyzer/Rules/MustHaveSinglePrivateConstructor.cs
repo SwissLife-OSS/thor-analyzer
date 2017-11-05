@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Reflection;
 
-namespace ChilliCream.Tracing.Analyzer.Rules
+#if LEGACY
+using Microsoft.Diagnostics.Tracing;
+#else
+using System.Diagnostics.Tracing;
+#endif
+
+namespace Thor.Analyzer.Rules
 {
     /// <summary>
     /// A rule which probes for a single private constructor.

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ChilliCream.Tracing.Analyzer.Rules
+namespace Thor.Analyzer.Rules
 {
     /// <summary>
     /// A rule set which contains best practice rules.

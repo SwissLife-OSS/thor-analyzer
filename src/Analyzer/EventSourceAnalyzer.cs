@@ -1,10 +1,15 @@
-﻿using ChilliCream.Tracing.Analyzer.Rules;
+﻿using Thor.Analyzer.Rules;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using System.Linq;
 
-namespace ChilliCream.Tracing.Analyzer
+#if LEGACY
+using Microsoft.Diagnostics.Tracing;
+#else
+using System.Diagnostics.Tracing;
+#endif
+
+namespace Thor.Analyzer
 {
     /// <summary>
     /// An event provider (<see cref="EventSource"/>) analyzer that generates reports.

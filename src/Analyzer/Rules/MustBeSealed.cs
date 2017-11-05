@@ -1,7 +1,12 @@
 ﻿using System;
-using System.Diagnostics.Tracing;
 
-namespace ChilliCream.Tracing.Analyzer.Rules
+#if LEGACY
+using Microsoft.Diagnostics.Tracing;
+#else
+using System.Diagnostics.Tracing;
+#endif
+
+namespace Thor.Analyzer.Rules
 {
     /// <summary>
     /// A rule which verifies if the event source is sealed.

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 
-namespace ChilliCream.Tracing.Analyzer
+namespace Thor.Analyzer
 {
     /// <summary>
     /// A cache for event provider schemas.

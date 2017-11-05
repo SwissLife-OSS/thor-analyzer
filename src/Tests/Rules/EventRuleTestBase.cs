@@ -1,11 +1,11 @@
-﻿using ChilliCream.Tracing.Analyzer.Rules;
+﻿using Thor.Analyzer.Rules;
 using FluentAssertions;
 using Moq;
 using System;
 using System.Diagnostics.Tracing;
 using Xunit;
 
-namespace ChilliCream.Tracing.Analyzer.Tests.Rules
+namespace Thor.Analyzer.Tests.Rules
 {
     public abstract class EventRuleTestBase<TRule>
         where TRule : IEventRule

@@ -1,9 +1,14 @@
 ﻿using System;
-using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Reflection;
 
-namespace ChilliCream.Tracing.Analyzer.Rules
+#if LEGACY
+using Microsoft.Diagnostics.Tracing;
+#else
+using System.Diagnostics.Tracing;
+#endif
+
+namespace Thor.Analyzer.Rules
 {
     /// <summary>
     /// A rule which checks if the <see cref="EventSource"/> matches the schema.

@@ -1,15 +1,18 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
+
+#if LEGACY
+using Microsoft.Diagnostics.Tracing;
+#else
 using System.Diagnostics.Tracing;
-
-#if NET461
-
-using System;
-using System.Collections.ObjectModel;
-
 #endif
 
-namespace ChilliCream.Tracing.Analyzer
+#if NET461 && !LEGACY
+using System;
+using System.Collections.ObjectModel;
+#endif
+
+namespace Thor.Analyzer
 {
     /// <summary>
     /// An event listener to probe events.
@@ -31,7 +34,7 @@ namespace ChilliCream.Tracing.Analyzer
             _queue.Enqueue(eventData);
         }
 
-        #if NET461
+        #if NET461 && !LEGACY
 
         /// <summary>
         /// An event whhich is fired when an eventsource is successfully added to the listeners.
@@ -47,7 +50,7 @@ namespace ChilliCream.Tracing.Analyzer
         #endif
     }
 
-    #if NET461
+    #if NET461 && !LEGACY
 
     /// <summary>
     /// Provides data for the System.Diagnostics.Tracing.EventListener.EventSourceCreated event.

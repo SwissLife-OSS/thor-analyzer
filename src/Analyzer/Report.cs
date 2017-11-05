@@ -1,9 +1,9 @@
-﻿using ChilliCream.Tracing.Analyzer.Rules;
+﻿using Thor.Analyzer.Rules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ChilliCream.Tracing.Analyzer
+namespace Thor.Analyzer
 {
     /// <summary>
     /// A report which summarizes the rules.

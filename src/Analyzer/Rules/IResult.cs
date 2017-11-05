@@ -1,4 +1,4 @@
-﻿namespace ChilliCream.Tracing.Analyzer.Rules
+﻿namespace Thor.Analyzer.Rules
 {
     /// <summary>
     /// Describes a result.

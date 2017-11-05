@@ -1,17 +1,17 @@
 <Project>
 
   <PropertyGroup>
-    <Product>ChilliCream EventSource Analyzer</Product>
+    <Product>Thor Analyzer</Product>
     <Authors>ChilliCream authors and contributors</Authors>
     <Company>ChilliCream</Company>
     <Copyright>Copyright © 2017 ChilliCream (Michael &amp; Rafael Staib)</Copyright>
-    <PackageLicenseUrl>https://github.com/ChilliCream/EventSourceAnalyzer/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/ChilliCream/EventSourceAnalyzer</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/ChilliCream/EventSourceAnalyzer</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/ChilliCream/thor-analyzer/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/ChilliCream/thor-analyzer</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ChilliCream/thor-analyzer</RepositoryUrl>
     <PackageTags>Analyzer, ETW, EventSource, Logging, Tracing</PackageTags>
-    <PackageReleaseNotes>Release notes: https://github.com/ChilliCream/EventSourceAnalyzer/releases/$(PackageVersion)</PackageReleaseNotes>
+    <PackageReleaseNotes>Release notes: https://github.com/ChilliCream/thor-analyzer/releases/$(PackageVersion)</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageIconUrl>https://github.com/ChilliCream/EventSourceAnalyzer/raw/master/icon.png</PackageIconUrl>
+    <PackageIconUrl>https://github.com/ChilliCream/thor-analyzer/raw/master/icon.png</PackageIconUrl>
     <RepositoryType>GitHub</RepositoryType>
   </PropertyGroup>
 

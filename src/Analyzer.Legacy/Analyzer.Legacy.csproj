@@ -1,0 +1,74 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\Package.props" />
+  <Import Project="..\Version.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>net46;net451</TargetFrameworks>
+    <PackageId>Thor.Analyzer.Legacy</PackageId>
+    <AssemblyName>Thor.Analyzer.Legacy</AssemblyName>
+    <RootNamespace>Thor.Analyzer</RootNamespace>
+    <Description>Provides an ETW EventSource analyzer build for 'Microsoft.Diagnostics.Tracing'.</Description>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Thor.Analyzer.Legacy.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>Full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;LEGACY</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>TRACE;LEGACY</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Analyzer\AssemblyAttributes.cs" Link="AssemblyAttributes.cs" />
+    <Compile Include="..\Analyzer\EventSchema.cs" Link="EventSchema.cs" />
+    <Compile Include="..\Analyzer\EventSchemaExtensions.cs" Link="EventSchemaExtensions.cs" />
+    <Compile Include="..\Analyzer\EventSourceAnalyzer.cs" Link="EventSourceAnalyzer.cs" />
+    <Compile Include="..\Analyzer\EventSourceExtensions.cs" Link="EventSourceExtensions.cs" />
+    <Compile Include="..\Analyzer\EventSourceSchema.cs" Link="EventSourceSchema.cs" />
+    <Compile Include="..\Analyzer\ExceptionMessages.cs" Link="ExceptionMessages.cs" />
+    <Compile Include="..\Analyzer\ProbeEventListener.cs" Link="ProbeEventListener.cs" />
+    <Compile Include="..\Analyzer\Report.cs" Link="Report.cs" />
+    <Compile Include="..\Analyzer\Rules\BestPracticeRuleSet.cs" Link="Rules\BestPracticeRuleSet.cs" />
+    <Compile Include="..\Analyzer\Rules\ConstructionExceptionNotAllowed.cs" Link="Rules\ConstructionExceptionNotAllowed.cs" />
+    <Compile Include="..\Analyzer\Rules\DuplicateEventIdsNotAllowed.cs" Link="Rules\DuplicateEventIdsNotAllowed.cs" />
+    <Compile Include="..\Analyzer\Rules\Error.cs" Link="Rules\Error.cs" />
+    <Compile Include="..\Analyzer\Rules\EventMustBeInvokable.cs" Link="Rules\EventMustBeInvokable.cs" />
+    <Compile Include="..\Analyzer\Rules\EventMustBeInvokableWithDefaults.cs" Link="Rules\EventMustBeInvokableWithDefaults.cs" />
+    <Compile Include="..\Analyzer\Rules\EventParametersMustBeInOrder.cs" Link="Rules\EventParametersMustBeInOrder.cs" />
+    <Compile Include="..\Analyzer\Rules\IEventRule.cs" Link="Rules\IEventRule.cs" />
+    <Compile Include="..\Analyzer\Rules\IEventSourceRule.cs" Link="Rules\IEventSourceRule.cs" />
+    <Compile Include="..\Analyzer\Rules\IResult.cs" Link="Rules\IResult.cs" />
+    <Compile Include="..\Analyzer\Rules\IRule.cs" Link="Rules\IRule.cs" />
+    <Compile Include="..\Analyzer\Rules\IRuleSet.cs" Link="Rules\IRuleSet.cs" />
+    <Compile Include="..\Analyzer\Rules\MustBeSealed.cs" Link="Rules\MustBeSealed.cs" />
+    <Compile Include="..\Analyzer\Rules\MustHaveSinglePrivateConstructor.cs" Link="Rules\MustHaveSinglePrivateConstructor.cs" />
+    <Compile Include="..\Analyzer\Rules\MustHaveStaticLogProperty.cs" Link="Rules\MustHaveStaticLogProperty.cs" />
+    <Compile Include="..\Analyzer\Rules\MustHaveValidName.cs" Link="Rules\MustHaveValidName.cs" />
+    <Compile Include="..\Analyzer\Rules\RequiredRuleSet.cs" Link="Rules\RequiredRuleSet.cs" />
+    <Compile Include="..\Analyzer\Rules\Success.cs" Link="Rules\Success.cs" />
+    <Compile Include="..\Analyzer\SchemaCache.cs" Link="SchemaCache.cs" />
+    <Compile Include="..\Analyzer\SchemaReader.cs" Link="SchemaReader.cs" />
+    <Compile Include="..\Analyzer\TypeExtensions.cs" Link="TypeExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Diagnostics.Tracing.EventSource.Redist" Version="1.1.28" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Rules\" />
+  </ItemGroup>
+
+</Project>

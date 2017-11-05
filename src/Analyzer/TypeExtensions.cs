@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace ChilliCream.Tracing.Analyzer
+namespace Thor.Analyzer
 {
     internal static class TypeExtensions
     {

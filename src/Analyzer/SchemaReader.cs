@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace ChilliCream.Tracing.Analyzer
+#if LEGACY
+using Microsoft.Diagnostics.Tracing;
+#else
+using System.Diagnostics.Tracing;
+#endif
+
+namespace Thor.Analyzer
 {
     /// <summary>
     /// A schema reader for event providers which parses the ETW manifest

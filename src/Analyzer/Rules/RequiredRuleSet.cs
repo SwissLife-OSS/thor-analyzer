@@ -1,7 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 
-namespace ChilliCream.Tracing.Analyzer.Rules
+#if LEGACY
+using Microsoft.Diagnostics.Tracing;
+#else
+using System.Diagnostics.Tracing;
+#endif
+
+namespace Thor.Analyzer.Rules
 {
     /// <summary>
     /// A rule set which contains rules for the vitality of the <see cref="EventSource"/>.

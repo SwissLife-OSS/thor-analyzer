@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.Tracing;
 
-namespace ChilliCream.Tracing.Analyzer.Tests.EventSources
+namespace Thor.Analyzer.Tests.EventSources
 {
     public sealed class ConstructionExceptionEventSource
         : EventSource

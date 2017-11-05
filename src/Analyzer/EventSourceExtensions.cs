@@ -1,9 +1,14 @@
 ﻿using System;
-using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Reflection;
 
-namespace ChilliCream.Tracing.Analyzer
+#if LEGACY
+using Microsoft.Diagnostics.Tracing;
+#else
+using System.Diagnostics.Tracing;
+#endif
+
+namespace Thor.Analyzer
 {
     internal static class EventSourceExtensions
     {

@@ -1,8 +1,13 @@
 ﻿using System;
-using System.Diagnostics.Tracing;
 using System.Reflection;
 
-namespace ChilliCream.Tracing.Analyzer.Rules
+#if LEGACY
+using Microsoft.Diagnostics.Tracing;
+#else
+using System.Diagnostics.Tracing;
+#endif
+
+namespace Thor.Analyzer.Rules
 {
     /// <summary>
     /// A rule which probes for missing <c>Log</c> properties.
