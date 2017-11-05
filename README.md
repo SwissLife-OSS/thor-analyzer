@@ -5,7 +5,7 @@ An analyzer for *ETW* (Event Tracing for Windows) event sources which helps reve
 
 ## Getting Started
 
-Before we start we have to decide which package would be the right choise for our project. If we work with the `System.Diagnostics.Tracing` namespace in combination with *.Net* 4.6.1 or higher, we might be well adviced by using the `ChilliCream.Tracing.Analyzer` package. But if we use instead the `Microsoft.Diagnostics.Tracing` namespace in combination with *.Net* 4.5.1 or higher, we should go for the `ChilliCream.Tracing.Analyzer.Legacy` package.
+Before we start we have to decide which package would be the right choice for our project. If we work with the `System.Diagnostics.Tracing` namespace in combination with *.Net* 4.6.1 or higher, we might be well adviced by using the `ChilliCream.Tracing.Analyzer` package. But if we use instead the `Microsoft.Diagnostics.Tracing` namespace in combination with *.Net* 4.5.1 or higher, we should go for the `ChilliCream.Tracing.Analyzer.Legacy` package.
 
 In summary, can be stated that newer projects using the `System.Diagnostics.Tracing` namespace should install the `ChilliCream.Tracing.Analyzer` package. See the following Powershell script.
 
