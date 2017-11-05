@@ -8,7 +8,7 @@ using Microsoft.Diagnostics.Tracing;
 using System.Diagnostics.Tracing;
 #endif
 
-namespace ChilliCream.Tracing.Analyzer.Rules
+namespace Thor.Analyzer.Rules
 {
     /// <summary>
     /// A rule which checks if the <see cref="EventSource"/> matches the schema.

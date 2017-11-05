@@ -6,7 +6,7 @@ using Microsoft.Diagnostics.Tracing;
 using System.Diagnostics.Tracing;
 #endif
 
-namespace ChilliCream.Tracing.Analyzer.Rules
+namespace Thor.Analyzer.Rules
 {
     /// <summary>
     /// A rule set which contains rules for the vitality of the <see cref="EventSource"/>.

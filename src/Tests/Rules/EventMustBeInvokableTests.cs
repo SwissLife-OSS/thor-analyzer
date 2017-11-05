@@ -1,11 +1,11 @@
-﻿using ChilliCream.Tracing.Analyzer.Rules;
-using ChilliCream.Tracing.Analyzer.Tests.EventSources;
+﻿using Thor.Analyzer.Rules;
+using Thor.Analyzer.Tests.EventSources;
 using FluentAssertions;
 using Moq;
 using System.Linq;
 using Xunit;
 
-namespace ChilliCream.Tracing.Analyzer.Tests.Rules
+namespace Thor.Analyzer.Tests.Rules
 {
     public class EventMustBeInvokableTests
         : EventRuleTestBase<EventMustBeInvokable>

@@ -1,5 +1,5 @@
-# EventSourceAnalyzer
-[![release](https://img.shields.io/github/release/ChilliCream/EventSourceAnalyzer.svg)](https://github.com/ChilliCream/EventSourceAnalyzer/releases) [![package](https://img.shields.io/nuget/v/ChilliCream.Tracing.Analyzer.svg)](https://www.nuget.org/packages/ChilliCream.Tracing.Analyzer) [![license](https://img.shields.io/github/license/ChilliCream/EventSourceAnalyzer.svg)](https://github.com/ChilliCream/EventSourceAnalyzer/blob/master/LICENSE) [![build](https://img.shields.io/appveyor/ci/rstaib/EventSourceAnalyzer-322tu/master.svg)](https://ci.appveyor.com/project/rstaib/eventsourceanalyzer-322tu) [![tests](https://img.shields.io/appveyor/tests/rstaib/EventSourceAnalyzer-322tu/master.svg)](https://ci.appveyor.com/project/rstaib/eventsourceanalyzer-322tu) [![coverage](https://img.shields.io/coveralls/ChilliCream/EventSourceAnalyzer.svg)](https://coveralls.io/github/ChilliCream/EventSourceAnalyzer?branch=master)
+# ThorAnalyzer
+[![release](https://img.shields.io/github/release/ChilliCream/thor-analyzer.svg)](https://github.com/ChilliCream/thor-analyzer/releases) [![package](https://img.shields.io/nuget/v/Thor.Analyzer.svg)](https://www.nuget.org/packages/Thor.Analyzer) [![license](https://img.shields.io/github/license/ChilliCream/thor-analyzer.svg)](https://github.com/ChilliCream/thor-analyzer/blob/master/LICENSE) [![build](https://img.shields.io/appveyor/ci/rstaib/thor-analyzer/master.svg)](https://ci.appveyor.com/project/rstaib/thor-analyzer) [![tests](https://img.shields.io/appveyor/tests/rstaib/thor-analyzer/master.svg)](https://ci.appveyor.com/project/rstaib/thor-analyzer) [![coverage](https://img.shields.io/coveralls/ChilliCream/thor-analyzer.svg)](https://coveralls.io/github/ChilliCream/thor-analyzer?branch=master)
 
 An analyzer for *ETW* (Event Tracing for Windows) event sources which helps reveal frequent mistakes and also guides in best practices rules.
 
@@ -9,18 +9,18 @@ Getting started in two steps. Install the *NuGet* package and start writing code
 
 ### Install Package
 
-Before we start we have to decide which package would be the right choice for our project. If we work with the `System.Diagnostics.Tracing` namespace in combination with *.Net* 4.6.1 or higher, we might be well adviced by using the `ChilliCream.Tracing.Analyzer` package. But if we use the `Microsoft.Diagnostics.Tracing` namespace in combination with *.Net* 4.5.1 or higher instead, we should choose the `ChilliCream.Tracing.Analyzer.Legacy` package.
+Before we start we have to decide which package would be the right choice for our project. If we work with the `System.Diagnostics.Tracing` namespace in combination with *.Net* 4.6.1 or higher, we might be well adviced by using the `Thor.Analyzer` package. But if we use the `Microsoft.Diagnostics.Tracing` namespace in combination with *.Net* 4.5.1 or higher instead, we should choose the `Thor.Analyzer.Legacy` package.
 
-In summary, can be stated that newer projects using the `System.Diagnostics.Tracing` namespace should install the `ChilliCream.Tracing.Analyzer` package. See the following Powershell script.
+In summary, can be stated that newer projects using the `System.Diagnostics.Tracing` namespace should install the `Thor.Analyzer` package. See the following Powershell script.
 
 ```powershell
-Install-Package ChilliCream.Tracing.Analyzer
+Install-Package Thor.Analyzer
 ```
 
-Therefore, older projects using the `Microsoft.Diagnostics.Tracing` namespace should install the `ChilliCream.Tracing.Analyzer.Legacy` package. See the following Powershell script.
+Therefore, older projects using the `Microsoft.Diagnostics.Tracing` namespace should install the `Thor.Analyzer.Legacy` package. See the following Powershell script.
 
 ```powershell
-Install-Package ChilliCream.Tracing.Analyzer.Legacy
+Install-Package Thor.Analyzer.Legacy
 ```
 
 ### Basic Example
@@ -37,7 +37,7 @@ The report contains all the important information we need. If we want to know wh
 
 ### Automated Test Example
 
-This example shows how to automate the analysis of event sources. For this example we used *xunit*, but any other test framework will work pretty much the same.
+This example shows how to automate the analysis of event sources. For this example we used *xUnit*, but any other test framework will work pretty much the same.
 
 ```csharp
 [Fact(DisplayName = "Should not contain any error")]
@@ -57,4 +57,4 @@ public void Analyze()
 
 ## Checkout the EventSourceGenerator
 
-In most scenarios we recommend to use the `ChilliCream.Tracing.Generator` aka `esgen` to generate event sources automatically. Thus, the critical parts are generated in an efficient way by the generator. Click [here](https://github.com/ChilliCream/EventSourceGenerator) to get more information about the *EventSourceGenerator*.
+In most scenarios we recommend to use the `Thor Generator` to generate event sources automatically. Thus, the critical parts are generated in an efficient way by the generator. Click [here](https://github.com/ChilliCream/thor-generator) to get more information about the *ThorGenerator*.

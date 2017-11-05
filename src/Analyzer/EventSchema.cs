@@ -7,7 +7,7 @@ using Microsoft.Diagnostics.Tracing;
 using System.Diagnostics.Tracing;
 #endif
 
-namespace ChilliCream.Tracing.Analyzer
+namespace Thor.Analyzer
 {
     /// <summary>
     /// Represents an <see cref="EventSource"/> event schema.

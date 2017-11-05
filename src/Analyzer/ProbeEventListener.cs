@@ -12,7 +12,7 @@ using System;
 using System.Collections.ObjectModel;
 #endif
 
-namespace ChilliCream.Tracing.Analyzer
+namespace Thor.Analyzer
 {
     /// <summary>
     /// An event listener to probe events.

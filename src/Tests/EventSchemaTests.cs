@@ -2,7 +2,7 @@
 using System.Diagnostics.Tracing;
 using Xunit;
 
-namespace ChilliCream.Tracing.Analyzer.Tests
+namespace Thor.Analyzer.Tests
 {
     public class EventSchemaTests
     {

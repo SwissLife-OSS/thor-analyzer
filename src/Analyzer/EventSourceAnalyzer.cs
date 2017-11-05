@@ -1,4 +1,4 @@
-﻿using ChilliCream.Tracing.Analyzer.Rules;
+﻿using Thor.Analyzer.Rules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using Microsoft.Diagnostics.Tracing;
 using System.Diagnostics.Tracing;
 #endif
 
-namespace ChilliCream.Tracing.Analyzer
+namespace Thor.Analyzer
 {
     /// <summary>
     /// An event provider (<see cref="EventSource"/>) analyzer that generates reports.

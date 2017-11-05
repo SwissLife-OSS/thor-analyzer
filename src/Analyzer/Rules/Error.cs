@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ChilliCream.Tracing.Analyzer.Rules
+namespace Thor.Analyzer.Rules
 {
     /// <summary>
     /// A result that represents an error status for a rule.

@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using System.Diagnostics.Tracing;
 
-namespace ChilliCream.Tracing.Analyzer.Tests
+namespace Thor.Analyzer.Tests
 {
     internal static class EventSchemaExtensions
     {

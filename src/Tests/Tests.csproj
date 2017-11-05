@@ -5,8 +5,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <IsPackable>false</IsPackable>
-    <AssemblyName>ChilliCream.Tracing.Analyzer.Tests</AssemblyName>
-    <RootNamespace>ChilliCream.Tracing.Analyzer.Tests</RootNamespace>
+    <AssemblyName>Thor.Analyzer.Tests</AssemblyName>
+    <RootNamespace>Thor.Analyzer.Tests</RootNamespace>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 

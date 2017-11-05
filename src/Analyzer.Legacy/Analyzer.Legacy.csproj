@@ -5,11 +5,11 @@
 
   <PropertyGroup>
     <TargetFrameworks>net46;net451</TargetFrameworks>
-    <PackageId>ChilliCream.Tracing.Analyzer.Legacy</PackageId>
-    <AssemblyName>ChilliCream.Tracing.Analyzer.Legacy</AssemblyName>
-    <RootNamespace>ChilliCream.Tracing.Analyzer</RootNamespace>
+    <PackageId>Thor.Analyzer.Legacy</PackageId>
+    <AssemblyName>Thor.Analyzer.Legacy</AssemblyName>
+    <RootNamespace>Thor.Analyzer</RootNamespace>
     <Description>Provides an ETW EventSource analyzer build for 'Microsoft.Diagnostics.Tracing'.</Description>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\ChilliCream.Tracing.Analyzer.Legacy.xml</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Thor.Analyzer.Legacy.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

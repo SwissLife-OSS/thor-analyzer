@@ -9,7 +9,7 @@ using Microsoft.Diagnostics.Tracing;
 using System.Diagnostics.Tracing;
 #endif
 
-namespace ChilliCream.Tracing.Analyzer
+namespace Thor.Analyzer
 {
     /// <summary>
     /// A schema reader for event providers which parses the ETW manifest

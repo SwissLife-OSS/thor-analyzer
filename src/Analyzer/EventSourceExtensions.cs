@@ -8,7 +8,7 @@ using Microsoft.Diagnostics.Tracing;
 using System.Diagnostics.Tracing;
 #endif
 
-namespace ChilliCream.Tracing.Analyzer
+namespace Thor.Analyzer
 {
     internal static class EventSourceExtensions
     {
