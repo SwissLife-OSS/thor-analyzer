@@ -15,26 +15,24 @@ namespace Thor.Analyzer.Tests.Rules
             return new EventParametersMustBeInOrder(ruleSet);
         }
 
-
-        // todo: find a way to simulate wrong parameter order.
-        //[Fact(DisplayName = "Apply: Should return an error if event parameters were not in order")]
-        //public void Apply_Error()
-        //{
-        //    // arrange
-        //    WrongEventParameterOrderEventSource eventSource =
-        //        WrongEventParameterOrderEventSource.Log;
-        //    SchemaReader reader = new SchemaReader(eventSource);
-        //    EventSourceSchema schema = reader.Read();
-        //    IRuleSet ruleSet = new Mock<IRuleSet>().Object;
-        //    IEventRule rule = CreateRule(ruleSet);
-
-        //    // act
-        //    IResult result = rule.Apply(schema.Events.First(), eventSource);
-
-        //    // assert
-        //    result.Should().NotBeNull();
-        //    result.Should().BeOfType<Error>();
-        //}
+        [Fact(DisplayName = "Apply: Should return an error if event parameters were not in order")]
+        public void Apply_Error()
+        {
+            // arrange
+            WrongEventParameterOrderEventSource eventSource =
+                WrongEventParameterOrderEventSource.Log;
+            SchemaReader reader = new SchemaReader(eventSource);
+            EventSourceSchema schema = reader.Read();
+            IRuleSet ruleSet = new Mock<IRuleSet>().Object;
+            IEventRule rule = CreateRule(ruleSet);
+        
+            // act
+            IResult result = rule.Apply(schema.Events.First(), eventSource);
+        
+            // assert
+            result.Should().NotBeNull();
+            result.Should().BeOfType<Error>();
+        }
 
         [Fact(DisplayName = "Apply: Should return a success if event parameters were in order")]
         public void Apply_Success()

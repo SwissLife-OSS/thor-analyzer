@@ -66,7 +66,7 @@ namespace Thor.Analyzer.Rules
                     if (eventExecuted)
                     {
                         string errorMessage = CheckPayloadOrder(schema, method, parameters,
-                            listener.OrderedEvents.First(e => e.EventId > 0));
+                            values, listener.OrderedEvents.First(e => e.EventId > 0));
 
                         if (errorMessage != null)
                         {
@@ -89,7 +89,7 @@ namespace Thor.Analyzer.Rules
         }
 
         private static string CheckPayloadOrder(EventSchema schema, MethodInfo method,
-            ParameterInfo[] parameters, EventWrittenEventArgs eventData)
+            ParameterInfo[] parameters, object[] arguments, EventWrittenEventArgs eventData)
         {
             if (parameters.Length > 0)
             {
@@ -98,7 +98,8 @@ namespace Thor.Analyzer.Rules
 
                 for (int i = 0; i < parameterCount; i++)
                 {
-                    if (parameters[i + parameterOffset].Name != eventData.PayloadNames[i])
+                    if (parameters[i + parameterOffset].Name != eventData.PayloadNames[i] ||
+                        !arguments[i + parameterOffset].Equals(eventData.Payload[i]))
                     {
                         return $"The parameter name '{parameters[i].Name}' defined in the event " +
                             $"'{method.Name}' does not match the order in WriteEvent function.";
