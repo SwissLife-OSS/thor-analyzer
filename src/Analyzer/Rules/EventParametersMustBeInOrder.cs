@@ -61,12 +61,12 @@ namespace Thor.Analyzer.Rules
                     string exceptionMessage = null;
                     bool eventExecuted = (method != null &&
                         eventSource.TryInvokeMethod(schema, method, values, out exceptionMessage) &&
-                        listener.OrderedEvents.Count() == 1);
+                        listener.OrderedEvents.Count(e => e.EventId > 0) == 1);
 
                     if (eventExecuted)
                     {
                         string errorMessage = CheckPayloadOrder(schema, method, parameters,
-                            listener.OrderedEvents.First());
+                            listener.OrderedEvents.First(e => e.EventId > 0));
 
                         if (errorMessage != null)
                         {
@@ -76,7 +76,7 @@ namespace Thor.Analyzer.Rules
                     else
                     {
                         return new Error(this, "This rule could not be executed successfully, " +
-                            "because the preconditions failed.");
+                            "because the preconditions failed.", new[] { exceptionMessage });
                     }
                 }
                 finally
