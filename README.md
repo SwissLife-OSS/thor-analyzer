@@ -55,6 +55,10 @@ public void Analyze()
 }
 ```
 
+## Documentation
+
+Click [here](https://github.com/ChilliCream/thor-analyzer-docs) to get to the documentation home of *Thor Analyzer*.
+
 ## Checkout the Thor Generator
 
 In most scenarios we recommend to use the *Thor Generator* to generate event sources automatically. Thus, the critical parts are generated in an efficient way by the generator. Click [here](https://github.com/ChilliCream/thor-generator) to get more information about the *Thor Generator*.
