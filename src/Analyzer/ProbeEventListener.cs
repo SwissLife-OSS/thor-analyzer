@@ -31,7 +31,10 @@ namespace Thor.Analyzer
         /// <inheritdoc/>
         protected override void OnEventWritten(EventWrittenEventArgs eventData)
         {
-            _queue.Enqueue(eventData);
+            if (eventData.EventId > 0)
+            {
+                _queue.Enqueue(eventData);
+            }
         }
 
         #if NET461 && !LEGACY

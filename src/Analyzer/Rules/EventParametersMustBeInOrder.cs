@@ -61,12 +61,12 @@ namespace Thor.Analyzer.Rules
                     string exceptionMessage = null;
                     bool eventExecuted = (method != null &&
                         eventSource.TryInvokeMethod(schema, method, values, out exceptionMessage) &&
-                        listener.OrderedEvents.Count(e => e.EventId > 0) == 1);
+                        listener.OrderedEvents.Count() == 1);
 
                     if (eventExecuted)
                     {
                         string errorMessage = CheckPayloadOrder(schema, method, parameters,
-                            values, listener.OrderedEvents.First(e => e.EventId > 0));
+                            values, listener.OrderedEvents.First());
 
                         if (errorMessage != null)
                         {
