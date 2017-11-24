@@ -33,7 +33,7 @@ EventSourceAnalyzer analyzer = new EventSourceAnalyzer();
 Report report = analyzer.Inspect(eventSource);
 ```
 
-The report contains all the important information we need. If we want to know whether the event schema contains any errors, we dan do so by checking the `HasErrors` property.
+The report contains all the important information we need. If we want to know whether the event schema contains any errors, we can do so by checking the `HasErrors` property.
 
 ### Automated Test Example
 
