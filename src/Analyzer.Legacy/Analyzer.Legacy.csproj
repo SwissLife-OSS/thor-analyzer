@@ -54,7 +54,7 @@
     <Compile Include="..\Analyzer\Rules\IRuleSet.cs" Link="Rules\IRuleSet.cs" />
     <Compile Include="..\Analyzer\Rules\MustBeSealed.cs" Link="Rules\MustBeSealed.cs" />
     <Compile Include="..\Analyzer\Rules\MustHaveSinglePrivateConstructor.cs" Link="Rules\MustHaveSinglePrivateConstructor.cs" />
-    <Compile Include="..\Analyzer\Rules\MustHaveStaticLogProperty.cs" Link="Rules\MustHaveStaticLogProperty.cs" />
+    <Compile Include="..\Analyzer\Rules\MustHaveStaticLogFieldOrProperty.cs" Link="Rules\MustHaveStaticLogFieldOrProperty.cs" />
     <Compile Include="..\Analyzer\Rules\MustHaveValidName.cs" Link="Rules\MustHaveValidName.cs" />
     <Compile Include="..\Analyzer\Rules\RequiredRuleSet.cs" Link="Rules\RequiredRuleSet.cs" />
     <Compile Include="..\Analyzer\Rules\Success.cs" Link="Rules\Success.cs" />
