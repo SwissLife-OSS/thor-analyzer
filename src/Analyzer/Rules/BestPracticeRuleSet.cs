@@ -17,7 +17,7 @@ namespace Thor.Analyzer.Rules
             {
                 new MustBeSealed(this),
                 new MustHaveSinglePrivateConstructor(this),
-                new MustHaveStaticLogProperty(this),
+                new MustHaveStaticLogFieldOrProperty(this),
                 new MustHaveValidName(this)
             };
         }
