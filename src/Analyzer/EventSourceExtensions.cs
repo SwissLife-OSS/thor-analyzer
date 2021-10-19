@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using System.Collections.Generic;
 
 #if LEGACY
 using Microsoft.Diagnostics.Tracing;
@@ -27,15 +28,31 @@ namespace Thor.Analyzer
                 throw new ArgumentNullException(nameof(schema));
             }
 
-            return eventSource.GetType().GetMethods(_bindings).SingleOrDefault(m =>
-                m.IsEvent(schema.Id)) ?? eventSource.GetType().GetMethod(schema.TaskName, _bindings);
+            return eventSource
+                .GetMethods()
+                .SingleOrDefault(m =>
+                    m.IsEvent(schema.Id)) ?? eventSource.GetType().GetMethod(schema.TaskName, _bindings);
         }
 
-        private static bool IsEvent(this MethodInfo method, int eventId)
+        public static IEnumerable<MethodInfo> GetMethods(this EventSource eventSource)
         {
+            if (eventSource == null)
+            {
+                throw new ArgumentNullException(nameof(eventSource));
+            }
+
+            return eventSource.GetType().GetMethods(_bindings);
+        }
+
+        public static bool IsEvent(this MethodInfo method, int eventId)
+        {
+            EventAttribute attribute = method.GetEvent();
             return method.GetCustomAttribute<EventAttribute>() != null &&
                 method.GetCustomAttribute<EventAttribute>().EventId == eventId;
         }
+
+        public static EventAttribute GetEvent(this MethodInfo method)
+            => method.GetCustomAttribute<EventAttribute>();
 
         public static bool TryInvokeMethod(this EventSource eventSource, EventSchema eventSchema,
             MethodInfo method, object[] values, out string exceptionMessage)
