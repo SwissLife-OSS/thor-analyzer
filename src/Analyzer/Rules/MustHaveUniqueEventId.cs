@@ -86,16 +86,5 @@ namespace Thor.Analyzer.Rules
 
             return new Success(this);
         }
-
-        private object GetDuplicatesString(Dictionary<int, string[]> duplicates)
-        {
-
-            string result = string.Empty;
-            foreach(var dup in duplicates)
-            {
-                result += $"{dup.Key} in [{string.Join(", ", dup.Value)}] ";
-            }
-            return result;
-        }
     }
 }
