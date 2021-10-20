@@ -13,8 +13,9 @@ namespace Thor.Analyzer
 {
     internal static class EventSourceExtensions
     {
-        private const BindingFlags _bindings = BindingFlags.Instance | BindingFlags.DeclaredOnly |
-            BindingFlags.InvokeMethod | BindingFlags.NonPublic | BindingFlags.Public;
+        private const BindingFlags _bindings = 
+            BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.InvokeMethod | 
+            BindingFlags.NonPublic | BindingFlags.Public;
 
         public static MethodInfo GetMethodFromSchema(this EventSource eventSource,
             EventSchema schema)
