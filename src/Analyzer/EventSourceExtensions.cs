@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using System.Collections.Generic;
 
 #if LEGACY
 using Microsoft.Diagnostics.Tracing;
@@ -12,8 +13,9 @@ namespace Thor.Analyzer
 {
     internal static class EventSourceExtensions
     {
-        private const BindingFlags _bindings = BindingFlags.Instance | BindingFlags.DeclaredOnly |
-            BindingFlags.InvokeMethod | BindingFlags.NonPublic | BindingFlags.Public;
+        private const BindingFlags _bindings = 
+            BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.InvokeMethod | 
+            BindingFlags.NonPublic | BindingFlags.Public;
 
         public static MethodInfo GetMethodFromSchema(this EventSource eventSource,
             EventSchema schema)
@@ -27,15 +29,34 @@ namespace Thor.Analyzer
                 throw new ArgumentNullException(nameof(schema));
             }
 
-            return eventSource.GetType().GetMethods(_bindings).SingleOrDefault(m =>
-                m.IsEvent(schema.Id)) ?? eventSource.GetType().GetMethod(schema.TaskName, _bindings);
+            return eventSource
+                .GetMethods()
+                .SingleOrDefault(m =>
+                    m.IsEvent(schema.Id)) ?? eventSource.GetType().GetMethod(schema.TaskName, _bindings);
         }
 
-        private static bool IsEvent(this MethodInfo method, int eventId)
+        public static IEnumerable<MethodInfo> GetMethods(this EventSource eventSource)
         {
-            return method.GetCustomAttribute<EventAttribute>() != null &&
-                method.GetCustomAttribute<EventAttribute>().EventId == eventId;
+            if (eventSource == null)
+            {
+                throw new ArgumentNullException(nameof(eventSource));
+            }
+
+            return eventSource.GetType().GetMethods(_bindings);
         }
+
+        public static bool IsEvent(this MethodInfo method, int eventId)
+        {
+            if (method == null)
+            {
+                throw new ArgumentNullException(nameof(method));
+            }
+
+            return method.GetEvent()?.EventId == eventId;
+        }
+
+        public static EventAttribute GetEvent(this MethodInfo method)
+            => method.GetCustomAttribute<EventAttribute>();
 
         public static bool TryInvokeMethod(this EventSource eventSource, EventSchema eventSchema,
             MethodInfo method, object[] values, out string exceptionMessage)
