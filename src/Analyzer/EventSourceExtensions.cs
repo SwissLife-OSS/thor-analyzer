@@ -46,9 +46,12 @@ namespace Thor.Analyzer
 
         public static bool IsEvent(this MethodInfo method, int eventId)
         {
-            EventAttribute attribute = method.GetEvent();
-            return method.GetCustomAttribute<EventAttribute>() != null &&
-                method.GetCustomAttribute<EventAttribute>().EventId == eventId;
+            if (method == null)
+            {
+                throw new ArgumentNullException(nameof(method));
+            }
+
+            return method.GetEvent()?.EventId == eventId;
         }
 
         public static EventAttribute GetEvent(this MethodInfo method)
